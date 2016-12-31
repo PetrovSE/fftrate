@@ -19,8 +19,8 @@ LIBINFO_FUNCTION
 	cmdline,
 	"CmdLine",
 	"Command line support functions",
-	"Copyright (c) 2007-11 PetrovSE",
-	"1.0.4.6"
+	"Copyright (c) 2007-16 PetrovSE",
+	"1.0.4.8"
 );
 
 

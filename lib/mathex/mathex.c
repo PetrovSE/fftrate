@@ -54,8 +54,8 @@ LIBINFO_FUNCTION
 	mathex,
 	"MathEx library",
 	"Some mathematical functions",
-	"Copyright (c) 2007-11 PetrovSE",
-	"1.0.5.0"
+	"Copyright (c) 2007-16 PetrovSE",
+	"1.0.5.2"
 );
 
 

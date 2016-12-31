@@ -14,6 +14,6 @@ LIBINFO_FUNCTION
 	riffio,
 	"RIFF I/O",
 	"RIFF file parser & writer",
-	"Copyright (c) 2007-11 PetrovSE",
-	"1.0.7.0"
+	"Copyright (c) 2007-16 PetrovSE",
+	"1.0.7.2"
 );

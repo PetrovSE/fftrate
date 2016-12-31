@@ -25,8 +25,8 @@ LIBINFO_FUNCTION
 	convert,
 	"PCM Converter",
 	"Sampling converter & channels mixer for Wave PCM data",
-	"Copyright (c) 2007-11 PetrovSE",
-	"2.0.9.8"
+	"Copyright (c) 2007-16 PetrovSE",
+	"2.0.9.10"
 );
 
 
