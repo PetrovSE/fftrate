@@ -1,0 +1,8 @@
+ 0 [I82801AAICH    ]: ICH - Intel 82801AA-ICH
+                      Intel 82801AA-ICH with STAC9700,83,84 at irq 5
+                      
+ 1 [ICH7           ]: ICH - Intel ICH7
+                      Intel ICH7 irq 12
+                      
+ 0 [Audigy2        ]: Audigy2 - SB Audigy 2 [SB0240]
+                      SB Audigy 2 [SB0240] (rev.4, serial:0x10071102) at 0xec00, irq 16

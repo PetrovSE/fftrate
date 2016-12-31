@@ -1,0 +1,30 @@
+Source: libasound2-plugin-fftrate
+Priority: optional
+Maintainer: Petrov Sergey <petrovse@mail.ru>
+Build-Depends: build-essential, libasound2-dev (>= 1.0.22),
+Standards-Version: 3.8.3
+
+Package: libasound2-plugin-fftrate
+Section: libs
+Architecture: i386 amd64
+Multi-Arch: same
+Depends: libasound2, libasound2-plugins, ${shlibs:Depends}
+Description: ALSA library additional plugin
+ This package contains plugin for the ALSA library that are
+ not included in the main libasound2 package.
+ .
+ The following plugins are included:
+   - fftrate: FFT based rate converter
+ .
+ ALSA is the Advanced Linux Sound Architecture.
+
+Package: alsa-config-utils
+Section: miscellaneous
+Architecture: i386 amd64
+Depends: libasound2, libasound2-plugins, libasound2-plugin-fftrate, swh-plugins, ${shlibs:Depends}
+Description: ALSA configurator
+ This package contains utilities for the ALSA configuration.
+ .
+ The following utilities are included:
+   - arateconf: ALSA configurator
+   - amixrestore: reset all ALSA mixer device

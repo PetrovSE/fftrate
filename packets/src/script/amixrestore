@@ -1,0 +1,9 @@
+#!/bin/sh
+
+STATE=/var/lib/alsa/asound.state
+
+alsa-utils stop
+rm -f $STATE
+
+alsa force-reload
+alsa-utils start
