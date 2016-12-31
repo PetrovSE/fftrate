@@ -5,6 +5,7 @@
 
 #if defined(IS_WIN32)
 #include <Windows.h>
+#include <tchar.h>
 #endif
 
 #if defined(IS_GCC)
@@ -144,7 +145,7 @@ LONGLONG clock_get_cpu_freq( VOID )
 		RegOpenKey
 			(
 				HKEY_LOCAL_MACHINE,
-				"HARDWARE\\DESCRIPTION\\System\\CentralProcessor\\0",
+				_T( "HARDWARE\\DESCRIPTION\\System\\CentralProcessor\\0" ),
 				&h_key
 			) == ERROR_SUCCESS
 	)
@@ -158,7 +159,7 @@ LONGLONG clock_get_cpu_freq( VOID )
 			RegQueryValueEx
 				(
 					h_key,
-					"~MHz",
+					_T( "~MHz" ),
 					0,
 					&n_type,
 					(LPBYTE )&n_val,

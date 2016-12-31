@@ -10,3 +10,5 @@ call clear.bat tests\ini_test
 call clear.bat lib
 
 call clear.bat workspaces
+
+for /d %%G in ("build-*") do rmdir "%%~G" /s /q

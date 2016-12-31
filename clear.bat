@@ -5,12 +5,13 @@ rmdir /S /Q %1\debug_win32
 rmdir /S /Q %1\release
 rmdir /S /Q %1\release_win32
 
-rmdir /S /Q %1\.clang
-rmdir /S /Q %1\.build-debug_win32
-rmdir /S /Q %1\.build-release_win32
-
 del %1\*.ncb
 del %1\*.plg
+del %1\*.pdb
+
+del %1\Makefile
+del %1\*.debug
+del %1\*.release
 
 del %1\*.user
 del %1\*.opt
