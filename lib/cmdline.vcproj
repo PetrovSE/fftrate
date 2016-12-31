@@ -164,10 +164,6 @@
 				>
 			</File>
 			<File
-				RelativePath="cmdline\logfile.c"
-				>
-			</File>
-			<File
 				RelativePath="cmdline\menu.c"
 				>
 			</File>
@@ -190,11 +186,11 @@
 				>
 			</File>
 			<File
-				RelativePath="getoptw.h"
+				RelativePath="cmdline\getoptlib.h"
 				>
 			</File>
 			<File
-				RelativePath="cmdline\getoptlib.h"
+				RelativePath="getoptw.h"
 				>
 			</File>
 			<File
@@ -211,14 +207,6 @@
 			</File>
 			<File
 				RelativePath="cmdline\kbhitlib.h"
-				>
-			</File>
-			<File
-				RelativePath="logfile.h"
-				>
-			</File>
-			<File
-				RelativePath="cmdline\logfilelib.h"
 				>
 			</File>
 			<File

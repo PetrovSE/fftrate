@@ -169,18 +169,6 @@
 				RelativePath="thr.h"
 				>
 			</File>
-			<File
-				RelativePath="thr\thrlib.h"
-				>
-			</File>
-			<File
-				RelativePath="thr\thrlib_posix.h"
-				>
-			</File>
-			<File
-				RelativePath=".\thr\thrlib_win.h"
-				>
-			</File>
 		</Filter>
 	</Files>
 	<Globals>
