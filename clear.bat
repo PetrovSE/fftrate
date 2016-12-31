@@ -9,10 +9,18 @@ del %1\*.ncb
 del %1\*.plg
 del %1\*.pdb
 
-del %1\Makefile
 del %1\*.debug
 del %1\*.release
 
 del %1\*.user
 del %1\*.opt
 del /A:H %1\*.suo
+
+for %%f in ("%1\Makefile.*") do (
+	set "no_remove="
+
+	if "%%~xf" == ".st" set no_remove=1
+	if "%%~xf" == "" set no_remove=1
+	
+	if not defined no_remove del %%f
+)
