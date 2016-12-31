@@ -463,15 +463,11 @@ STATIC PBR_INST bitreverse_index_create( INT len )
 
 		arralloc( h_inst->p_index, len );
 		if( !arrcheck( h_inst->p_index ) )
-		{
 			break;
-		}
 
 		arralloc( h_inst->p_itab, m );
 		if( !arrcheck( h_inst->p_itab ) )
-		{
 			break;
-		}
 
 		//----------------------------------------------------------------
 
@@ -548,9 +544,7 @@ STATIC INLINE VOID bitreverse_download( PBR_INST h_inst, CONST COMPLEX *p_x, PCO
 	INT k, n = h_inst->len;
 
 	for( k = 0 ; k < n ; k ++ )
-	{
 		p_y[k] = p_x[p_index[k] * step];
-	}
 }
 
 
@@ -560,9 +554,7 @@ STATIC INLINE VOID bitreverse_upload( PBR_INST h_inst, CONST COMPLEX *p_x, PCOMP
 	INT k, n = h_inst->len;
 
 	for( k = 0 ; k < n ; k ++ )
-	{
 		p_y[p_index[k] * step] = p_x[k];
-	}
 }
 
 
@@ -587,9 +579,7 @@ HFFT fft_radix2_init( INT len )
 		//---------------------------------------------------------------------------
 		
 		if( !is_pow2( len ) )
-		{
 			break;
-		}
 
 		//---------------------------------------------------------------------------
 
@@ -600,21 +590,15 @@ HFFT fft_radix2_init( INT len )
 
 		arralloc( h_inst->p_table, h_inst->cos_len );
 		if( !arrcheck( h_inst->p_table ) )
-		{
 			break;	
-		}
 
 		h_inst->h_index = bitreverse_index_create( h_inst->len );
 		if( !arrcheck( h_inst->h_index ) )
-		{
 			break;	
-		}
 		
 		arralloc( h_inst->p_temp, h_inst->len );
 		if( !arrcheck( h_inst->p_temp ) )
-		{
 			break;	
-		}
 
 		//---------------------------------------------------------------------------
 		
@@ -664,15 +648,13 @@ VOID fft_radix2( HFFT p_inst, PCOMPLEX p_x, INT step )
 	//================================================================
 	//  Bit reverse
 	//----------------------------------------------------------------
-	if( step == 1 )
-	{
-		bitreverse_inplace( h_inst->h_index, p_work );
-	}
-	else
+	if( step != 1 )
 	{
 		p_work = h_inst->p_temp;
 		bitreverse_download( h_inst->h_index, p_x, p_work, step );
 	}
+	else
+		bitreverse_inplace( h_inst->h_index, p_work );
 
 
 	//================================================================
@@ -764,9 +746,7 @@ HFFT fft_splitradix_init( INT len )
 		//---------------------------------------------------------------------------
 
 		if( !is_pow2( len ) || len < 4 )
-		{
 			break;
-		}
 
 		//---------------------------------------------------------------------------
 
@@ -774,15 +754,11 @@ HFFT fft_splitradix_init( INT len )
 
 		arralloc( h_inst->p_table, h_inst->len );
 		if( !arrcheck( h_inst->p_table ) )
-		{
 			break;	
-		}
 
 		arralloc( h_inst->p_temp, h_inst->len );
 		if( !arrcheck( h_inst->p_temp ) )
-		{
 			break;	
-		}
 
 		//---------------------------------------------------------------------------
 
@@ -1054,13 +1030,9 @@ VOID fft_splitradix( HFFT p_inst, PCOMPLEX p_x, INT step )
 	//  Bit reverse
 	//----------------------------------------------------------------
 	if( p_work == p_x )
-	{
 		bitreverse_inplace( h_inst->h_index, p_work );
-	}
 	else
-	{
 		bitreverse_upload( h_inst->h_index, p_work, p_x, step );
-	}
 }
 
 
@@ -1090,9 +1062,7 @@ HFFT dft_init( INT n, INT m, BOOL b_rotate )
 
 		arralloc( h_inst->p_table, h_inst->n - 1 );
 		if( !arrcheck( h_inst->p_table ) )
-		{
 			break;
-		}
 
 		arrzero( h_inst->p_table, h_inst->n - 1 );
 
@@ -1100,9 +1070,7 @@ HFFT dft_init( INT n, INT m, BOOL b_rotate )
 		{
 			arralloc( h_inst->p_temp, len );
 			if( !arrcheck( h_inst->p_temp ) )
-			{
 				break;
-			}
 		}
 
 		//---------------------------------------------------------------------------
@@ -1128,9 +1096,7 @@ HFFT dft_init( INT n, INT m, BOOL b_rotate )
 		//---------------------------------------------------------------------------
 
 		if( less_zero( i ) )
-		{
 			break;
-		}
 
 		return (HFFT)h_inst;
 	}
@@ -1152,9 +1118,7 @@ HFFT dft_deinit( HFFT p_inst )
 			INT n;
 
 			for( n = 0 ; n < h_inst->n - 1 ; n ++ )
-			{
 				arrfree( h_inst->p_table[n] );
-			}
 		}
 
 		arrfree( h_inst->p_table );
@@ -1208,9 +1172,7 @@ VOID dft( HFFT p_inst, PCOMPLEX p_x, INT step )
 		//---------------------------------------------------------------------------
 
 		for( n = 0 ; n < len ; n ++ )
-		{
 			p_temp[n] = p_x[n * step];
-		}
 
 		//---------------------------------------------------------------------------
 
@@ -1225,9 +1187,7 @@ VOID dft( HFFT p_inst, PCOMPLEX p_x, INT step )
 				cmplx_zero( res );
 			
 				for( m = 0 ; m < cnt ; m ++ )
-				{
 					cmplx_add( res, res, p_temp[m] );
-				}
 			}
 			else
 			{
@@ -1270,9 +1230,7 @@ STATIC INLINE VOID move_by_index
 	if( arrcheck( p_index ) )
 	{
 		for( ; len ; len -- )
-		{
 			p_dst[*p_index ++] = *p_src ++;
-		}
 		
 		return;
 	}
@@ -1325,9 +1283,7 @@ STATIC INLINE VOID save_by_index
 	if( arrcheck( p_index ) )
 	{
 		for( ; len ; len -- )
-		{
 			p_dst[( *p_index ++ ) * step] = *p_src ++;
-		}
 				
 		return;
 	}
@@ -1349,9 +1305,7 @@ STATIC BOOL index_is_linear( INT *p_index, INT len )
 	for( i = 0 ; i < len ; i ++ )
 	{
 		if( i != p_index[i] )
-		{
 			return FALSE;
-		}
 	}
 
 	return TRUE;
@@ -1368,9 +1322,7 @@ STATIC BOOL make_gt_input_index( INT n, INT m, INT **pp_index )
 
 	arralloc( p_index, len );
 	if( !arrcheck( p_index ) )
-	{
 		return FALSE;
-	}
 
 	//---------------------------------------------------------------------------
 
@@ -1379,9 +1331,7 @@ STATIC BOOL make_gt_input_index( INT n, INT m, INT **pp_index )
 		INT j;
 
 		for( j = 0 ; j < m ; j ++ )
-		{
 			p_index[( i * m + j * n ) % len] = k ++;
-		}
 	}
 
 	//---------------------------------------------------------------------------
@@ -1409,9 +1359,7 @@ STATIC BOOL make_gt_output_index( INT n, INT m, INT **pp_index )
 
 	arralloc( p_index, len );
 	if( !arrcheck( p_index ) )
-	{
 		return FALSE;
-	}
 
 	//---------------------------------------------------------------------------
 
@@ -1422,9 +1370,7 @@ STATIC BOOL make_gt_output_index( INT n, INT m, INT **pp_index )
 		INT j;
 		
 		for( j = 0 ; j < m ; j ++ )
-		{
 			p_index[k ++] = mod( i * m * mm + j * n * nn, len );
-		}
 	}
 
 	//---------------------------------------------------------------------------
@@ -1462,9 +1408,7 @@ STATIC BOOL make_ct_output_index( INT n, INT m, INT **pp_index )
 
 	arralloc( p_index, len );
 	if( !arrcheck( p_index ) )
-	{
 		return FALSE;
-	}
 
 	//---------------------------------------------------------------------------
 
@@ -1473,9 +1417,7 @@ STATIC BOOL make_ct_output_index( INT n, INT m, INT **pp_index )
 		INT j;
 
 		for( j = i ; j < len ; j += m )
-		{
 			p_index[j] = k ++;
-		}
 	}
 
 	//---------------------------------------------------------------------------
@@ -1518,14 +1460,10 @@ STATIC INT get_length_divisor( INT len )
 	//---------------------------------------------------------------------------
 
 	if( n_pow2 > n_elem )
-	{
 		return n_pow2;
-	}
 
 	if( n_elem > 1 )
-	{
 		return n_elem;
-	}
 
 	return n_prime == 1 ? len : n_prime;
 }
@@ -1593,9 +1531,7 @@ STATIC BOOL search_fft( INT len, PFFT_INST h_inst, BOOL b_first )
 	//---------------------------------------------------------------------------
 
 	if( b_first || n_divisor == len )
-	{
 		return get_fft_by_length( n_divisor, h_inst );
-	}
 
 	//---------------------------------------------------------------------------
 
@@ -1611,9 +1547,7 @@ STATIC BOOL search_fft( INT len, PFFT_INST h_inst, BOOL b_first )
 STATIC VOID subfft_deinit( PFFT_INST p_inst )
 {
 	if( !invalid_ptr( p_inst->fn_deinit ) && arrcheck( p_inst->h_inst ) )
-	{
 		p_inst->fn_deinit( p_inst->h_inst );
-	}
 }
 
 
@@ -1635,21 +1569,15 @@ HFFT fft_init( INT len )
 
 		arralloc( h_inst->p_temp, h_inst->len );
 		if( !arrcheck( h_inst->p_temp ) )
-		{
 			break;
-		}
 
 		//---------------------------------------------------------------------------
 
 		if( !search_fft( h_inst->len, &h_inst->fft_lines, TRUE ) )
-		{
 			break;
-		}
 
 		if( !search_fft( h_inst->len / h_inst->fft_lines.len, &h_inst->fft_rows, FALSE ) )
-		{
 			break;
-		}
 
 		//---------------------------------------------------------------------------
 
@@ -1684,9 +1612,7 @@ HFFT fft_init( INT len )
 
 			h_inst->p_rotate_inst = (PDFT_INST)dft_init( n, m, TRUE );
 			if( !arrcheck( h_inst->p_rotate_inst ) )
-			{
 				break;
-			}
 		}
 
 		h_inst->b_no_index =
@@ -1715,9 +1641,7 @@ HFFT fft_deinit( HFFT p_inst )
 		subfft_deinit( &h_inst->fft_rows );
 
 		if( !invalid_ptr( h_inst->p_rotate_inst ) )
-		{
 			dft_deinit( (HFFT)h_inst->p_rotate_inst );
-		}
 
 		arrfree( h_inst->p_index_in );
 		arrfree( h_inst->p_index_out );
@@ -1777,9 +1701,7 @@ VOID fft( HFFT p_inst, PCOMPLEX p_x, INT step )
 		INT i;
 
 		for( i = 0 ; i < len ; i ++ )
-		{
 			h_inst->fft_lines.fn_proc( h_inst->fft_lines.h_inst, ptr ++, len );
-		}
 	}
 
 	//---------------------------------------------------------------------------
@@ -1787,9 +1709,7 @@ VOID fft( HFFT p_inst, PCOMPLEX p_x, INT step )
 	BP_START( FFT_ROTATE );
 
 	if( h_inst->p_rotate_inst )
-	{
 		dft( (HFFT)h_inst->p_rotate_inst, p_work, 1 );
-	}
 
 	BP_STOP( FFT_ROTATE );
 

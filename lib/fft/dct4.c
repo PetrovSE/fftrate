@@ -35,9 +35,7 @@ HDCT4 dct4_init( INT len )
 		//----------------------------------------------------------------
 
 		if( len % 2 )
-		{
 			break;
-		}
 
 		h_inst->len		= len;
 		h_inst->len2	= len / 2;
@@ -64,9 +62,7 @@ HDCT4 dct4_init( INT len )
 
 		h_inst->h_fft = fft_init( h_inst->len2 );
 		if( invalid_ptr( h_inst->h_fft ) )
-		{
 			break;
-		}
 
 		//----------------------------------------------------------------
 
@@ -104,9 +100,7 @@ HDCT4 dct4_deinit( HDCT4 p_inst )
 		arrfree( h_inst->p_temp );
 
 		if( !invalid_ptr( h_inst->h_fft ) )
-		{
 			fft_deinit( h_inst->h_fft );
-		}
 	}
 
 	arrfree( h_inst );

@@ -84,9 +84,7 @@ INT thr_pid( VOID )
 BOOL thr_signal_set( INT sig, pfn_signal_handler p_signal_handler )
 {
 	if( invalid_ptr( p_signal_handler ) )
-	{
 		return signal( sig, SIG_DFL ) != SIG_ERR;
-	}
 	
 	return signal( sig, p_signal_handler ) != SIG_ERR;
 }
@@ -103,16 +101,12 @@ HSECTION thr_section_open( VOID )
 	while( arrcheck( h_inst ) )
 	{
 		if( non_zero( pthread_mutexattr_init( &h_inst->attr ) ) )
-		{
 			break;
-		}
 		
 		pthread_mutexattr_settype( &h_inst->attr, PTHREAD_MUTEX_RECURSIVE );
 		
 		if( non_zero( pthread_mutex_init( &h_inst->mutex, &h_inst->attr ) ) )
-		{
 			break;
-		}
 		
 		return (HSECTION)h_inst;
 	}
@@ -141,9 +135,7 @@ VOID thr_section_enter( HSECTION p_inst )
 	PSECTION h_inst = (PSECTION )p_inst;
 
 	if( arrcheck( h_inst ) )
-	{
 		pthread_mutex_lock( &h_inst->mutex );
-	}
 }
 
 
@@ -152,9 +144,7 @@ VOID thr_section_leave( HSECTION p_inst )
 	PSECTION h_inst = (PSECTION )p_inst;
 
 	if( arrcheck( h_inst ) )
-	{
 		pthread_mutex_unlock( &h_inst->mutex );
-	}
 }
 
 
@@ -231,14 +221,10 @@ VOID thr_event_wait( HTEVENT p_inst, DWORD timeout_ms )
 	{
 		pthread_mutex_lock( &h_inst->mx );
 		while( !h_inst->state )
-		{
 			pthread_cond_wait( &h_inst->cv, &h_inst->mx );
-		}
 
 		if( !h_inst->manual_reset )
-		{
 			h_inst->state = FALSE;
-		}
 		pthread_mutex_unlock( &h_inst->mx );
 	}
 }
@@ -252,13 +238,9 @@ STATIC PVOID thr_thread_callback( PVOID p_arg )
 	PTHREAD h_inst = (PTHREAD)p_arg;
 	
 	if( invalid_ptr( h_inst->p_call_back ) )
-	{
 		thr_semaphore_set( h_inst->exit_code, 0x0 );
-	}
 	else
-	{
 		thr_semaphore_set( h_inst->exit_code, h_inst->p_call_back( h_inst->p_arg ) );
-	}
 	
 	return 0x0;
 }
@@ -279,9 +261,7 @@ HTHREAD thr_thread_open( pfn_thread_callback p_callback_function, PVOID p_arg )
 		
 		h_inst->exit_code = thr_semaphore_open();
 		if( !arrcheck( h_inst->exit_code ) )
-		{
 			break;
-		}
 		
 		thr_semaphore_set( h_inst->exit_code, THR_IS_ACTIVE );
 		
@@ -292,9 +272,7 @@ HTHREAD thr_thread_open( pfn_thread_callback p_callback_function, PVOID p_arg )
 		
 		ret = pthread_create( &h_inst->h_thr, NULL, thr_thread_callback, h_inst );
 		if( non_zero( ret ) || is_zero( h_inst ) )
-		{
 			break;
-		}
 		
 		//----------------------------------------------------------------
 		
@@ -312,14 +290,10 @@ HTHREAD thr_thread_close( HTHREAD p_inst )
 	if( arrcheck( h_inst ) )
 	{
 		if( non_zero( h_inst->h_thr ) )
-		{
 			pthread_join( h_inst->h_thr, NULL );
-		}
 
 		if( arrcheck( h_inst->exit_code ) )
-		{
 			h_inst->exit_code = thr_semaphore_close( h_inst->exit_code );
-		}
 		
 		arrfree( h_inst );
 	}
@@ -333,16 +307,12 @@ VOID thr_thread_terminate( HTHREAD p_inst )
 	PTHREAD h_inst = (PTHREAD)p_inst;
 
 	if( !thr_thread_is_active( p_inst ) )
-	{
 		return;
-	}
 
 	if( arrcheck( h_inst ) )
 	{
 		if( non_zero( h_inst->h_thr ) )
-		{
 			pthread_cancel( h_inst->h_thr );
-		}
 		
 		thr_semaphore_set( h_inst->exit_code, 0x0 );
 	}
@@ -356,15 +326,11 @@ VOID thr_thread_wait( HTHREAD p_inst, DWORD timeout_ms )
 		DWORD tm = min( timeout_ms, 100 );
 			
 		if( !thr_thread_is_active( p_inst ) )
-		{
 			break;
-		}
 			
 		thr_sleep( tm );
 		if( timeout_ms != INFINITE_TIMEOUT )
-		{
 			timeout_ms -= tm;
-		}
 	}
 }
 
@@ -379,9 +345,7 @@ BOOL thr_thread_exit_code( HTHREAD p_inst, DWORD *code )
 		exit_code = thr_semaphore_check( h_inst->exit_code );
 		
 		if( !invalid_ptr( code ) )
-		{
 			*code = exit_code;
-		}
 	}
 	
 	return exit_code != THR_IS_ACTIVE;
@@ -402,9 +366,7 @@ HPIPE thr_pipe_open( VOID )
 		arrzero( h_inst, 2 );
 
 		if( !thr_pipe_connect( (HPIPE)h_inst ) )
-		{
 			break;
-		}
 
 		return (HPIPE)h_inst;
 	}
@@ -436,9 +398,7 @@ BOOL thr_pipe_connect( HPIPE p_inst )
 	while( arrcheck( h_inst ) )
 	{
 		if( less_zero( pipe( h_inst ) ) )
-		{
 			break;
-		}
 
 		return TRUE;
 	}
@@ -454,17 +414,12 @@ BOOL thr_pipe_disconnect( HPIPE p_inst )
 	while( arrcheck( h_inst ) )
 	{
 		if( non_zero( h_inst[0] ) )
-		{
 			close( h_inst[0] );
-		}
 
 		if( non_zero( h_inst[1] ) )
-		{
 			close( h_inst[1] );
-		}
 
 		arrzero( h_inst, 2 );
-		
 		return TRUE;
 	}
 	
@@ -481,9 +436,7 @@ DWORD thr_pipe_write( HPIPE p_inst, CONST BYTE *p_frame, DWORD size )
 		INT ret = write( h_inst[1], p_frame, size );
 		
 		if( less_zero( ret ) )
-		{
 			break;
-		}
 		
 		return (DWORD)ret;
 	}
@@ -501,9 +454,7 @@ DWORD thr_pipe_read( HPIPE p_inst, BYTE *p_frame, DWORD size )
 		INT ret = read( h_inst[0], p_frame, size );
 		
 		if( less_zero( ret ) )
-		{
 			break;
-		}
 		
 		return (DWORD)ret;
 	}

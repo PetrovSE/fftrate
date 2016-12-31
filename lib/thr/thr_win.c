@@ -107,9 +107,7 @@ BOOL thr_signal_set( INT sig, pfn_signal_handler p_signal_handler )
 	//----------------------------------------------------------------
 
 	if( invalid_ptr( g_signal_int ) )
-	{
 		return b_set;
-	}
 
 	b_set &= non_zero( SetConsoleCtrlHandler( thr_local_signal_hook, TRUE ) );
 	return b_set;
@@ -154,9 +152,7 @@ VOID thr_section_enter( HSECTION p_inst )
 	CRITICAL_SECTION *h_inst = (CRITICAL_SECTION *)p_inst;
 
 	if( arrcheck( h_inst ) )
-	{
 		EnterCriticalSection( h_inst );
-	}
 }
 
 
@@ -165,9 +161,7 @@ VOID thr_section_leave( HSECTION p_inst )
 	CRITICAL_SECTION * h_inst = (CRITICAL_SECTION *)p_inst;
 
 	if( arrcheck( h_inst ) )
-	{
 		LeaveCriticalSection( h_inst );
-	}
 }
 
 
@@ -185,9 +179,7 @@ HTEVENT thr_event_close( HTEVENT p_inst )
 	HANDLE h_event = (HANDLE)p_inst;
 
 	if( arrcheck( h_event ) )
-	{
 		CloseHandle( h_event );
-	}
 
 	return NULL;
 }
@@ -198,9 +190,7 @@ VOID thr_event_set( HTEVENT p_inst )
 	HANDLE h_event = (HANDLE)p_inst;
 
 	if( arrcheck( h_event ) )
-	{
 		SetEvent( h_event );
-	}
 }
 
 
@@ -209,9 +199,7 @@ VOID thr_event_reset( HTEVENT p_inst )
 	HANDLE h_event = (HANDLE)p_inst;
 
 	if( arrcheck( h_event ) )
-	{
 		ResetEvent( h_event );
-	}
 }
 
 
@@ -220,9 +208,7 @@ VOID thr_event_wait( HTEVENT p_inst, DWORD timeout_ms )
 	HANDLE h_event = (HANDLE)p_inst;
 
 	if( arrcheck( h_event ) )
-	{
 		WaitForSingleObject( h_event, timeout_ms );
-	}
 }
 
 
@@ -251,9 +237,7 @@ HTHREAD thr_thread_close( HTHREAD p_inst )
 	thr_thread_wait( p_inst, INFINITE_TIMEOUT );
 
 	if( arrcheck( p_inst ) )
-	{
 		CloseHandle( (HANDLE)p_inst );
-	}
 
 	return NULL;
 }
@@ -262,28 +246,20 @@ HTHREAD thr_thread_close( HTHREAD p_inst )
 VOID thr_thread_terminate( HTHREAD p_inst )
 {
 	if( !thr_thread_is_active( p_inst ) )
-	{
 		return;
-	}
 
 	if( arrcheck( p_inst ) )
-	{
 		TerminateThread( (HANDLE)p_inst, 0x0 );
-	}
 }
 
 
 VOID thr_thread_wait( HTHREAD p_inst, DWORD timeout_ms )
 {
 	if( !thr_thread_is_active( p_inst ) )
-	{
 		return;
-	}
 
 	if( arrcheck( p_inst ) )
-	{
 		WaitForSingleObject( (HANDLE)p_inst, timeout_ms );
-	}
 }
 
 
@@ -298,19 +274,13 @@ BOOL thr_thread_exit_code( HTHREAD p_inst, DWORD *code )
 		if( GetExitCodeThread( (HANDLE)p_inst, &exit_code ) )
 		{
 			if( exit_code == STILL_ACTIVE )
-			{
 				exit_code = THR_IS_ACTIVE;
-			}
 			else
-			{
 				ret = TRUE;
-			}
 		}
 
 		if( !invalid_ptr( code ) )
-		{
 			*code = exit_code;
-		}
 	}
 
 	return ret;
@@ -331,9 +301,7 @@ HPIPE thr_pipe_open( VOID )
 		arrzero_unit( h_inst );
 
 		if( !thr_pipe_connect( (HPIPE)h_inst ) )
-		{
 			break;
-		}
 
 		return (HPIPE)h_inst;
 	}
@@ -365,9 +333,7 @@ BOOL thr_pipe_connect( HPIPE p_inst )
 	while( arrcheck( h_inst ) )
 	{
 		if( !CreatePipe( &h_inst->pipe_read, &h_inst->pipe_write, NULL, 0 ) )
-		{
 			break;
-		}
 		
 		return TRUE;
 	}
@@ -383,14 +349,10 @@ BOOL thr_pipe_disconnect( HPIPE p_inst )
 	while( arrcheck( h_inst ) )
 	{
 		if( !invalid_ptr( h_inst->pipe_write ) )
-		{
 			CloseHandle( h_inst->pipe_write );
-		}
 
 		if( !invalid_ptr( h_inst->pipe_read ) )
-		{
 			CloseHandle( h_inst->pipe_read );
-		}
 
 		h_inst->pipe_read	= NULL;
 		h_inst->pipe_write	= NULL;
@@ -411,9 +373,7 @@ DWORD thr_pipe_write( HPIPE p_inst, CONST BYTE *p_frame, DWORD size )
 		DWORD written = 0;
 
 		if( !WriteFile( h_inst->pipe_write, p_frame, size, &written, NULL ) )
-		{
 			break;
-		}
 
 		return written;
 	}
@@ -431,9 +391,7 @@ DWORD thr_pipe_read( HPIPE p_inst, BYTE *p_frame, DWORD size )
 		DWORD read = 0;
 		
 		if( !ReadFile( h_inst->pipe_read, p_frame, size, &read, NULL ) )
-		{
 			break;
-		}
 		
 		return read;
 	}

@@ -48,9 +48,7 @@ STATIC VOID buffer_clear( PSAMPLESTATE p_sample, DWORD start, DWORD size )
 	size  = min( size, p_sample->packet_len - start );
 
 	for( chn = 0 ; chn < p_sample->n_of_chann ; chn ++ )
-	{
 		arrzero( &p_sample->pp_buffers[chn][start], size );
-	}
 }
 
 
@@ -85,9 +83,7 @@ STATIC VOID window_rect( DATA *p_window, INT len, DATA coef )
 	coef *= (DATA)sqrt( 0.5 );
 
 	for( i = 0 ; i < len ; i ++ )
-	{
 		p_window[i] = coef;
-	}
 }
 
 
@@ -96,9 +92,7 @@ STATIC VOID window_sin( DATA *p_window, INT len, DATA coef )
 	INT i;
 
 	for( i = 0 ; i < len ; i ++ )
-	{
 		p_window[i] = coef * (DATA)sin( M_PI * ( 0.5 + (DATA)i ) / (DATA)len );
-	}
 }
 
 
@@ -294,9 +288,7 @@ STATIC VOID resampler_dct
 STATIC BOOL transform_init( PTRANSFORM p_transform, DWORD transform_id, DWORD window_id, BOOL b_resample )
 {
 	if( !b_resample )
-	{
 		transform_id = CONV_TRANSFORM_NONE;
-	}
 
 	p_transform->transform_id	= transform_id;
 	p_transform->window_id		= window_id;
@@ -383,9 +375,7 @@ STATIC BOOL transform_alloc( PTRANSFORM p_transform, INT spec_len )
 		arralloc( p_transform->p_frame, spec_len * 2 );
 
 		if( !arrcheck( p_transform->p_spec ) || !arrcheck( p_transform->p_frame ) )
-		{
 			return FALSE;
-		}
 
 		arrzero( p_transform->p_spec, spec_len );
 		return TRUE;
@@ -418,9 +408,7 @@ STATIC BOOL resampler_init
 )
 {
 	if( is_odd( frame_len ) )
-	{
 		return FALSE;
-	}
 	
 	//---------------------------------------------------------------------------
 	
@@ -458,9 +446,7 @@ STATIC BOOL resampler_init
 		
 		p_resampler->h_mdct_inst = mdct_init( frame_len );
 		if( invalid_ptr( p_resampler->h_mdct_inst ) )
-		{
 			return FALSE;
-		}
 		
 		break;
 	}
@@ -469,9 +455,7 @@ STATIC BOOL resampler_init
 	
 	arralloc( p_resampler->p_window, frame_len );
 	if( !arrcheck( p_resampler->p_window ) )
-	{
 		return FALSE;
-	}
 	
 	//---------------------------------------------------------------------------
 	
@@ -526,9 +510,7 @@ BOOL resampling_init( PCONVINST h_inst, INT freq_in, INT freq_out, DWORD transfo
 	//---------------------------------------------------------------------------
 
 	if( !more_zero( freq_in ) || !more_zero( freq_out ) )
-	{
 		return FALSE;
-	}
 
 	//---------------------------------------------------------------------------
 
@@ -538,9 +520,7 @@ BOOL resampling_init( PCONVINST h_inst, INT freq_in, INT freq_out, DWORD transfo
 	//---------------------------------------------------------------------------
 
 	if( !transform_init( &h_inst->transform, transform_id, window_id, freq_in != freq_out ) )
-	{
 		return FALSE;
-	}
 
 	//---------------------------------------------------------------------------
 	
@@ -595,9 +575,7 @@ BOOL resampling_alloc( PCONVINST h_inst, PSAMPLESTATE p_sample )
 		arralloc( h_inst->pp_hist_out[chn], h_inst->resampler_out.hist_len );
 
 		if( !arrcheck( h_inst->pp_hist_in[chn] ) || !arrcheck( h_inst->pp_hist_out[chn] ) )
-		{
 			return FALSE;
-		}
 	}
 
 	//---------------------------------------------------------------------------
@@ -632,14 +610,10 @@ VOID resampling_reset( PCONVINST h_inst, PSAMPLESTATE p_sample )
 	for( chn = 0 ; chn < p_sample->n_of_chann ; chn ++ )
 	{
 		if( !invalid_ptr( h_inst->pp_hist_in[chn] ) )
-		{
 			arrzero( h_inst->pp_hist_in[chn], h_inst->resampler_in.hist_len );
-		}
 
 		if( !invalid_ptr( h_inst->pp_hist_out[chn] ) )
-		{
 			arrzero( h_inst->pp_hist_out[chn], h_inst->resampler_out.hist_len );
-		}
 	}
 }
 
@@ -698,20 +672,12 @@ STATIC DWORD chann_relations_all_values( CONST SAMPLESTATE *p_sample, BOOL b_dir
 		CONST CHANNELDESC *p_desc = mmsys_channel_desc( p_sample->chann_mask, p_sample->p_chann_order, n );
 
 		if( invalid_ptr( p_desc ) )
-		{
 			break;
-		}
-
-		//----------------------------------------------------------------
 
 		if( b_dir )
-		{
 			val |= p_desc->dwDirection;
-		}
 		else
-		{
 			val |= p_desc->dwPosition;
-		}
 	}
 
 	return val;
@@ -814,23 +780,19 @@ STATIC BOOL chann_relations_coef
 			for( ; non_zero( pos ) ; pos = is_zero( n ) ? pos << 1 : pos >> 1 )
 			{
 				if( pos == SPPOS_LFE )
-				{
 					continue;
-				}
 				
 				//---------------------------------------------------------------------------
 
 				if( flag_check_mask( p_sample_self->position, pos ) )
 				{
-					if( pos != p_desc_self->dwPosition )
-					{
-						return FALSE;
-					}
-					else
+					if( pos == p_desc_self->dwPosition )
 					{
 						n = 2;
 						break;
 					}
+
+					return FALSE;
 				}
 			}
 		}
@@ -871,9 +833,7 @@ BOOL transform_matrix_make( PCONVINST h_inst )
 				);
 
 		if( invalid_ptr( p_desc_out ) )
-		{
 			return FALSE;
-		}
 
 		//---------------------------------------------------------------------------
 
@@ -891,9 +851,7 @@ BOOL transform_matrix_make( PCONVINST h_inst )
 					);
 
 			if( invalid_ptr( p_desc_in ) )
-			{
 				return FALSE;
-			}
 
 			//---------------------------------------------------------------------------
 
@@ -910,16 +868,12 @@ BOOL transform_matrix_make( PCONVINST h_inst )
 				//---------------------------------------------------------------------------
 				// The disappear channel
 				if( chann_relations_coef( p_desc_in, p_desc_out, p_sample_out, &val, FALSE ) )
-				{
 					break;
-				}
 
 				//---------------------------------------------------------------------------
 				// The new channel
 				if( chann_relations_coef( p_desc_out, p_desc_in, p_sample_in, &val, TRUE ) )
-				{
 					break;
-				}
 
 				//---------------------------------------------------------------------------
 
@@ -944,16 +898,12 @@ BOOL transform_matrix_make( PCONVINST h_inst )
 			DATA sum = D( 0.0 );
 
 			for( chn_in = 0 ; chn_in < p_mixer->channels ; chn_in ++ )
-			{
 				sum += p_mixer->relation[chn_in].val;
-			}
 			
 			if( sum > D( 1.0 ) )
 			{
 				for( chn_in = 0 ; chn_in < p_mixer->channels ; chn_in ++ )
-				{
 					p_mixer->relation[chn_in].val /= sum;
-				}
 			}
 		}
 	}
@@ -988,9 +938,7 @@ VOID transform_matrix_export( PCONVINST h_inst, PCHANNELMIXMATRIX p_transform_ma
 		CONST CHANNELMIXER *p_mixer = &h_inst->p_chann_mixers[chn_out];
 
 		for( chn_in = 0 ; chn_in < p_sample_in->n_of_chann ; chn_in ++ )
-		{
 			p_transform_matrix->ppMixer[chn_in][chn_out] = D( 0.0 );
-		}
 
 		for( chn_in = 0 ; chn_in < p_mixer->channels ; chn_in ++ )
 		{
@@ -999,9 +947,7 @@ VOID transform_matrix_export( PCONVINST h_inst, PCHANNELMIXMATRIX p_transform_ma
 			p_transform_matrix->ppMixer[p_mixer->relation[chn_in].idx][chn_out] = val;
 
 			if( CHANN_IS_USED( val ) )
-			{
 				p_transform_matrix->bEmptyMatrix = FALSE;
-			}
 		}
 	}
 }
@@ -1042,9 +988,7 @@ VOID transform_matrix_processing
 				DATA *p_out  = &p_sample_out->pp_buffers[chn_out][p_sample_out->rem];
 
 				for( pos = 0 ; pos < rem ; pos ++ )
-				{
 					( *p_out ++ ) += val * ( *p_in ++ );
-				}
 			}
 		}
 
@@ -1092,14 +1036,10 @@ BOOL samples_alloc
 	//---------------------------------------------------------------------------
 
 	if( is_zero( chann_mask ) )
-	{
 		chann_mask = mmsys_make_chmask( n_chann );
-	}
 
 	if( n_chann != binweight( chann_mask ) || is_zero( n_chann ) || n_chann > N_OF_MAX_CHANNELS )
-	{
 		return FALSE;
-	}
 
 	//---------------------------------------------------------------------------
 
@@ -1126,9 +1066,7 @@ BOOL samples_alloc
 	{
 		arralloc_unit( p_sample->p_peaks );
 		if( !arrcheck( p_sample->p_peaks ) )
-		{
 			return FALSE;
-		}
 	}
 
 	//---------------------------------------------------------------------------
@@ -1152,9 +1090,7 @@ VOID samples_free( PSAMPLESTATE p_sample )
 	INT chn;
 
 	for( chn = 0 ; chn < p_sample->n_of_chann ; chn ++ )
-	{
 		arrfree( p_sample->pp_buffers[chn] );
-	}
 	
 	arrfree( p_sample->p_peaks );
 
@@ -1198,9 +1134,7 @@ STATIC VOID samples_get_peaks( PSAMPLESTATE p_sample, INT from, INT to )
 	//---------------------------------------------------------------------------
 
 	if( from == to || invalid_ptr( p_peaks ) )
-	{
 		return;
-	}
 
 	//---------------------------------------------------------------------------
 
@@ -1346,9 +1280,7 @@ DWORD samples_load
 	//---------------------------------------------------------------------------
 
 	if( b_need_peaks )
-	{
 		samples_get_peaks( p_sample, skipped, stop_pos );
-	}
 
 	p_sample->rem = stop_pos;
 
@@ -1487,9 +1419,7 @@ DWORD samples_save
 	//---------------------------------------------------------------------------
 
 	if( b_need_peaks )
-	{
 		samples_get_peaks( p_sample, skipped, save_size );
-	}
 
 	buffer_shift( p_sample, save_size );
 	fpux86_set_rounding_mode( fpu_flag );

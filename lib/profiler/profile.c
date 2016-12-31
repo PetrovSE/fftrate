@@ -66,9 +66,7 @@ VOID profiler_reset( VOID )
 			PPROFPOINTINFO info = &g_ProfilerPointTables[cnt][n];
 			
 			if( invalid_ptr( info->name ) )
-			{
 				break;
-			}
 
 			CPUCLOCKS_RESET( info->clocks );
 			info->count = 0;
@@ -85,9 +83,7 @@ VOID profiler_print_info( FILE *fp, DATA duration_in_sec )
 	//----------------------------------------------------------------
 
 	if( g_ProfilerNofPoints == 0 )
-	{
 		return;
-	}
 
 	//----------------------------------------------------------------
 
@@ -115,9 +111,7 @@ VOID profiler_print_info( FILE *fp, DATA duration_in_sec )
 	for( cnt = 0 ; cnt < g_ProfilerNofPoints ; cnt ++ )
 	{
 		if( cnt )
-		{
 			fprintf( fp, "\n" );
-		}
 
 		for( n = 0 ; ; n ++ )
 		{
@@ -125,14 +119,10 @@ VOID profiler_print_info( FILE *fp, DATA duration_in_sec )
 			DATA mips;
 
 			if( invalid_ptr( info->name ) )
-			{
 				break;
-			}
 
 			if( info->count == 0 )
-			{
 				continue;
-			}
 
 			mips = (DATA)CPUCLOCKS_GETCLOCKS( info->clocks ) * duration_in_sec;
 

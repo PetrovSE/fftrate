@@ -32,9 +32,7 @@ HMDCT mdct_init( INT len )
 		//----------------------------------------------------------------
 
 		if( len % 4 )
-		{
 			break;
-		}
 
 		h_inst->len		= len;
 		h_inst->len2	= len / 2;
@@ -44,17 +42,13 @@ HMDCT mdct_init( INT len )
 
 		arralloc( h_inst->p_temp, h_inst->len2 );
 		if( !arrcheck( h_inst->p_temp ) )
-		{
 			break;
-		}
 
 		//----------------------------------------------------------------
 
 		h_inst->h_dct4 = dct4_init( h_inst->len2 );
 		if( invalid_ptr( h_inst->h_dct4 ) )
-		{
 			break;
-		}
 
 		//----------------------------------------------------------------
 
@@ -74,9 +68,7 @@ HMDCT mdct_deinit( HMDCT p_inst )
 		arrfree( h_inst->p_temp );
 
 		if( !invalid_ptr( h_inst->h_dct4 ) )
-		{
 			dct4_deinit( h_inst->h_dct4 );
-		}
 	}
 
 	arrfree( h_inst );
@@ -100,14 +92,10 @@ VOID mdct_forward( HMDCT p_inst, CONST DATA *p_x, DATA *p_y )
 	BP_START( MDCT_PRE_PROC );
 
 	for( n = h_inst->len4 ; n ; n -- )
-	{
 		( *ptr ++ ) = ( *ptr2 -- ) + ( *ptr1 ++ );
-	}
 
 	for( ptr1 = p_x, n = h_inst->len4 ; n ; n -- )
-	{
 		( *ptr ++ ) = ( *ptr2 -- ) - ( *ptr1 ++ );
-	}
 
 	BP_STOP( MDCT_PRE_PROC );
 
@@ -132,24 +120,16 @@ VOID mdct_inverse( HMDCT p_inst, CONST DATA *p_y, DATA *p_x )
 	BP_START( MDCT_POST_PROC );
 
 	for( n = h_inst->len4 ; n ; n -- )
-	{
 		( *p_x ++ ) = -( *ptr ++ );
-	}
 
 	for( ptr --, n = h_inst->len4 ; n ; n -- )
-	{
 		( *p_x ++ ) = ( *ptr -- );
-	}
 
 	for( n = h_inst->len4 ; n ; n -- )
-	{
 		( *p_x ++ ) = ( *ptr -- );
-	}
 
 	for( ptr ++, n = h_inst->len4 ; n ; n -- )
-	{
 		( *p_x ++ ) = ( *ptr ++ );
-	}
 
 	BP_STOP( MDCT_POST_PROC );
 }

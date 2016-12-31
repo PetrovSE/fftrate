@@ -49,9 +49,7 @@ STATIC LONGLONG clock_local_parse_cpuinfo_cur_freq( VOID )
 	FILE *fp = fopen( "/sys/devices/system/cpu/cpu0/cpufreq/cpuinfo_cur_freq", "r" );
 
 	if( invalid_ptr( fp ) )
-	{
 		return 0;
-	}
 
 	loopinf
 	{
@@ -59,15 +57,11 @@ STATIC LONGLONG clock_local_parse_cpuinfo_cur_freq( VOID )
 		CHAR *ptr = fgetst( str, MAX_STRING, fp );
 
 		if( invalid_ptr( ptr ) )
-		{
 			break;
-		}
 
 		result = (LONGLONG)( atof( ptr ) * 1e3 + 0.5 );
 		if( result > 0 )
-		{
 			break;
-		}
 
 		result = 0;
 	};
@@ -83,9 +77,7 @@ STATIC LONGLONG clock_local_parse_cpuinfo( VOID )
 	FILE *fp = fopen( "/proc/cpuinfo", "r" );
 
 	if( invalid_ptr( fp ) )
-	{
 		return 0;
-	}
 
 	loopinf
 	{
@@ -93,28 +85,20 @@ STATIC LONGLONG clock_local_parse_cpuinfo( VOID )
 		CHAR *ptr = fgetst( str, MAX_STRING, fp );
 
 		if( invalid_ptr( ptr ) )
-		{
 			break;
-		}
 
 		ptr = strstr( ptr, "MHz" );
 
 		if( invalid_ptr( ptr ) )
-		{
 			continue;
-		}
 
 		ptr = strstr( ptr, ":" );
 		if( invalid_ptr( ptr ) )
-		{
 			continue;
-		}
 
 		result = (LONGLONG)( atof( ptr + 1 ) * 1e6 + 0.5 );
 		if( result > 0 )
-		{
 			break;
-		}
 
 		result = 0;
 	};
@@ -199,15 +183,11 @@ LONGLONG clock_get_cpu_freq( VOID )
 	{
 		result = clock_local_parse_cpuinfo_cur_freq();
 		if( result )
-		{
 			break;
-		}
 		
 		result = clock_local_parse_cpuinfo();
 		if( result )
-		{
 			break;
-		}
 		
 		return 1;
 	}

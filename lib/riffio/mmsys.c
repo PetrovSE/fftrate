@@ -57,17 +57,13 @@ PCHANNELORDER mmsys_channel_order_make( CONST CHAR *str_desc )
 	loopinf
 	{
 		if( invalid_ptr( str_desc ) )
-		{
 			break;
-		}
 
 		//----------------------------------------------------------------
 
 		arralloc_unit( p_order );
 		if( !arrcheck( p_order ) )
-		{
 			break;
-		}
 
 		//----------------------------------------------------------------
 
@@ -83,9 +79,7 @@ PCHANNELORDER mmsys_channel_order_make( CONST CHAR *str_desc )
 				INT  len = (INT)strlen( p_info->szShortName );
 
 				if( (INT)strlen( str_desc ) < len )
-				{
 					continue;
-				}
 
 				strncpyt( test, str_desc, min( len + 1, MAX_NAME ) );
 
@@ -130,9 +124,7 @@ STATIC CONST CHANNELDESC *mmsys_local_order_desc( CONST CHANNELORDER *p_order, I
 	if( invalid_ptr( p_order ) )
 	{
 		if( pos < g_NofChannelsName )
-		{
 			p_info = &g_ChannelsName[pos];
-		}
 	}
 	else
 	{
@@ -172,14 +164,10 @@ BOOL mmsys_channel_order_is_same( CONST CHANNELORDER *p_order1, CONST CHANNELORD
 		DWORD mask2 = mmsys_local_get_mask( mask, p_order2, cnt );
 
 		if( mask1 != mask2 )
-		{
 			return FALSE;
-		}
 
 		if( is_zero( mask1 ) )
-		{
 			break;
-		}
 	}
 
 	return TRUE;
@@ -196,9 +184,7 @@ DWORD mmsys_channel_order_mask( CONST CHANNELORDER *p_order )
 		CONST CHANNELDESC *p_info = mmsys_local_order_desc( p_order, cnt );
 
 		if( invalid_ptr( p_info ) )
-		{
 			break;
-		}
 
 		mask |= p_info->dwMask;
 	}
@@ -218,18 +204,14 @@ CONST CHANNELDESC *mmsys_channel_desc( DWORD mask, CONST CHANNELORDER *p_order, 
 		CONST CHANNELDESC *p_info = mmsys_local_order_desc( p_order, cnt );
 
 		if( invalid_ptr( p_info ) )
-		{
 			break;
-		}
 
 		//----------------------------------------------------------------
 
 		if( flag_check_mask( mask, p_info->dwMask ) )
 		{
 			if( chann_num == 0 )
-			{
 				return p_info;
-			}
 
 			chann_num --;
 		}
@@ -247,9 +229,7 @@ CONST CHANNELDESC *mmsys_channel_desc( DWORD mask, CONST CHANNELORDER *p_order, 
 FOURCC mmsys_str_to_fcc( CONST CHAR *str )
 {
 	if( invalid_ptr( str ) || strlen( str ) < 4 )
-	{
 		return FCC_NULL;
-	}
 	
 	return MAKEFOURCC( str[0], str[1], str[2], str[3] );
 }
@@ -357,9 +337,7 @@ DWORD mmsys_format_info( CONST WAVEFORMATEX *p_format, CHAR type )
 	//----------------------------------------------------------------
 
 	if( !arrcheck( p_format_ex ) )
-	{
 		return 0x0;
-	}
 
 	//----------------------------------------------------------------
 
@@ -369,9 +347,7 @@ DWORD mmsys_format_info( CONST WAVEFORMATEX *p_format, CHAR type )
 	{
 	case 't':
 		if( b_extensible )
-		{
 			return EXTRACT_WAVEFORMATEX_ID( p_format_ex->SubFormat );
-		}
 
 	case 'T':
 		return p_format->wFormatTag;
@@ -383,9 +359,7 @@ DWORD mmsys_format_info( CONST WAVEFORMATEX *p_format, CHAR type )
 
 	case 'b':
 		if( b_extensible && p_format_ex->Samples.wValidBitsPerSample )
-		{
 			return p_format_ex->Samples.wValidBitsPerSample;
-		}
 
 	case 'B':
 		return p_format->wBitsPerSample;
@@ -399,9 +373,7 @@ DWORD mmsys_format_info( CONST WAVEFORMATEX *p_format, CHAR type )
 
 	case 's':
 		if( b_extensible || !mmsys_format_is_pcm( p_format ) )
-		{
 			return p_format->cbSize + sizeof(WAVEFORMATEX);
-		}
 
 		return sizeof(WAVEFORMAT) + sizeof(WORD);
 
@@ -422,29 +394,19 @@ DWORD mmsys_format_unit_type( CONST WAVEFORMATEX *p_format )
 	case WAVE_FORMAT_PCM:
 		
 		if( bits == 8 )
-		{
 			return UNIT_TYPE_FIXED_8;
-		}
 		
 		if( bits == 16 )
-		{
 			return UNIT_TYPE_FIXED_16;
-		}
 		
 		if( bits < 16 )
-		{
 			break;
-		}
 		
 		if( bits <= 24 )
-		{
 			return UNIT_TYPE_FIXED_24;
-		}
 		
 		if( bits <= 32 )
-		{
 			return UNIT_TYPE_FIXED_32;
-		}
 		
 		break;
 		
@@ -453,14 +415,10 @@ DWORD mmsys_format_unit_type( CONST WAVEFORMATEX *p_format )
 	case WAVE_FORMAT_IEEE_FLOAT:
 		
 		if( bits == 32 )
-		{
 			return UNIT_TYPE_FLOAT;
-		}
 		
 		if( bits == 64 )
-		{
 			return UNIT_TYPE_DOUBLE;
-		}
 		
 		break;
 	}
@@ -478,9 +436,7 @@ PWAVEFORMATEX mmsys_format_alloc( DWORD size )
 	//----------------------------------------------------------------
 
 	if( size == INVALID_SIZE )
-	{
 		return NULL;
-	}
 
 	//----------------------------------------------------------------
 
@@ -488,9 +444,7 @@ PWAVEFORMATEX mmsys_format_alloc( DWORD size )
 
 	arralloc_bytes( p_format, size );
 	if( !arrcheck( p_format ) )
-	{
 		return NULL;
-	}
 
 	//----------------------------------------------------------------
 
@@ -519,18 +473,14 @@ PWAVEFORMATEX mmsys_format_dublicate( CONST WAVEFORMATEX *p_format )
 		DWORD size = mmsys_format_info( p_format, 'S' );
 
 		if( is_zero( size ) )
-		{
 			break;
-		}
 
 		//----------------------------------------------------------------
 
 		arralloc_bytes( p_dup, size );
 			
 		if( !arrcheck( p_dup ) )
-		{
 			break;
-		}
 			
 		//----------------------------------------------------------------
 
@@ -594,14 +544,10 @@ PWAVEFORMATEX mmsys_format_pcm_change( PWAVEFORMATEX p_format, CONST CHAR *types
 			if( new_chann ^ new_mask )
 			{
 				if( new_chann )
-				{
 					chann_mask = 0x0;
-				}
 
 				if( new_mask )
-				{
 					n_chann = 0;
-				}
 			}
 		}
 
@@ -659,9 +605,7 @@ PWAVEFORMATEX mmsys_format_pcm_fill
 		//----------------------------------------------------------------
 
 		if( is_zero( channels ) )
-		{
 			channels = binweight( channel_mask );
-		}
 		
 		if
 		(
@@ -685,22 +629,16 @@ PWAVEFORMATEX mmsys_format_pcm_fill
 			( format_tag == WAVE_FORMAT_EXTENSIBLE );
 
 		if( b_extensible )
-		{
 			size = sizeof(WAVEFORMATEXTENSIBLE);
-		}
 		else
-		{
 			size = sizeof(WAVEFORMATEX);
-		}
 
 		//----------------------------------------------------------------
 
 		p_format = mmsys_format_alloc( size );
 
 		if( !arrcheck( p_format ) )
-		{
 			break;
-		}
 
 		//----------------------------------------------------------------
 
@@ -721,9 +659,7 @@ PWAVEFORMATEX mmsys_format_pcm_fill
 		//----------------------------------------------------------------
 
 		if( !mmsys_format_is_pcm( p_format ) )
-		{
 			break;
-		}
 
 		//----------------------------------------------------------------
 

@@ -35,16 +35,12 @@ HWAVEIO waveio_open( CONST CHAR *file_name, DWORD open_type )
 
 			h_inst->p_file = fopen( file_name, "rb" );
 			if( invalid_ptr( h_inst->p_file ) )
-			{
 				break;
-			}
 
 			//----------------------------------------------------------------
 
 			if( fread( &h_inst->main_chunk, sizeof(h_inst->main_chunk), 1, h_inst->p_file ) != 1 )
-			{
 				break;
-			}
 
 			if
 			(
@@ -70,9 +66,7 @@ HWAVEIO waveio_open( CONST CHAR *file_name, DWORD open_type )
 
 			h_inst->p_file = fopen( file_name, "wb" );
 			if( invalid_ptr( h_inst->p_file ) )
-			{
 				break;
-			}
 
 			//----------------------------------------------------------------
 
@@ -81,9 +75,7 @@ HWAVEIO waveio_open( CONST CHAR *file_name, DWORD open_type )
 			h_inst->main_chunk.header.size		= sizeof(FCCTYPE);
 
 			if( fwrite( &h_inst->main_chunk, sizeof(h_inst->main_chunk), 1, h_inst->p_file ) != 1 )
-			{
 				break;
-			}
 
 			//----------------------------------------------------------------
 
@@ -174,9 +166,7 @@ DWORD waveio_find_chunk( HWAVEIO p_inst, FOURCC fcc_type )
 			PCHUNKIDX p_chunk = &h_inst->chunk_index[h_inst->chunk_counter - 1];
 
 			if( fseek( h_inst->p_file, p_chunk->file_pos + p_chunk->chunk.size, SEEK_SET ) )
-			{
 				break;
-			}
 		}
 
 		//----------------------------------------------------------------
@@ -212,9 +202,7 @@ DWORD waveio_find_chunk( HWAVEIO p_inst, FOURCC fcc_type )
 			//----------------------------------------------------------------
 
 			if( fseek( h_inst->p_file, p_chunk->chunk.size, SEEK_CUR ) )
-			{
 				break;
-			}
 
 			h_inst->rem_size -= min( h_inst->rem_size, p_chunk->chunk.size );
 		}
@@ -252,9 +240,7 @@ BOOL waveio_store_chunk( HWAVEIO p_inst, FOURCC fcc_type )
 			if( FCCTYPE_EQ_FCC( p_chunk->chunk.type, fcc_type ) )
 			{
 				if( fseek( h_inst->p_file, p_chunk->file_pos, SEEK_SET ) )
-				{
 					break;
-				}
 
 				h_inst->work_chunk				= p_chunk;
 				h_inst->work_chunk->rem_size	= h_inst->work_chunk->chunk.size;
@@ -270,9 +256,7 @@ BOOL waveio_store_chunk( HWAVEIO p_inst, FOURCC fcc_type )
 			PCHUNKIDX p_chunk = &h_inst->chunk_index[h_inst->chunk_counter - 1];
 
 			if( fseek( h_inst->p_file, p_chunk->file_pos + p_chunk->chunk.size, SEEK_SET ) )
-			{
 				break;
-			}
 		}
 
 		//----------------------------------------------------------------
@@ -285,9 +269,7 @@ BOOL waveio_store_chunk( HWAVEIO p_inst, FOURCC fcc_type )
 			h_inst->main_chunk.header.size		+= sizeof(h_inst->work_chunk->chunk);
 
 			if( fwrite( &h_inst->work_chunk->chunk, sizeof(h_inst->work_chunk->chunk), 1, h_inst->p_file ) != 1 )
-			{
 				break;
-			}
 
 			h_inst->work_chunk->file_pos = ftell( h_inst->p_file );
 
@@ -315,19 +297,13 @@ BOOL waveio_flush_chunk( HWAVEIO p_inst )
 	)
 	{
 		if( invalid_ptr( h_inst->work_chunk ) )
-		{
 			return TRUE;
-		}
 
 		if( fseek( h_inst->p_file, h_inst->work_chunk->file_pos - sizeof(h_inst->work_chunk->chunk), SEEK_SET ) )
-		{
 			break;
-		}
 
 		if( fwrite( &h_inst->work_chunk->chunk, sizeof(h_inst->work_chunk->chunk), 1, h_inst->p_file ) != 1 )
-		{
 			break;
-		}
 
 		h_inst->work_chunk = NULL;
 
@@ -346,9 +322,7 @@ VOID waveio_align( HWAVEIO p_inst, INT align )
 	PRIFFIOFILE h_inst = (PRIFFIOFILE)p_inst;
 	
 	if( arrcheck( h_inst ) )
-	{
 		h_inst->align = align;
-	}
 }
 
 
@@ -433,9 +407,7 @@ DWORD waveio_seek( HWAVEIO p_inst, LONG shift, DWORD seek )
 		}
 
 		if( shift > 0 )
-		{
 			shift = min( stop - pos, (DWORD)shift );
-		}
 
 		pos = alignment( pos - start + shift, h_inst->align ) + start;
 		rem = stop - pos;
@@ -480,9 +452,7 @@ DWORD waveio_read( HWAVEIO p_inst, PBYTE p_buff, DWORD buff_size )
 		buff_size = min( h_inst->work_chunk->rem_size, buff_size );
 
 		if( more_zero( buff_size ) )
-		{
 			buff_size = (DWORD)fread( p_buff, sizeof(BYTE), buff_size, h_inst->p_file );
-		}
 
 		h_inst->rem_size				-= buff_size;
 		h_inst->work_chunk->rem_size	-= buff_size;
@@ -510,9 +480,7 @@ DWORD waveio_write( HWAVEIO p_inst, CONST BYTE *p_buff, DWORD buff_size )
 	)
 	{
 		if( h_inst->work_chunk->rem_size )
-		{
 			buff_size = min( buff_size, h_inst->work_chunk->rem_size );
-		}
 
 		buff_size = (DWORD)fwrite( p_buff, sizeof(BYTE), buff_size, h_inst->p_file );
 

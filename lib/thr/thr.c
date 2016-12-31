@@ -39,9 +39,7 @@ HSEMAPHORE thr_semaphore_open( VOID )
 		
 		h_inst->h_section = thr_section_open();
 		if( invalid_ptr( h_inst->h_section ) )
-		{
 			break;
-		}
 		
 		//----------------------------------------------------------------
 		
@@ -133,34 +131,26 @@ HSYNCBUFF thr_syncbuff_open( DWORD size )
 
 		h_inst->h_section = thr_section_open();
 		if( invalid_ptr( h_inst->h_section ) )
-		{
 			break;
-		}
 
 		//----------------------------------------------------------------
 
 		h_inst->h_event = thr_event_open( TRUE, FALSE );
 		if( invalid_ptr( h_inst->h_event ) )
-		{
 			break;
-		}
 
 		//----------------------------------------------------------------
 
 		arralloc( h_inst->buffer, size );
 		if( !arrcheck( h_inst->buffer ) )
-		{
 			break;
-		}
 
 		h_inst->size = size;
 
 		//----------------------------------------------------------------
 
 		if( !thr_syncbuff_connect( (HSYNCBUFF)h_inst ) )
-		{
 			break;
-		}
 		
 		return (HSYNCBUFF)h_inst;
 	}
@@ -278,25 +268,17 @@ CONST BYTE *thr_syncbuff_lock_read( HSYNCBUFF p_inst, DWORD *p_size, BOOL wait )
 			//----------------------------------------------------------------
 
 			if( flag_check_mask( h_inst->flag, THR_SYNCBUFF_DISCONNECT ) )
-			{
 				wait = FALSE;
-			}
 
 			if( *p_size == 0 )
-			{
 				loop = wait;
-			}
 
 			//----------------------------------------------------------------
 
 			if( loop )
-			{
 				thr_event_reset( h_inst->h_event );
-			}
 			else
-			{
 				flag_set( h_inst->flag, THR_SYNCBUFF_LOCK_READ );
-			}
 
 			thr_section_leave( h_inst->h_section );
 
@@ -372,25 +354,17 @@ PBYTE thr_syncbuff_lock_write( HSYNCBUFF p_inst, DWORD *p_size, BOOL wait )
 			//----------------------------------------------------------------
 
 			if( flag_check_mask( h_inst->flag, THR_SYNCBUFF_DISCONNECT ) )
-			{
 				wait = FALSE;
-			}
 
 			if( *p_size == 0 )
-			{
 				loop = wait;
-			}
 
 			//----------------------------------------------------------------
 
 			if( loop )
-			{
 				thr_event_reset( h_inst->h_event );
-			}
 			else
-			{
 				flag_set( h_inst->flag, THR_SYNCBUFF_LOCK_WRITE );
-			}
 
 			thr_section_leave( h_inst->h_section );
 

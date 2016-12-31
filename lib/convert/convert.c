@@ -162,9 +162,7 @@ HCONVERT convert_open
 		if( !transform_matrix_make( h_inst ) )
 		{
 			if( h_inst->mixing_mode == MIX_MODE_MIXING )
-			{
 				break;
-			}
 
 			arrzero( h_inst->p_chann_mixers, N_OF_MAX_CHANNELS );
 		}
@@ -200,9 +198,7 @@ HCONVERT convert_open
 				arralloc_unit( h_inst->p_sample_work );
 
 				if( !arrcheck( h_inst->p_sample_work ) )
-				{
 					break;
-				}
 
 				arrzero_unit( h_inst->p_sample_work );
 
@@ -248,19 +244,13 @@ HCONVERT convert_open
 			//---------------------------------------------------------------------------
 
 			if( !res )
-			{
 				break;
-			}
 
 			if( !resampling_alloc( h_inst, h_inst->p_sample_work ) )
-			{
 				break;
-			}
 
 			if( b_sync )
-			{
 				samples_set_skipped( p_sample_out, h_inst->resampler_out.hist_len );
-			}
 		}
 
 		//---------------------------------------------------------------------------
@@ -338,9 +328,7 @@ BOOL convert_reset( HCONVERT p_inst )
 			//----------------------------------------------------------------
 
 			if( p_sample_work != p_sample_out )
-			{
 				samples_reset( p_sample_work );
-			}
 		}
 
 		//----------------------------------------------------------------
@@ -462,23 +450,17 @@ BOOL convert_processing
 			bytes_dst += bytes_save;
 
 			if( is_zero( bytes_load ) && is_zero( bytes_save ) )
-			{
 				break;
-			}
 		}
 	}
 
 	//---------------------------------------------------------------------------
 
 	if( !invalid_ptr( p_src_size ) )
-	{
 		*p_src_size = bytes_src;
-	}
 	
 	if( !invalid_ptr( p_dst_size ) )
-	{
 		*p_dst_size = bytes_dst;
-	}
 	
 	return non_zero( bytes_src ) || non_zero( bytes_dst );
 }
@@ -494,13 +476,9 @@ BOOL convert_stat_mode( HCONVERT p_inst, DWORD mode, BOOL b_set )
 	if( arrcheck( h_inst ) )
 	{
 		if( b_set )
-		{
 			flag_set( h_inst->statistic_mode, mode );
-		}
 		else
-		{
 			flag_reset( h_inst->statistic_mode, mode );
-		}
 		
 		return TRUE;
 	}

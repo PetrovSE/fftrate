@@ -77,9 +77,7 @@ INT euclid( INT a, INT b )
 		INT tmp = a % b;
 
 		if( is_zero( tmp ) )
-		{
 			break;
-		}
 
 		a = b;
 		b = tmp;
@@ -199,10 +197,9 @@ INT get_digits( INT x )
 	{
 		n ++;
 		x /= 10;
+
 		if( is_zero( x ) )
-		{
 			break;
-		}
 	}
 
 	return n;
@@ -215,19 +212,13 @@ INT get_digits( INT x )
 DATA to_db( DATA val )
 {
 	if( less_zero( val ) || isnan( val ) )
-	{
 		return NAN;
-	}
 
 	if( is_zero( val ) )
-	{
 		return -INFINITY;
-	}
 
 	if( isinf( val ) )
-	{
 		return INFINITY;
-	}
 
 	return (DATA)10.0 * (DATA)log10( val );
 }
@@ -257,9 +248,7 @@ HMSE mse_close( HMSE p_inst )
 	PMSE_INST h_inst = (PMSE_INST )p_inst;
 
 	if( arrcheck( h_inst ) )
-	{
 		arrfree( h_inst );
-	}
 	
 	return NULL;
 }
