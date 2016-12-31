@@ -352,13 +352,11 @@ static int pcm_rate_init( void *obj, snd_pcm_rate_info_t *info )
 		CHAR wind_name[MAX_STRING]	= "";
 		BOOL zummer = FALSE;
 
-		INIVAL init_value[] =
-		{
+		INI_BEGIN( init_value )
 			SET_STR(	"transform",	trans_name,	MAX_STRING	),
 			SET_STR(	"window",		wind_name,	MAX_STRING	),
 			SET_BOOL(	"zummer",		zummer,		INI_BOOL_STYLE_ONOFF ),
-			STRUCT_TERMINATE
-		};
+		INI_END
 
 		FILE *fp_conf = inifile_open( CONF, FILE_OPEN_READ );
 

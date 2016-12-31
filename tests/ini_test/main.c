@@ -39,7 +39,7 @@ STATIC INI_BEGIN( ini_values )
 	SET_WILD( name[1], MAX_STRING ),
 	SET_WILD( name[2], MAX_STRING ),
 	SET_WILD( name[3], MAX_STRING ),
-INI_END	
+INI_END
 
 
 //================================================================
