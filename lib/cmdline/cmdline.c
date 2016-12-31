@@ -205,7 +205,7 @@ VOID cmdline_print_help( CONST HELPTXT *p_help, CONST CHAR *self, INT n_layer )
 			text = (CHAR *)ptr->text;
 
 		fprintf( stderr, "%s\n", text );
-		
+
 		if( text != ptr->text )
 			arrfree( text );
 	}
@@ -258,15 +258,13 @@ VOID cmdline_progress_show( DWORD proc, DWORD size, CONST CHAR *title )
 		g_progress_state = state;
 		cmdline_progress_fill( state );
 
-		if( invalid_ptr( title ) )
-		{
-			fprintf( stderr, "%5.1f %%", 100.0f * percent );
-		}
-		else
+		if( !invalid_ptr( title ) )
 		{
 			strncpyt( g_prev_title, title, MAX_STRING );
 			fprintf( stderr, "%s", title );
 		}
+		else
+			fprintf( stderr, "%5.1f %%", 100.0f * percent );
 
 		fflush( stderr );
 	}
@@ -278,9 +276,7 @@ VOID cmdline_progress_done( CONST CHAR *title )
 	CONST CHAR *text = "Ok.";
 
 	if( !invalid_ptr( title ) )
-	{
 		text = title;
-	}
 
 	fprintf( stderr, "\n%s\n", text );
 }

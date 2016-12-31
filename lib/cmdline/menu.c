@@ -116,20 +116,16 @@ VOID menu_print( CONST MENU *menu )
 STATIC CONST MENUITEM *menu_wait( CONST MENU *menu )
 {
 	keyb_mode_set( KEYB_MODE_PRESS | KEYB_MODE_NOECHO );
-	
+
 	loopinf
 	{
 		BOOL b_repaint = TRUE;
 
 		if( !invalid_ptr( menu->f_runtime ) )
-		{
 			b_repaint = menu->f_runtime();
-		}
 
 		if( b_repaint )
-		{
 			menu_print( menu );
-		}
 
 		//----------------------------------------------------------------
 
@@ -144,23 +140,21 @@ STATIC CONST MENUITEM *menu_wait( CONST MENU *menu )
 				{
 					menu_local_print_key( wh );
 					printf( "\n" );
-				
+
 					keyb_mode_reset();
 					return item;
 				}
-			
+
 				item ++;
 			}
-			
+
 			continue;
 		}
 
 		//----------------------------------------------------------------
 
 		if( more_zero( menu->timeout ) )
-		{
 			thr_sleep( menu->timeout );
-		}
 	}
 	
 	return NULL;
@@ -180,26 +174,18 @@ BOOL menu_parse( CONST MENU *menu )
 	while( !g_stop_menu )
 	{
 		CONST MENUITEM *item = menu_wait( menu );
-		
+
 		if( invalid_ptr( item ) )
-		{
 			return FALSE;
-		}
-		
+
 		if( invalid_ptr( item->desc ) )
-		{
 			continue;
-		}
 
 		if( !invalid_ptr( item->f_do ) )
-		{
 			item->f_do( item );
-		}
-		
+
 		if( !invalid_ptr( item->next_menu ) && !invalid_ptr( item->next_menu->items[0].desc ) )
-		{
 			menu = item->next_menu;
-		}
 	}
 
 	return TRUE;
@@ -215,32 +201,28 @@ BOOL menu_yes_no( CONST CHAR *quest )
 	CHAR ch;
 
 	//----------------------------------------------------------------
-	
+
 	if( !invalid_ptr( quest ) )
-	{
 		printf( "%s", quest );
-	}
 
 	//----------------------------------------------------------------
 
 	keyb_mode_set( KEYB_MODE_PRESS | KEYB_MODE_NOECHO );
-	
+
 	loopinf
 	{
 		WORD wh = getkey();
 		ch = (CHAR)wh;
 
 		if( wh != ch )
-		{
 			continue;
-		}
 
 		if( symcasecmp( ch, 'Y' ) == 0 )
 		{
 			ret = TRUE;
 			break;
 		}
-		
+
 		if( symcasecmp( ch, 'N' ) == 0 )
 		{
 			break;
@@ -249,7 +231,7 @@ BOOL menu_yes_no( CONST CHAR *quest )
 
 	keyb_mode_reset();
 	printf( "%c\n", ch );
-	
+
 	return ret;
 }
 
@@ -270,9 +252,7 @@ VOID menu_press( CONST CHAR *quest )
 VOID menu_final_item( MENUITEM *item )
 {
 	if( !invalid_ptr( item ) )
-	{
 		item->desc = NULL;
-	}
 }
 
 
@@ -281,7 +261,7 @@ VOID menu_copy_item( MENUITEM *dst, CONST MENUITEM *src )
 	arrcpy_unit( dst, src );
 }
 
-	
+
 VOID menu_add( MENU *menu, INT pos, INT count )
 {
 	if
@@ -295,7 +275,7 @@ VOID menu_add( MENU *menu, INT pos, INT count )
 	{
 		MENUITEM *items = menu->items;
 		INT len = menu_local_len( items );
-		
+
 		if( pos < len )
 		{
 			count = min( count, MENU_MAX_ITEMS - len + pos );
@@ -336,8 +316,6 @@ VOID menu_fill_item
 		item->next_menu = next_menu;
 
 		if( !invalid_ptr( misc ) )
-		{
 			item->misc = *misc;
-		}
 	}
 }

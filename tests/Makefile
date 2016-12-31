@@ -1,6 +1,7 @@
-PROJS = cmdline convert fft mathex profiler riffio thr
 
-include makedef.mk
+PROJS = fft_test ini_test
+
+include ../lib/makedef.mk
 
 all:
 	for proj in $(PROJS);					\

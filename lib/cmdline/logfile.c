@@ -26,9 +26,7 @@ STATIC PLOGFILE	g_log_inst = NULL;
 BOOL log_open( CONST CHAR *name )
 {
 	if( arrcheck( g_log_inst ) )
-	{
 		return TRUE;
-	}
 
 	//----------------------------------------------------------------
 
@@ -44,9 +42,7 @@ BOOL log_open( CONST CHAR *name )
 		
 		g_log_inst->h_section = thr_section_open();
 		if( !arrcheck( g_log_inst->h_section ) )
-		{
 			break;
-		}
 
 		//----------------------------------------------------------------
 
@@ -56,9 +52,7 @@ BOOL log_open( CONST CHAR *name )
 
 		g_log_inst->fp = fopen( name, "w" );
 		if( invalid_ptr( g_log_inst->fp ) )
-		{
 			break;
-		}
 
 		//----------------------------------------------------------------
 
@@ -82,9 +76,7 @@ VOID log_close( VOID )
 		thr_section_close( g_log_inst->h_section );
 
 		if( !invalid_ptr( g_log_inst->fp ) )
-		{
 			fclose( g_log_inst->fp );
-		}
 	}
 
 	arrfree( g_log_inst );
@@ -113,14 +105,10 @@ VOID log_lock( CONST CHAR *func_name, INT line_numb )
 			CONST CHAR *tmp = strstr( ptr, "\\" );
 
 			if( invalid_ptr( tmp ) )
-			{
 				tmp = strstr( ptr, "/" );
-			}
 
 			if( invalid_ptr( tmp ) )
-			{
 				break;
-			}
 
 			ptr = tmp + 1;
 		}
@@ -128,13 +116,9 @@ VOID log_lock( CONST CHAR *func_name, INT line_numb )
 		//----------------------------------------------------------------
 
 		if( line_numb < 0 )
-		{
 			strncpyt( name, ptr, MAX_STRING );
-		}
 		else
-		{
 			snprintft( name, MAX_STRING, "%s, %4d", ptr, line_numb );
-		}
 
 		//----------------------------------------------------------------
 
@@ -158,9 +142,7 @@ VOID log_lock( CONST CHAR *func_name, INT line_numb )
 			}
 		}
 		else
-		{
 			g_log_inst->delay = 0;
-		}
 
 		//----------------------------------------------------------------
 
@@ -169,9 +151,7 @@ VOID log_lock( CONST CHAR *func_name, INT line_numb )
 		len = min( len, MAX_STRING - 1 );
 
 		for( n = 0 ; n < len ; n ++ )
-		{
 			dump[n] = ' ';
-		}
 
 		dump[n] = STR_TERM;
 

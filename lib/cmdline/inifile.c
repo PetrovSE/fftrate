@@ -54,15 +54,13 @@ STATIC VOID get_arg( CONST CHAR *str, CHAR *arg, INT len )
 	strncpyt( arg, str, len );
 	ptr = strstr( arg, "=" );
 
-	if( invalid_ptr( ptr ) )
-	{
-		arg[0] = STR_TERM;
-	}
-	else
+	if( !invalid_ptr( ptr ) )
 	{
 		strncpyt( arg, ptr + 1, len );
 		str_clear_left( arg );
 	}
+	else
+		arg[0] = STR_TERM;
 }
 
 
@@ -71,23 +69,17 @@ STATIC BOOL get_boolean_val( CONST CHAR *val )
 	INT n;
 
 	if( strlen( val ) == 0 )
-	{
 		return TRUE;
-	}
 
 	for( n = 0 ; n < g_n_of_ini_pairs ; n ++ )
 	{
 		CONST INIBOOLPAIR *p_pair = &g_ini_bool_pairs[n];
 
 		if( strcasecmp( val, p_pair->name[INI_IDX_TRUE] ) == 0 )
-		{
 			return TRUE;
-		}
 
 		if( strcasecmp( val, p_pair->name[INI_IDX_FALSE] ) == 0 )
-		{
 			return FALSE;
-		}
 	}
 
 	return atoi( val ) != 0;
@@ -122,9 +114,7 @@ FILE *inifile_open( CONST CHAR *name, INT mode )
 FILE *inifile_close( FILE *fp )
 {
 	if( !invalid_ptr( fp ) )
-	{
 		fclose( fp );
-	}
 
 	return NULL;
 }
@@ -163,9 +153,7 @@ BOOL inifile_load( FILE *fp, PINIVAL p_values )
 			//----------------------------------------------------------------
 
 			if( invalid_ptr( fgetst( in_str, MAX_STRING, fp ) ) )
-			{
 				break;
-			}
 
 			//----------------------------------------------------------------
 
@@ -176,9 +164,7 @@ BOOL inifile_load( FILE *fp, PINIVAL p_values )
 			get_arg( in_str, arg, MAX_STRING );
 			
 			if( strlen( name ) == 0 )
-			{
 				continue;
-			}
 
 			//----------------------------------------------------------------
 
@@ -194,33 +180,25 @@ BOOL inifile_load( FILE *fp, PINIVAL p_values )
 
 					case INI_VALTYPE_BOOL:
 						if( INI_DATA_IS_VALID( p_enum ) )
-						{
 							INI_DATA_BOOL( p_enum ) = get_boolean_val( arg );
-						}
 						break;
 
 
 					case INI_VALTYPE_INT:
 						if( INI_DATA_IS_VALID( p_enum ) )
-						{
 							INI_DATA_INT( p_enum ) = atoi( arg );
-						}
 						break;
 
 					
 					case INI_VALTYPE_DATA:
 						if( INI_DATA_IS_VALID( p_enum ) )
-						{
 							INI_DATA_DATA( p_enum ) = (DATA)atof( arg );
-						}
 						break;
 
 
 					case INI_VALTYPE_STR:
 						if( INI_DATA_IS_VALID( p_enum ) )
-						{
 							strncpyt( INI_DATA_STR( p_enum ), arg, p_enum->reserved );
-						}
 						break;
 					}
 					
@@ -273,10 +251,8 @@ BOOL inifile_save( FILE *fp, CONST INIVAL *p_values )
 		for( ; !invalid_ptr( p_enum->name ) ; p_enum ++ )
 		{
 			if( !INI_DATA_IS_VALID( p_enum ) )
-			{
 				continue;
-			}
-			
+
 			switch( p_enum->type )
 			{
 			case INI_VALTYPE_BOOL:
@@ -315,6 +291,6 @@ BOOL inifile_save( FILE *fp, CONST INIVAL *p_values )
 
 		return TRUE;
 	}
-	
+
 	return FALSE;
 }

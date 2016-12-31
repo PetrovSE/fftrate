@@ -5,5 +5,5 @@ LIBS   = -lmathex -lfft -lprofiler -lcmdline -lm
 CMP    = $(CC)
 EXT    = c
 
-include ../../projects/makedef.mk
-include ../maketst.mk
+include ../../lib/makedef.mk
+include ../../lib/makeapp.mk

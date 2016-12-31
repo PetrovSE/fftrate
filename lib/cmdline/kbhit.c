@@ -109,9 +109,7 @@ VOID keyb_mode_set( DWORD mode )
 VOID keyb_mode_reset( VOID )
 {
 	if( g_keyb_saved )
-	{
 		tcsetattr( STDIN_FILENO, TCSANOW, &g_saved_settings );
-	}
 }
 
 
@@ -130,9 +128,7 @@ INT kbhit( VOID )
 	FD_SET( STDIN_FILENO, &rdfs );
 
 	if( select( STDIN_FILENO + 1, &rdfs, NULL, NULL, &tv ) == -1 )
-	{
 		return 0;
-	}
 
 	return non_zero( FD_ISSET( STDIN_FILENO, &rdfs ) );
 }
@@ -156,15 +152,11 @@ WORD getkey( VOID )
 	for( i = 0 ; i < numelems(g_key_map) ; i ++ )
 	{
 		if( is_zero( strcmp( code, g_key_map[i].chmap ) ) )
-		{
 			return g_key_map[i].code;
-		}
 	}
 
 	if( size == 1 )
-	{
 		return KEY_SYMB( code[0] );
-	}
 
 	return KEY_UNKNOWN;
 }

@@ -1,6 +1,7 @@
-PROJS = cmdline convert fft mathex profiler riffio thr
 
-include makedef.mk
+PROJS = pcm_conv pcm_info pcm_mse
+
+include ../lib/makedef.mk
 
 all:
 	for proj in $(PROJS);					\

@@ -24,37 +24,37 @@ VOID PrintWaveSystemEnum( VOID )
 {
 	INT nCnt;
 	INT nMaxLen = 0;
-	
+
 	printf( "Wave systems:\n" );
-		
+
 	for( nCnt = 0 ; ; nCnt ++ )
 	{
 		CONST PLUGINFO *pInfo = wavedev_system_enum( nCnt );
-			
+
 		if( pInfo == NULL )
 		{
 			break;
 		}
-		
+
 		nMaxLen = max( nMaxLen, (INT)strlen( pInfo->system_name ) );
 	}
-	
+
 	//----------------------------------------------------------------------------
-	
+
 	for( nCnt = 0 ; ; nCnt ++ )
 	{
 		CONST PLUGINFO *pInfo = wavedev_system_enum( nCnt );
-			
+
 		if( pInfo == NULL )
 		{
 			break;
 		}
-			
+
 		printf( " %s", pInfo->system_name );
 		fprintfill( stdout, ' ', nMaxLen - (INT)strlen( pInfo->system_name ) );
 		printf( " - \"%s\"\n", pInfo->system_desc );
 	}
-	
+
 	printf( "\n" );
 }
 
@@ -71,19 +71,19 @@ VOID PrintWaveSystemInfo( CONST PLUGINFO *pSysInfo )
 VOID PrintWaveDevEnum( CONST CHAR *szTitle, CONST PLUGINFO *pSysInfo, DWORD dwMode )
 {
 	INT nCnt;
-	
+
 	if( pSysInfo == NULL )
 	{
 		return;
 	}
-	
+
 	if( szTitle == NULL )
 	{
 		szTitle = "Wave devices";
 	}
-	
+
 	//----------------------------------------------------------------------------
-	
+
 	printf( "%s [%s]:\n", szTitle, pSysInfo->system_name );
 
 	for( nCnt = 0 ; ; nCnt ++ )
@@ -94,11 +94,11 @@ VOID PrintWaveDevEnum( CONST CHAR *szTitle, CONST PLUGINFO *pSysInfo, DWORD dwMo
 		{
 			break;
 		}
-		
+
 		printf( " %s", Info.id );
-		
+
 		//----------------------------------------------------------------------------
-		
+
 		if( strlen( Info.desc ) )
 		{
 			CHAR desc[MAX_STRING];
@@ -109,10 +109,10 @@ VOID PrintWaveDevEnum( CONST CHAR *szTitle, CONST PLUGINFO *pSysInfo, DWORD dwMo
 			
 			printf( "%s", desc );
 		}
-		
+
 		printf( "\n" );
 	}
-	
+
 	printf( "\n" );
 }
 
@@ -123,11 +123,11 @@ VOID PrintWaveDevInfo( CONST CHAR *szTitle, HWAVEDEV hWaveDev, BOOL bExclusive )
 	{
 		szTitle = "Wave device";
 	}
-	
+
 	//----------------------------------------------------------------------------
-	
+
 	printf( "%s ", szTitle );
-		
+
 	if( hWaveDev == NULL )
 	{
 		printf( "failed!\n" );
@@ -135,7 +135,7 @@ VOID PrintWaveDevInfo( CONST CHAR *szTitle, HWAVEDEV hWaveDev, BOOL bExclusive )
 	else
 	{
 		DEVINFO Info;
-			
+
 		if( wavedev_get_device_name( hWaveDev, &Info ) )
 		{
 			printf( "[%s]: \"%s\" %c\n", Info.id, Info.desc, bExclusive ? '!' : ' ' );

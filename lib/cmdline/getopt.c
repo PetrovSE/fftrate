@@ -139,9 +139,7 @@ STATIC INT getopt_internal
 		p_shortopts ++;
 	}
 	else
-	{
 		ordering = ( getenv( "POSIXLY_CORRECT" ) != NULL ) ? REQUIRE_ORDER : PERMUTE;
-	}
 
 	//----------------------------------------------------------------
 	// based on ordering, find our next option, if we're at the beginning of one
@@ -186,9 +184,8 @@ STATIC INT getopt_internal
 
 		case REQUIRE_ORDER:
 			if( !is_option( args[optind], only ) )
-			{
 				return EOF;
-			}
+
 			break;
 		}
 	}
@@ -217,9 +214,7 @@ STATIC INT getopt_internal
 		// handle long options
 		//----------------------------------------------------------------
 		if( is_zero( memcmp( args[optind], "--", 2 ) ) )
-		{
 			optwhere = 2;
-		}
 
 		longopt_match	= -1;
 		possible_arg	= strchr( args[optind] + optwhere, '=' );
@@ -231,9 +226,7 @@ STATIC INT getopt_internal
 			match_chars		= match_chars - optwhere;
 		}
 		else
-		{
 			match_chars = (INT)( ( possible_arg - args[optind] ) - optwhere );
-		}
 
 		for( optindex = 0 ; longopts[optindex].name != NULL ; optindex ++ )
 		{
@@ -273,9 +266,7 @@ STATIC INT getopt_internal
 		}
 
 		if( more_eq_zero( longopt_match ) )
-		{
 			has_arg = longopts[longopt_match].has_arg;
-		}
 	}
 
 
@@ -325,9 +316,7 @@ STATIC INT getopt_internal
 	{
 	case optional_argument:
 		if( *possible_arg == '=' )
-		{
 			possible_arg ++;
-		}
 
 		if( !is_term( *possible_arg ) )
 		{
@@ -335,16 +324,12 @@ STATIC INT getopt_internal
 			optwhere	= 1;
 		}
 		else
-		{
 			optarg = NULL;
-		}
 		break;
 
 	case required_argument:
 		if( *possible_arg == '=' )
-		{
 			possible_arg ++;
-		}
 
 		if( !is_term( *possible_arg ) )
 		{
@@ -360,13 +345,9 @@ STATIC INT getopt_internal
 					fprintf( stderr, "%s: argument required for option `", args[0] );
 
 					if( more_eq_zero( longopt_match ) )
-					{
 						fprintf( stderr, "--%s'\n", longopts[longopt_match].name );
-					}
 					else
-					{
 						fprintf( stderr, "-%c'\n", invalid_ptr( cp ) ? ' ' : *cp );
-					}
 				}
 
 				optind ++;
@@ -386,14 +367,10 @@ STATIC INT getopt_internal
 		{
 			optwhere ++;
 			if( is_term( args[optind][optwhere] ) )
-			{
 				optwhere = 1;
-			}
 		}
 		else
-		{
 			optwhere = 1;
-		}
 
 		optarg = NULL;
 		break;
@@ -411,9 +388,7 @@ STATIC INT getopt_internal
 	else 
 	{
 		if( optwhere == 1 )
-		{
 			optind = optind + 1 + arg_next;
-		}
 	}
 
 	//----------------------------------------------------------------
@@ -422,9 +397,7 @@ STATIC INT getopt_internal
 	if( more_eq_zero( longopt_match ) )
 	{
 		if( longind != NULL )
-		{
 			*longind = longopt_match;
-		}
 
 		if( longopts[longopt_match].flag != NULL )
 		{
@@ -432,14 +405,10 @@ STATIC INT getopt_internal
 			return 0;
 		}
 		else
-		{
 			return longopts[longopt_match].val;
-		}
 	}
 	else
-	{
 		return optopt;
-	}
 }
 
 

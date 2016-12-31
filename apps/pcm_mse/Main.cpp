@@ -258,33 +258,33 @@ static BOOL wavefile_open( WAVEFILE *pFile )
 		printf( "Failed!\n" );
 		return FALSE;
 	}
-	
+
 	//-------------------------------------------------------------------------
-	
+
 	dwSize = waveio_find_chunk( pFile->hFiles, FCC_FMT );
-	
+
 	pFile->pFormat = mmsys_format_alloc( dwSize );
 	if( pFile->pFormat == NULL )
 	{
 		printf( "No format!\n" );
 		return FALSE;
 	}
-	
+
 	if( waveio_read( pFile->hFiles, (PBYTE)pFile->pFormat, dwSize ) != dwSize )
 	{
 		printf( "I/O file error!\n" );
 		return FALSE;
 	}
-	
+
 	if( !mmsys_format_is_pcm( pFile->pFormat ) )
 	{
 		printf( "Invalid input format!\n" );
 		return FALSE;
 	}
-	
+
 	mmsys_format_complete( pFile->pFormat );
 	PrintWaveInfo( pFile->pFormat, "Ok." );
-	
+
 	return TRUE;
 }
 
@@ -299,16 +299,16 @@ static DWORD wavefile_init( WAVEFILE *pFile, PWAVEFORMATEX pOutFormat )
 		printf( "Converter failed!\n" );
 		return INVALID_SIZE;
 	}
-	
+
 	//-------------------------------------------------------------------------
-	
+
 	dwSize = waveio_find_chunk( pFile->hFiles, FCC_DATA );
 	if( dwSize == INVALID_SIZE )
 	{
 		printf( "No data!\n" );
 		return INVALID_SIZE;
 	}
-	
+
 	return dwSize / pFile->pFormat->nBlockAlign;
 }
 
@@ -324,7 +324,7 @@ static void wavefile_load( WAVEFILE *pFile )
 {
 	DWORD dwOut;
 	DWORD dwInp;
-	
+
 	pFile->dwRemIn +=
 		waveio_read
 			(
@@ -344,7 +344,7 @@ static void wavefile_load( WAVEFILE *pFile )
 			&pFile->pBufferOut[pFile->dwRemOut],
 			&dwOut
 		);
-				
+
 	pFile->dwRemIn  -= dwInp;
 	pFile->dwRemOut += dwOut;
 
@@ -418,7 +418,7 @@ INT main( INT nArg, CHAR *pszArgs[] )
 			case 0: // info
 				nOfInfos	= sizeof( pFnInfos ) / sizeof( *pFnInfos );
 				break;
-				
+
 			case 1: // help
 				nHelpLayer = max( nHelpLayer, 2 );
 				break;
@@ -646,7 +646,7 @@ INT main( INT nArg, CHAR *pszArgs[] )
 
 		printf( "\n" );
 		cmdline_progress_init( PROGRESS_FILL_PROGR );
-		
+
 		//-------------------------------------------------------------------------
 
 		for( dwProc = 0 ; ; )
@@ -746,8 +746,8 @@ INT main( INT nArg, CHAR *pszArgs[] )
 			);
 
 		//-------------------------------------------------------------------------
-		
-		dwChannMask	= mmsys_format_info( pGlobalFormat, 'm' );
+
+		dwChannMask = mmsys_format_info( pGlobalFormat, 'm' );
 
 		for( nCnt = 0 ; nCnt < nChann ; nCnt ++ )
 		{
@@ -787,7 +787,7 @@ INT main( INT nArg, CHAR *pszArgs[] )
 
 			printf( " Max diff.  : " );
 			print_diff( ResidFile.hConv, hMSE[nCnt], bFloatData, nBits, FALSE, dwStart );
-				
+
 			printf
 				(
 					" Number of different samples: %d ( %.1f%% )\n\n",

@@ -29,30 +29,26 @@ STATIC CONST BOOLBOX g_check_box[] =
 VOID str_clear_left( CHAR *str )
 {
 	CHAR *ptr = str;
-	
+
 	for( ; is_space( *ptr ) && !is_term( *ptr ) ; ptr ++ );
-	
+
 	if( ptr != str )
-	{
 		arrmove( str, ptr, strlen( ptr ) + 1 );
-	}
 }
 
 
 VOID str_clear_rght( CHAR *str )
 {
 	CHAR *ptr = &str[strlen(str)];
-	
+
 	for( ; ptr > str ; ptr -- )
 	{
 		CHAR ch = ptr[-1];
-		
+
 		if( !is_space( ch ) )
-		{
 			break;
-		}
 	}
-	
+
 	*ptr = STR_TERM;
 }
 
@@ -69,9 +65,7 @@ VOID str_clear_comment( CHAR *str, CONST CHAR *comm )
 	CHAR *ptr = strstr( str, comm );
 
 	if( !invalid_ptr( ptr ) )
-	{
 		*ptr = STR_TERM;
-	}
 }
 
 
@@ -82,14 +76,10 @@ BOOL str_only_digit( CONST CHAR *str )
 		CHAR ch = *str ++;
 
 		if( is_term( ch ) )
-		{
 			break;
-		}
 
 		if( !is_digit( ch ) )
-		{
 			return FALSE;
-		}
 	}
 
 	return TRUE;
@@ -107,14 +97,10 @@ BOOL str_replace( CHAR *str, INT len, CONST CHAR *templ1, CONST CHAR *templ2 )
 		CHAR *ptr = strstr( start, templ1 );
 
 		if( invalid_ptr( ptr ) )
-		{
 			break;
-		}
 
 		if( ( (INT)strlen( str ) + len2 - len1 ) >= len )
-		{
 			return FALSE;
-		}
 
 		start = &ptr[len2];
 		arrmove( start, &ptr[len1], strlen( &ptr[len1] ) + 1 );
@@ -129,7 +115,7 @@ INT symcasecmp( CHAR sym1, CHAR sym2 )
 {
 	CHAR str1[2] = { sym1, STR_TERM };
 	CHAR str2[2] = { sym2, STR_TERM };
-	
+
 	return strcasecmp( str1, str2 );
 }
 
@@ -148,15 +134,11 @@ CONST CHAR *strcasestr( CONST CHAR *str1, CONST CHAR *str2 )
 		for( n = 0 ; n < len2 ; n ++ )
 		{
 			if( symcasecmp( str1[pos + n], str2[n] ) )
-			{
 				break;
-			}
 		}
 
 		if( n == len2 )
-		{
 			return &str1[pos];
-		}
 	}
 
 	return NULL;
@@ -175,13 +157,13 @@ CONST CHAR *str_fix_null( CONST CHAR *str )
 CONST CHAR *bool_box( BOOL val, DWORD type )
 {
 	CONST BOOLBOX *box;
-	
+
 	switch( type )
 	{
 	case BOOL_BOX_ONOFF:
 		box = &g_check_box[0];
 		break;
-		
+
 	case BOOL_BOX_CHECK:
 		box = &g_check_box[1];
 		break;
@@ -193,7 +175,7 @@ CONST CHAR *bool_box( BOOL val, DWORD type )
 	default:
 		return "";
 	}
-	
+
 	return val ? box->s_true : box->s_false;
 }
 
@@ -204,9 +186,7 @@ CONST CHAR *bool_box( BOOL val, DWORD type )
 STATIC VOID str_terminate( CHAR *str, INT len )
 {
 	if( more_zero( len ) )
-	{
 		str[len - 1] = STR_TERM;
-	}
 }
 
 
@@ -248,9 +228,7 @@ VOID strncatt( CHAR *dst, CONST CHAR *src, INT len )
 CHAR *fgetst( CHAR *str, INT len, FILE *fp )
 {
 	if( fgets( str, len, fp ) == NULL )
-	{
 		return NULL;
-	}
 
 	str_terminate( str, len );
 	return str;
@@ -282,9 +260,7 @@ VOID parse_arg( va_list vl_t, CONST CHAR *types, CONST CHAR *format, ... )
 			{
 				for( ; *fmt && ( *fmt == ' ' || *fmt == '\t' ) ; fmt ++ );
 				if( strlen( fmt ) < 2 )
-				{
 					break;
-				}
 
 				//----------------------------------------------------------------
 
@@ -340,9 +316,7 @@ CONST CHAR *get_filename( CONST CHAR *name )
 		CONST CHAR *ptr = strstr( name, sep );
 
 		if( invalid_ptr( ptr ) )
-		{
 			break;
-		}
 
 		name = ptr + 1;
 	}
@@ -359,12 +333,12 @@ CONST CHAR *get_filename( CONST CHAR *name )
 CHAR *strupr( CHAR *text )
 {
 	CHAR *ptr = text;
-	
+
 	for( ; *ptr ; ptr ++ )
 	{
 		*ptr = toupper( *ptr );
 	}
-	
+
 	return text;
 }
 
@@ -372,12 +346,10 @@ CHAR *strupr( CHAR *text )
 CHAR *strlwr( CHAR *text )
 {
 	CHAR *ptr = text;
-	
+
 	for( ; *ptr ; ptr ++ )
-	{
 		*ptr = tolower( *ptr );
-	}
-	
+
 	return text;
 }
 

@@ -32,7 +32,7 @@ VOID PrintConvMatrix( HCONVERT hConv )
 	convert_stat_mode( hConv, CONV_STAT_GETMATRIX, TRUE );
 	convert_get_stat( hConv, &ConvStat );
 	convert_stat_mode( hConv, CONV_STAT_GETMATRIX, FALSE );
-	
+
 	//-----------------------------------------------------------------------------
 
 	if( flag_check_mask( ConvStat.dwModeDone, CONV_STAT_GETMATRIX ) )
@@ -65,7 +65,7 @@ VOID PrintConvMatrix( HCONVERT hConv )
 		printf( "\n" );
 
 		//-----------------------------------------------------------------------------
-	
+
 		for( i = 0 ; i < nChannIn ; i ++ )
 		{
 			CONST CHANNELDESC *pDesc =
@@ -75,7 +75,7 @@ VOID PrintConvMatrix( HCONVERT hConv )
 						ConvStat.TransformMatrix.pOrderIn,
 						i
 					);
-			
+
 			printf( "%-8s", pDesc ? pDesc->szShortName : "" );
 
 			//-----------------------------------------------------------------------------
@@ -90,7 +90,7 @@ VOID PrintConvMatrix( HCONVERT hConv )
 				fprintfill( stdout, ' ', 3 );
 			}
 
-			printf( "\n" );		
+			printf( "\n" );
 		}
 
 		printf( "\n" );
@@ -101,7 +101,7 @@ VOID PrintConvMatrix( HCONVERT hConv )
 VOID PrintConvInfo( HCONVERT hConv )
 {
 	CONVSTAT ConvStat;
-	
+
 	if( hConv == NULL )
 		return;
 
@@ -109,13 +109,13 @@ VOID PrintConvInfo( HCONVERT hConv )
 
 	convert_stat_mode( hConv, CONV_STAT_GETINFO, TRUE );
 	convert_get_stat( hConv, &ConvStat );
-	
+
 	//-----------------------------------------------------------------------------
 
 	if( flag_check_mask( ConvStat.dwModeDone, CONV_STAT_GETINFO ) )
 	{
 		PCONVNFO pInfo = &ConvStat.Info;
-		
+
 		printf
 			(
 				"Windows : \"%s\" (%d => %d)\n",

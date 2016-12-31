@@ -112,7 +112,7 @@ LIBINFO_FUNCTION
 	"1.0.4.0"
 )
 
-	
+
 STATIC LIBINFO_POINTER pFnInfos[] =
 {
 	pcm_conv_get_info,

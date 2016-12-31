@@ -23,11 +23,11 @@ STATIC CONST CHAR *FormatName( WORD wFormatTag )
 	{
 	case WAVE_FORMAT_PCM:
 		return "fixed";
-		
+
 	case WAVE_FORMAT_IEEE_FLOAT:
 		return "float";
 	}
-	
+
 	return "unknown";
 }
 
@@ -44,7 +44,7 @@ VOID PrintWaveInfo( CONST WAVEFORMATEX *pFormat, CONST CHAR *szTitle )
 
 	if( szTitle )
 		printf( "%s\n", szTitle );
-	
+
 	//-----------------------------------------------------------------------------
 
 	printf( " Samples rate    = %d Hz\n", (INT)pFormat->nSamplesPerSec );

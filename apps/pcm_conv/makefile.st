@@ -7,5 +7,5 @@ LIBS   = -lconvert -lfft -lmathex -lprofiler -lcmdline -lriffio -lthr -lm -lpthr
 CMP    = $(CPP)
 EXT    = cpp
 
-include ../../projects/makedef.mk
-include ../maketst.mk
+include ../../lib/makedef.mk
+include ../../lib/makeapp.mk
