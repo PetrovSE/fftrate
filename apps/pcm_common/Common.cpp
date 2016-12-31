@@ -38,16 +38,12 @@ STATIC CONST CHAR *FormatName( WORD wFormatTag )
 VOID PrintWaveInfo( CONST WAVEFORMATEX *pFormat, CONST CHAR *szTitle )
 {
 	if( pFormat == NULL )
-	{
 		return;
-	}
 
 	//-----------------------------------------------------------------------------
 
 	if( szTitle )
-	{
 		printf( "%s\n", szTitle );
-	}
 	
 	//-----------------------------------------------------------------------------
 

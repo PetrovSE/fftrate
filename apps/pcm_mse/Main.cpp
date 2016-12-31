@@ -196,11 +196,7 @@ static void print_diff( HCONVERT hConv, HMSE hMSE, BOOL bFloatData, WORD nBits, 
 {
 	DWORD nPos = mse_get_cnt( hMSE, bFirst ? MSE_CNT_DIFF_FIRST : MSE_CNT_DIFF_MAX );
 
-	if( nPos == INVALID_SIZE )
-	{
-		printf( "none\n" );
-	}
-	else
+	if( nPos != INVALID_SIZE )
 	{
 		print_value
 			(
@@ -217,6 +213,8 @@ static void print_diff( HCONVERT hConv, HMSE hMSE, BOOL bFloatData, WORD nBits, 
 				(INT)nPos
 			);
 	}
+	else
+		printf( "none\n" );
 }
 
 
@@ -390,9 +388,7 @@ INT main( INT nArg, CHAR *pszArgs[] )
 	//-------------------------------------------------------------------------
 
 	for( nCnt = 0 ; nCnt < 2 ; nCnt ++ )
-	{
 		wavefile_reset( &InputFiles[nCnt], g_BufferIn[nCnt], g_BufferOut[nCnt] );
-	}
 	
 	wavefile_reset( &ResidFile, g_BufferOut[0], g_BufferResid );
 
@@ -434,16 +430,12 @@ INT main( INT nArg, CHAR *pszArgs[] )
 	//-------------------------------------------------------------------------
 
 	for( nCnt = 0 ; optind < nArg && nCnt < 2 ; nCnt ++, optind ++ )
-	{
 		InputFiles[nCnt].szNames = pszArgs[optind];
-	}
 
 	for( ; optind < nArg ; optind ++ )
 	{
 		if( ResidFile.szNames == NULL )
-		{
 			ResidFile.szNames = pszArgs[optind];
-		}
 
 		break;
 	}
@@ -460,9 +452,7 @@ INT main( INT nArg, CHAR *pszArgs[] )
 	cmdline_print_help( g_szHelp, pszArgs[0], nHelpLayer );
 
 	if( nHelpLayer )
-	{
 		return 1;
-	}
 
 	//-------------------------------------------------------------------------
 
@@ -481,9 +471,7 @@ INT main( INT nArg, CHAR *pszArgs[] )
 			WAVEFILE *pFile = &InputFiles[nCnt];
 
 			if( !wavefile_open( pFile ) )
-			{
 				break;
-			}
 
 			//-------------------------------------------------------------------------
 
@@ -512,17 +500,13 @@ INT main( INT nArg, CHAR *pszArgs[] )
 			//-------------------------------------------------------------------------
 
 			if( mmsys_format_info( pFile->pFormat, 't' ) == WAVE_FORMAT_IEEE_FLOAT )
-			{
 				bFloatData |= TRUE;
-			}
 
 			nBits = max( nBits, (WORD)mmsys_format_info( pFile->pFormat, 'b' ) );
 		}
 
 		if( nCnt < 2 )
-		{
 			break;
-		}
 
 		//-------------------------------------------------------------------------
 
@@ -546,9 +530,7 @@ INT main( INT nArg, CHAR *pszArgs[] )
 		}
 
 		if( pGlobalFormat == NULL || ResidFile.pFormat == NULL )
-		{
 			break;
-		}
 
 		//-------------------------------------------------------------------------
 
@@ -556,15 +538,11 @@ INT main( INT nArg, CHAR *pszArgs[] )
 		{
 			dwDataSize[nCnt] = wavefile_init( &InputFiles[nCnt], pGlobalFormat );
 			if( dwDataSize[nCnt] == INVALID_SIZE )
-			{
 				break;
-			}
 		}
 
 		if( nCnt < 2 )
-		{
 			break;
-		}
 
 		//-------------------------------------------------------------------------
 
@@ -589,9 +567,7 @@ INT main( INT nArg, CHAR *pszArgs[] )
 				printf( "Ok.\n" );
 			}
 			else
-			{
 				printf( "Failed!\n" );
-			}
 
 			PrintWaveInfo( ResidFile.pFormat, NULL );
 		}
@@ -604,9 +580,7 @@ INT main( INT nArg, CHAR *pszArgs[] )
 		
 		ResidFile.hConv = convert_open( pGlobalFormat, ResidFile.pFormat, NULL );
 		if( ResidFile.hConv == NULL )
-		{
 			printf( "Residual convert error!\n" );
-		}
 
 		//-------------------------------------------------------------------------
 
@@ -618,9 +592,7 @@ INT main( INT nArg, CHAR *pszArgs[] )
 		{
 			hMSE[nCnt] = mse_open( MSE_FLAG_DEFAULT | MSE_FLAG_DIFF );
 			if( hMSE[nCnt] == NULL )
-			{
 				break;
-			}
 
 			mse_reset( hMSE[nCnt] );
 		}
@@ -649,13 +621,9 @@ INT main( INT nArg, CHAR *pszArgs[] )
 		//-------------------------------------------------------------------------
 
 		if( dwStop )
-		{
 			dwStop = min( dwStop, dwSize );
-		}
 		else
-		{
 			dwStop = dwSize;
-		}
 
 		dwStart = min( dwStart, dwStop );
 		dwSize	= ( dwStop - dwStart ) * pGlobalFormat->nBlockAlign;
@@ -665,9 +633,7 @@ INT main( INT nArg, CHAR *pszArgs[] )
 		for( nCnt = 0 ; nCnt < 2 ; nCnt ++ )
 		{
 			if( !wavefile_seek( &InputFiles[nCnt], dwStart ) )
-			{
 				break;
-			}
 		}
 
 		if( nCnt < 2 )
@@ -688,15 +654,11 @@ INT main( INT nArg, CHAR *pszArgs[] )
 			DWORD dwDonePos;
 
 			for( nCnt = 0 ; nCnt < 2 ; nCnt ++ )
-			{
 				wavefile_load( &InputFiles[nCnt] );
-			}
 
 			dwDonePos = min( InputFiles[0].dwRemOut, InputFiles[1].dwRemOut );
 			if( dwDonePos == 0 )
-			{
 				break;
-			}
 
 			//-------------------------------------------------------------------------
 
@@ -757,9 +719,7 @@ INT main( INT nArg, CHAR *pszArgs[] )
 			//-------------------------------------------------------------------------
 
 			for( nCnt = 0 ; nCnt < 2 ; nCnt ++ )
-			{
 				wavefile_flush( &InputFiles[nCnt], dwDonePos );
-			}
 
 			//-------------------------------------------------------------------------
 
@@ -775,9 +735,7 @@ INT main( INT nArg, CHAR *pszArgs[] )
 
 		printf( "\n" );
 		if( dwSize != dwProc )
-		{
 			printf( "Warning: data is corrupted!\n" );
-		}
 
 		printf
 			(
@@ -805,13 +763,9 @@ INT main( INT nArg, CHAR *pszArgs[] )
 
 
 			if( pChannId )
-			{
 				snprintft( szTemp, MAX_STRING, "%s", pChannId->szLongName );
-			}
 			else
-			{
 				snprintft( szTemp, MAX_STRING, "Channel #%d", nCnt );
-			}
 
 			strncatt( szTemp, ":", MAX_STRING );
 			printf( "%s\n", szTemp );
@@ -852,14 +806,10 @@ INT main( INT nArg, CHAR *pszArgs[] )
 	mmsys_format_free( pGlobalFormat );
 
 	for( nCnt = 0 ; nCnt < nChann ; nCnt ++ )
-	{
 		mse_close( hMSE[nCnt] );
-	}
 
 	for( nCnt = 0 ; nCnt < 2 ; nCnt ++ )
-	{
 		wavefile_free( &InputFiles[nCnt] );
-	}
 
 	wavefile_free( &ResidFile );
 

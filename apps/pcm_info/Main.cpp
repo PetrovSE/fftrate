@@ -105,9 +105,7 @@ INT main( INT nArg, CHAR *pszArgs[] )
 	cmdline_print_help( g_szHelp, pszArgs[0], nHelpLayer );
 
 	if( nHelpLayer )
-	{
 		return 1;
-	}
 
 	//-------------------------------------------------------------------------
 
@@ -184,14 +182,10 @@ INT main( INT nArg, CHAR *pszArgs[] )
 		{
 			CONST CHANNELDESC *pInfo = mmsys_channel_desc( dwMask, NULL, nCnt );
 			if( pInfo == NULL )
-			{
 				break;
-			}
 
 			if( nCnt )
-			{
 				printf( ", " );
-			}
 
 			printf( "%s", pInfo->szShortName );
 		}

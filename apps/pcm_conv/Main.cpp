@@ -263,9 +263,7 @@ INT main( INT nArg, CHAR *pszArgs[] )
 	}
 
 	if( szOutName == NULL )
-	{
 		szOutName = (CHAR *)DEFAULT_OUTPUT;
-	}
 
 	//-------------------------------------------------------------------------
 
@@ -279,9 +277,7 @@ INT main( INT nArg, CHAR *pszArgs[] )
 	cmdline_print_help( g_szHelp, pszArgs[0], nHelpLayer );
 
 	if( nHelpLayer )
-	{
 		return 1;
-	}
 
 	//-------------------------------------------------------------------------
 
@@ -365,24 +361,16 @@ INT main( INT nArg, CHAR *pszArgs[] )
 		}
 
 		if( Frequency )
-		{
 			pOutFormat = mmsys_format_pcm_change( pOutFormat, "r", Frequency );
-		}
 
 		if( nBits || bFloat )
-		{
 			pOutFormat = mmsys_format_pcm_change( pOutFormat, "bt", nBits, bFloat ? WAVE_FORMAT_IEEE_FLOAT : WAVE_FORMAT_PCM );
-		}
 
 		if( nChannels )
-		{
 			pOutFormat = mmsys_format_pcm_change( pOutFormat, "c", nChannels );
-		}
 
 		if( dwChMask )
-		{
 			pOutFormat = mmsys_format_pcm_change( pOutFormat, "m", dwChMask );
-		}
 
 		mmsys_format_complete( pOutFormat );
 
@@ -467,9 +455,7 @@ INT main( INT nArg, CHAR *pszArgs[] )
 				);
 
 			if( is_zero( dwLoad ) && is_zero( dwSave ) )
-			{
 				break;
-			}
 
 			//-------------------------------------------------------------------------
 

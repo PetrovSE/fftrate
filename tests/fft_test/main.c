@@ -59,9 +59,7 @@ INT main( VOID )
 	srand( 1 );
 	
 	for( i = 0 ; i < N ; i ++ )
-	{
 		x[i] = (DATA)rand();
-	}
 
 	h_dct4 = dct4_init( N );
 	dct4( h_dct4, x, y );
@@ -78,9 +76,7 @@ INT main( VOID )
 	srand( 1 );
 	
 	for( i = 0 ; i < N ; i ++ )
-	{
 		x[i] = (DATA)rand();
-	}
 	
 	h_mdct = mdct_init( N );
 	mdct_forward( h_mdct, x, y );
@@ -101,9 +97,7 @@ INT main( VOID )
 	srand( 1 );
 
 	for( i = 0 ; i < N * STEP ; i ++ )
-	{
 		cmplx_make( p_in[i], (DATA)rand(), (DATA)rand() );
-	}
 
 	//---------------------------------------------------------------------------
 

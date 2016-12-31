@@ -25,9 +25,7 @@ VOID PrintConvMatrix( HCONVERT hConv )
 	CONVSTAT ConvStat;
 
 	if( hConv == NULL )
-	{
 		return;
-	}
 
 	//-----------------------------------------------------------------------------
 
@@ -45,9 +43,7 @@ VOID PrintConvMatrix( HCONVERT hConv )
 		INT i, j;
 
 		if( ConvStat.TransformMatrix.bEmptyMatrix )
-		{
 			return;
-		}
 
 		//-----------------------------------------------------------------------------
 
@@ -87,13 +83,9 @@ VOID PrintConvMatrix( HCONVERT hConv )
 			for( j = 0 ; j < nChannOut ; j ++ )
 			{
 				if( CHANN_IS_USED( ConvStat.TransformMatrix.ppMixer[i][j] ) )
-				{
 					printf( "%5.3f", ConvStat.TransformMatrix.ppMixer[i][j] );
-				}
 				else
-				{
 					fprintfill( stdout, '-', 5 );
-				}
 
 				fprintfill( stdout, ' ', 3 );
 			}
@@ -111,9 +103,7 @@ VOID PrintConvInfo( HCONVERT hConv )
 	CONVSTAT ConvStat;
 	
 	if( hConv == NULL )
-	{
 		return;
-	}
 
 	//-----------------------------------------------------------------------------
 
