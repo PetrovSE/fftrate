@@ -14,8 +14,7 @@
 #define MENU_FULL( _n, _t, _f, _d )	MENU _n = { _t, _f, _d, {
 
 #define MENU_BEGIN( _n, _t )		MENU_FULL( _n, _t, NULL, 0 )
-#define MENU_END					STRUCT_TERMINATE } };
-
+#define MENU_END					{ NULL } };
 
 #define MENU_SET_TITLE( _h, _t )	(_h).title = _t
 

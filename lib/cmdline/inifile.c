@@ -260,8 +260,8 @@ BOOL inifile_save( FILE *fp, CONST INIVAL *p_values )
 					INI_BOOL_STYLE style = p_enum->reserved;
 					INT idx   = INI_DATA_BOOL( p_enum ) ? INI_IDX_TRUE : INI_IDX_FALSE;
 
-					style = max( style, 0 );
-					style = min( style, g_n_of_ini_pairs - 1 );
+					style = (INI_BOOL_STYLE)max( (INT)style, 0 );
+					style = (INI_BOOL_STYLE)min( (INT)style, g_n_of_ini_pairs - 1 );
 
 					fprintf( fp, "%s = %s\n", p_enum->name, g_ini_bool_pairs[style].name[idx] );
 				}

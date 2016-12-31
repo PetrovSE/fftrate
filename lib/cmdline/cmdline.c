@@ -47,6 +47,7 @@ STATIC CHAR		g_fill_next;
 //----------------------------------------------------------------
 VOID printf_null( CONST CHAR *fmt, ... )
 {
+	unref_param( fmt );
 }
 
 
@@ -56,9 +57,7 @@ VOID printf_null( CONST CHAR *fmt, ... )
 VOID fprintfill( FILE *fp, CHAR ch, INT len )
 {
 	for( ; len > 0 ; len -- )
-	{
 		fputc( ch, fp );
-	}
 }
 
 
@@ -101,25 +100,19 @@ VOID number_to_str( LONGLONG val, CHAR *str, INT len )
 		CHAR ch = (CHAR)( val % 10 + '0' );
 
 		if( is_zero( val ) && cnt )
-		{
 			break;
-		}
 
 		ADD_SYMB( last, ch );
 		val /= 10;
 
 		if( val && ( cnt % 3 ) == 2 )
-		{
 			ADD_SYMB( last, '.' );
-		}
 	}
 
 	//----------------------------------------------------------------
 
 	if( sign )
-	{
 		ADD_SYMB( last, '-' );
-	}
 
 	//----------------------------------------------------------------
 
@@ -133,18 +126,14 @@ VOID number_to_str( LONGLONG val, CHAR *str, INT len )
 STATIC VOID cmdline_local_print_info( CONST CHAR *title, CONST CHAR *info )
 {
 	if( !invalid_ptr( info ) )
-	{
 		fprintf( stderr, "%s: %s\n", title, info );
-	}
 }
 
 
 VOID cmdline_print_infos( CONST LIBINFO_POINTER *p_fn_infos, INT number )
 {
 	if( is_zero( number ) )
-	{
 		return;
-	}
 
 	fprintf( stderr, "=================================================================\n" );
 	fprintf( stderr, "Module Info:\n\n" );
@@ -156,9 +145,7 @@ VOID cmdline_print_infos( CONST LIBINFO_POINTER *p_fn_infos, INT number )
 		for( cnt = 0 ; cnt < number ; cnt ++ )
 		{
 			if( cnt )
-			{
 				fprintf( stderr, "\n" );
-			}
 
 			cmdline_local_print_info( "Short name", p_fn_infos[cnt]( LIBINFO_SHORTNAME ) );
 			cmdline_local_print_info( "Long name ", p_fn_infos[cnt]( LIBINFO_LONGNAME ) );
@@ -182,14 +169,10 @@ VOID cmdline_print_help( CONST HELPTXT *p_help, CONST CHAR *self, INT n_layer )
 		CHAR *text;
 
 		if( invalid_ptr( ptr->text ) )
-		{
 			break;
-		}
 
 		if( n_layer < ptr->layer )
-		{
 			continue;
-		}
 
 		if( self )
 		{

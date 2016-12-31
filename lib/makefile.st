@@ -14,5 +14,11 @@ clean:
 		( cd $$proj; $(MAKE) -f $(MAKEF) clean );	\
 	done
 
+	rm -rf release
+	rm -rf debug
+
+	rm -f Makefile
+	rm -f Makefile.*
+
 purge: clean
 	rm -rf $(BIND)

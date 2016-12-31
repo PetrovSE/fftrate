@@ -15,3 +15,9 @@ $(FILES):
 
 clean:
 	rm -rf $(OBJD)
+
+	rm -rf release
+	rm -rf debug
+
+	rm -f Makefile
+	rm -f Makefile.*

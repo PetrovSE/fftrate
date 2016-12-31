@@ -55,15 +55,15 @@
 #define B8_9		D(  7.660444431189780e-1 )
 
 
-STATIC FFT_INST g_pElementaryFFT[] = 
+STATIC FFT_INST g_pElementaryFFT[] =
 {
-	{	9, fft_9	},
-	{	8, fft_8	},
-	{	7, fft_7	},
-	{	5, fft_5	},
-	{	4, fft_4	},
-	{	3, fft_3	},
-	{	2, fft_2	},
+	{	9, fft_9, NULL, NULL },
+	{	8, fft_8, NULL, NULL },
+	{	7, fft_7, NULL, NULL },
+	{	5, fft_5, NULL, NULL },
+	{	4, fft_4, NULL, NULL },
+	{	3, fft_3, NULL, NULL },
+	{	2, fft_2, NULL, NULL },
 };
 
 STATIC INT g_nOfElementaryFFT = numelems( g_pElementaryFFT );

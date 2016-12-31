@@ -54,13 +54,15 @@ typedef struct
 //  Values pre-definitions
 //----------------------------------------------------------------
 #define INI_BEGIN( _n )					INIVAL _n[] = {
-#define INI_END							STRUCT_TERMINATE };
+#define INI_END							{ NULL, 0, NULL, 0 } };
 
 
 #define SET_STOP( _name )				\
 {										\
 	_name,								\
 	INI_VALTYPE_STOP,					\
+	NULL,								\
+	0									\
 }
 
 
@@ -68,6 +70,8 @@ typedef struct
 {										\
 	_name,								\
 	INI_VALTYPE_COMMENT,				\
+	NULL,								\
+	0									\
 }
 
 
@@ -85,6 +89,7 @@ typedef struct
 	_name,								\
 	INI_VALTYPE_INT,					\
 	&(_val),							\
+	0									\
 }
 
 
@@ -93,6 +98,7 @@ typedef struct
 	_name,								\
 	INI_VALTYPE_DATA,					\
 	&(_val),							\
+	0									\
 }
 
 

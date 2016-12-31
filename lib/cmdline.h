@@ -12,7 +12,7 @@
 //  Definitions
 //----------------------------------------------------------------
 #define HELPTXT_BEGIN( _name )			CONST HELPTXT _name[] = {
-#define HELPTXT_END						STRUCT_TERMINATE };
+#define HELPTXT_END						{ 0, NULL } };
 #define HELPTXT_ITEM( _l, _t )			{ _l, _t, }
 
 

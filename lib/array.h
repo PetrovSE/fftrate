@@ -20,7 +20,7 @@
 //  Macros definitions
 //----------------------------------------------------------------
 #define invalid_ptr( _ptr )					( (_ptr) == NULL )
-#define numelems( _ptr )					( sizeof(_ptr) / sizeof( *(_ptr) ) )
+#define numelems( _ptr )					(INT)( sizeof(_ptr) / sizeof( *(_ptr) ) )
 
 #define arralloc_bytes( _ptr, _size )		( (_ptr) = malloc( _size ) )
 #define arralloc( _ptr, _num )				arralloc_bytes( _ptr, (_num) * sizeof( *(_ptr) ) )

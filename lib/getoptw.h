@@ -95,7 +95,7 @@ CDECL_END
 //  Definitions
 //-----------------------------------------------------------------------------
 #define GETOPT_BEGIN( _name )		const struct option _name[] = {
-#define GETOPT_END					STRUCT_TERMINATE };
+#define GETOPT_END					{ NULL, 0, NULL, 0 } };
 
 #define GETOPT_ITEM( _name, _arg, _flag, _val )		{ STR( _name ), _arg, _flag, _val }
 #define GETOPT_ITEM_SIMPLE( _name)					GETOPT_ITEM( _name, no_argument, NULL, 0 )
