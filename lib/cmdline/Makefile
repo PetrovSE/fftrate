@@ -1,0 +1,5 @@
+MODULE = cmdline
+FILES  = cmdline.o inifile.o kbhit.o str.o menu.o plug.o getopt.o
+
+include ../../projects/makedef.mk
+include ../../projects/makelib.mk
