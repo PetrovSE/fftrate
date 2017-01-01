@@ -7,6 +7,9 @@ PFILES = plugin.o
 AFILES = main.o conf.o alsa.o
 
 
+include ../lib/makedef.mk
+
+
 CONF   = fftrate.conf
 ETCD   = etc
 COMPTD = usr/lib/alsa-lib
@@ -28,8 +31,6 @@ else
 PLUGD  = usr/lib/$(DSTD)/alsa-lib
 endif
 
-
-include ../lib/makedef.mk
 
 CC        = gcc
 CFLAGS    = -O2 -Wall -fdata-sections -ffunction-sections
@@ -82,6 +83,7 @@ purge: clean
 
 clean:
 	rm -rf $(OBJD)
+	( cd $(DEBD); find -mindepth 1 -maxdepth 1 -type d | xargs rm -rf )
 
 	rm -rf $(DEBD)/tmp
 	rm -rf $(DEBD)/*-utils
