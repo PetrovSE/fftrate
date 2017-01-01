@@ -17,10 +17,5 @@ del %1\*.opt
 del /A:H %1\*.suo
 
 for %%f in ("%1\Makefile.*") do (
-	set "no_remove="
-
-	if "%%~xf" == ".st" set no_remove=1
-	if "%%~xf" == "" set no_remove=1
-	
-	if not defined no_remove del %%f
+	if not "%%~xf" == ".st" del %%f
 )

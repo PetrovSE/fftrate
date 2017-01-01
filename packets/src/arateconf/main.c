@@ -91,8 +91,8 @@ LIBINFO_FUNCTION
 	arateconf,
 	"ALSA config maker",
 	"Generate config file for ALSA",
-	"Copyright (c) 2010-11, PetrovSE",
-	"1.0.4.4"
+	"Copyright (c) 2010-16, PetrovSE",
+	"1.0.4.6"
 )
 
 

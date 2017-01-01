@@ -7,6 +7,7 @@ call clear.bat apps\pcm_mse
 call clear.bat tests\fft_test
 call clear.bat tests\ini_test
 
+call clear.bat packets\src
 call clear.bat lib
 
 call clear.bat workspaces

@@ -13,6 +13,7 @@ SUBDIRS += \
 	\
 	fft_test	\
 	ini_test	\
+	arateconf	\
 	\
 	pcm_conv	\
 	pcm_info	\
@@ -30,6 +31,7 @@ thr.file		= ../lib/thr.pro
 
 fft_test.file	= ../tests/fft_test/fft_test.pro
 ini_test.file	= ../tests/ini_test/ini_test.pro
+arateconf.file	= ../packets/src/arateconf.pro
 
 pcm_conv.file	= ../apps/pcm_conv/pcm_conv.pro
 pcm_info.file	= ../apps/pcm_info/pcm_info.pro
