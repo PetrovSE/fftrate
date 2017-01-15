@@ -3,6 +3,7 @@
 call clear.bat apps\pcm_conv
 call clear.bat apps\pcm_info
 call clear.bat apps\pcm_mse
+call clear.bat apps\pcm_stretch
 
 call clear.bat tests\fft_test
 call clear.bat tests\ini_test

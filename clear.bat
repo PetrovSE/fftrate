@@ -8,6 +8,7 @@ rmdir /S /Q %1\release_win32
 del %1\*.ncb
 del %1\*.plg
 del %1\*.pdb
+del %1\*.wav
 
 del %1\*.debug
 del %1\*.release
