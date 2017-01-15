@@ -5,6 +5,7 @@ SUBDIRS += \
 	cmdline		\
 	common		\
 	convert		\
+	stretch		\
 	fft			\
 	mathex		\
 	profiler	\
@@ -24,6 +25,7 @@ SUBDIRS += \
 cmdline.file	= ../lib/cmdline.pro
 common.file		= ../lib/common.pro
 convert.file	= ../lib/convert.pro
+stretch.file	= ../lib/stretch.pro
 fft.file		= ../lib/fft.pro
 mathex.file		= ../lib/mathex.pro
 profiler.file	= ../lib/profiler.pro

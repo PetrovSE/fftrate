@@ -11,7 +11,7 @@
 
 #include "../../lib/types.h"
 #include "../../lib/getoptw.h"
-//#include "../../lib/convert.h"
+#include "../../lib/stretch.h"
 #include "../../lib/riffio.h"
 #include "../../lib/fft.h"
 #include "../../lib/str.h"
@@ -83,6 +83,7 @@ LIBINFO_FUNCTION
 STATIC LIBINFO_POINTER pFnInfos[] =
 {
 	pcm_stretch_get_info,
+	stretch_get_info,
 	riffio_get_info,
 	fft_get_info,
 	cmdline_get_info,
@@ -199,7 +200,7 @@ INT main( INT nArg, CHAR *pszArgs[] )
 		DATA	tFullTime = (DATA)thr_time();
 		DATA	tFileDuration;
 
-//		HCONVERT hInst = NULL;
+		HSTRETCH hInst = NULL;
 
 		DWORD dwSize;
 		DWORD dwRem;
@@ -259,17 +260,17 @@ INT main( INT nArg, CHAR *pszArgs[] )
 
 		//-------------------------------------------------------------------------
 
-//		hInst = convert_open( pWaveHdr, pOutFormat, "twnio", dwTransform, dwWindow, bNorm, szOrderIn, szOrderOut );
+		hInst = stretch_open( pWaveHdr, fStretchCoef );
 
-//		if( hInst == NULL )
-//		{
-//			printf( "Failed to open converter!\n" );
-//			break;
-//		}
+		if( hInst == NULL )
+		{
+			printf( "Failed to open converter!\n" );
+			break;
+		}
 
 		//-------------------------------------------------------------------------
 
-//		convert_reset( hInst );
+		stretch_reset( hInst );
 
 		//-------------------------------------------------------------------------
 
@@ -315,7 +316,7 @@ INT main( INT nArg, CHAR *pszArgs[] )
 			dwLoad = dwRem;
 			dwSave = BUFFER_SIZE;
 
-/*			convert_processing
+			stretch_processing
 				(
 					hInst,
 
@@ -324,10 +325,7 @@ INT main( INT nArg, CHAR *pszArgs[] )
 
 					pOutBuffer,
 					&dwSave
-				); */
-
-			arrcpy( pOutBuffer, pInBuffer, dwLoad );
-			dwSave = dwLoad;
+				);
 
 			if( is_zero( dwLoad ) && is_zero( dwSave ) )
 				break;
@@ -344,7 +342,7 @@ INT main( INT nArg, CHAR *pszArgs[] )
 
 		//-------------------------------------------------------------------------
 
-//		convert_close( hInst );
+		stretch_close( hInst );
 
 		//-------------------------------------------------------------------------
 

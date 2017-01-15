@@ -1,4 +1,4 @@
-PROJS = cmdline convert fft mathex profiler riffio thr
+PROJS = cmdline convert stretch fft mathex profiler riffio thr
 
 include makedef.mk
 

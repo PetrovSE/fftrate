@@ -14,6 +14,7 @@ LIBS +=	\
 	-lprofiler	\
 	-lcmdline	\
 	-lconvert	\
+	-lstretch	\
 	-lfft		\
 	-lmathex	\
 	-lriffio	\
