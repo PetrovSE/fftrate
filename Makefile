@@ -1,11 +1,18 @@
 
 include src/lib/makedef.mk
 
-all:
+libs:
 	( cd src/lib; $(MAKE) -f $(MAKEF) )
+
+apps:
 	( cd src/apps; $(MAKE) -f $(MAKEF) )
-	( cd src/tests; $(MAKE) -f $(MAKEF) )
+
+alsa:
 	( cd src/tools; $(MAKE) -f $(MAKEF) )
+
+
+all: libs apps alsa
+	( cd src/tests; $(MAKE) -f $(MAKEF) )
 
 clean:
 	( cd src/lib; $(MAKE) -f $(MAKEF) clean )
