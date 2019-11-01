@@ -12,22 +12,22 @@
 DWORD fpux86_get_state( VOID )
 {
 	DWORD control = 0x0;
-	
-#if defined(IS_VC)
+
+#if defined(ASM_MS)
 	__asm fnstcw control;
-#elif defined(IS_GCC)
+#elif defined(ASM_ATT)
 	__asm__ __volatile__ ( "fnstcw %0" : "=m" (control) );
 #endif
-	
-    return control;
+
+	return control;
 }
 
 
 VOID fpux86_set_state( DWORD control )
 {
-#if defined(IS_VC)
+#if defined(ASM_MS)
 	__asm fldcw control;
-#elif defined(IS_GCC)
+#elif defined(ASM_ATT)
 	__asm__ __volatile__ ( "fldcw %0" : : "m" (control) );
 #endif
 }
@@ -37,7 +37,7 @@ VOID fpux86_modify_state( DWORD control, DWORD mask )
 {
 	DWORD old_control = fpux86_get_state();
 	DWORD new_control = ( ( old_control & ( ~mask ) ) | ( control & mask ) );
-	
+
 	fpux86_set_state( new_control );
 }
 

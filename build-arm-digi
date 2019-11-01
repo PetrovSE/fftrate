@@ -1,0 +1,5 @@
+#!/bin/sh
+
+PREF=/opt/digi-toolchain/usr/bin/arm-linux-
+
+make PREF=$PREF

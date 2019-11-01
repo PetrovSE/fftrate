@@ -7,7 +7,7 @@ mk_dir:
 
 
 $(MODULE): $(FILES)
-	$(AR) ../$(BIND)/lib$(MODULE).a $(addprefix $(OBJD)/, $(FILES))
+	$(AR) rcus ../$(BIND)/lib$(MODULE).a $(addprefix $(OBJD)/, $(FILES))
 
 $(FILES):
 	$(CC) $(CFLAGS) -c $*.c -o $(OBJD)/$@

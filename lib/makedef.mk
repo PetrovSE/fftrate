@@ -1,9 +1,9 @@
-CC      = gcc
-CPP     = g++
-AR      = ar rcus
+CC      = $(PREF)gcc
+CPP     = $(PREF)g++
+AR      = $(PREF)ar
 
-CFLAGS  = -O2 -Wall -fPIC -fdata-sections -ffunction-sections
-LDFLAGS = -s -Wl,--gc-sections
+CFLAGS  = -O2 -Wall -fPIC
+LDFLAGS = -s
 
 OBJD    = obj
 BIND    = bin

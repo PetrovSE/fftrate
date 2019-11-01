@@ -56,7 +56,7 @@
 #define IS_GCC
 #endif
 
-		
+
 //================================================================
 //  Platform detection
 //----------------------------------------------------------------
@@ -84,6 +84,26 @@
 
 #if defined(linux)
 #define IS_LINUX
+#endif
+
+
+
+//================================================================
+//  Assembler detection
+//----------------------------------------------------------------
+#define ASM_NONE
+
+#if defined(IS_PC) || defined(IS_PC_64)
+
+#if defined(IS_VC)
+#undef  ASM_NONE
+#define ASM_MS
+
+#elif defined(IS_GCC)
+#undef  ASM_NONE
+#define ASM_ATT
+
+#endif
 #endif
 
 

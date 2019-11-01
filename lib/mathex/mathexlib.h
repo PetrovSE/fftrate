@@ -25,11 +25,11 @@ typedef struct
 {
 	COMBOTYPE	vFirst;
 	COMBOTYPE	vMax;
-	
+
 	DWORD	first_pos;
 	DWORD	max_pos;
 	DWORD	total_pos;
-	
+
 } MSEDIFF_INST, *PMSEDIFF_INST;
 
 

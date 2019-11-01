@@ -1,7 +1,7 @@
 MODULE = pcm_info
 DIRC   = ../pcm_common
 
-FILES  = Main.o $(DIRC)/Common.o $(DIRC)/InfoConv.o
+FILES  = Main.o $(DIRC)/Common.o
 LIBS   = -lriffio -lmathex -lcmdline
 
 CMP    = $(CPP)

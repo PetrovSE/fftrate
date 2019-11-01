@@ -59,15 +59,15 @@ CDECL_END
 STATIC INLINE LONG fpux86_get_long( DATA flt )
 {
 	LONG retval;
-    
-#if defined(IS_VC)
+
+#if defined(ASM_MS)
 	_asm
 	{
 		fld		flt
 		fistp	retval
 	}
-#elif defined(IS_GCC)
-	__asm__ __volatile__ 
+#elif defined(ASM_ATT)
+	__asm__ __volatile__
 	(
 		"fistpl	%0"
 
@@ -78,8 +78,8 @@ STATIC INLINE LONG fpux86_get_long( DATA flt )
 #else
 	retval = (LONG)flt;
 #endif
-	
-    return retval;
+
+	return retval;
 }
 
 
