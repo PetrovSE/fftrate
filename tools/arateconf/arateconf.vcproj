@@ -116,7 +116,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="../../Libs/src"
+				AdditionalIncludeDirectories="../../lib"
 				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE;_CRT_SECURE_NO_DEPRECATE"
 				RuntimeLibrary="2"
 				UsePrecompiledHeader="0"
@@ -177,15 +177,15 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath="..\src\arateconf\alsa.c"
+				RelativePath="..\alsa.c"
 				>
 			</File>
 			<File
-				RelativePath="..\src\arateconf\conf.c"
+				RelativePath="..\conf.c"
 				>
 			</File>
 			<File
-				RelativePath="..\src\arateconf\main.c"
+				RelativePath="..\main.c"
 				>
 			</File>
 		</Filter>
@@ -195,7 +195,7 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
-				RelativePath="..\src\arateconf\conf.h"
+				RelativePath="..\conf.h"
 				>
 			</File>
 		</Filter>

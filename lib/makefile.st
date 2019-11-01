@@ -19,6 +19,3 @@ clean:
 
 	rm -f Makefile
 	rm -f Makefile.*
-
-purge: clean
-	rm -rf $(BIND)

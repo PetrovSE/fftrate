@@ -1,4 +1,4 @@
-PROJS = pcm_conv pcm_info pcm_mse
+PROJS = arateconf plugin
 
 include ../lib/makedef.mk
 

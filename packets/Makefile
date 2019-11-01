@@ -16,7 +16,7 @@ COMPTD = usr/lib/alsa-lib
 BIND   = usr/bin
 PROJD  = projects
 
-PSRCD  = src
+PSRCD  = ../tools
 ASRCD  = $(PSRCD)/arateconf
 MSRCD  = $(PSRCD)/script
 

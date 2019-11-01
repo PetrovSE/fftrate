@@ -1,4 +1,3 @@
-
 PROJS = fft_test ini_test
 
 include ../lib/makedef.mk
@@ -14,6 +13,3 @@ clean:
 	do							\
 		( cd $$proj; $(MAKE) -f $(MAKEF) clean );	\
 	done
-
-purge: clean
-	rm -rf $(BIND)

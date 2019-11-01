@@ -5,7 +5,8 @@ AR      = $(PREF)ar
 CFLAGS  = -O2 -Wall -fPIC
 LDFLAGS = -s
 
+INCD    = $(ROOT)/lib
+BIND    = $(ROOT)/bin
 OBJD    = obj
-BIND    = bin
 
 MAKEF   = makefile.st
