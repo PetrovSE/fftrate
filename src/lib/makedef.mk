@@ -6,7 +6,8 @@ CFLAGS  = -O2 -Wall -fPIC
 LDFLAGS = -s
 
 INCD    = $(ROOT)/lib
-BIND    = $(ROOT)/bin
 OBJD    = obj
+BIND    = ../$(ROOT)/bin
+LIBD    = ../$(ROOT)/lib
 
 MAKEF   = makefile.st

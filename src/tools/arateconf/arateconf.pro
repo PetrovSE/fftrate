@@ -1,13 +1,18 @@
 include (../../lib/build.pri)
 
-TARGET   = fft_test
+TARGET   = arateconf
 TEMPLATE = app
 
 CONFIG += console c++11
 CONFIG -= app_bundle
 CONFIG -= qt gui
 
-SOURCES +=		\
+SOURCES += \
+	alsa.c	\
+	conf.c	\
 	main.c
 
-HEADERS +=
+HEADERS += \
+	conf.h
+
+INCLUDEPATH += ../../lib

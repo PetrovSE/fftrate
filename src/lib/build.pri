@@ -20,6 +20,10 @@ LIBS +=	\
 	-lriffio	\
 	-lthr
 
+unix {
+	LIBS	+= -lasound
+}
+
 win32 {
 	DEFINES += _UNICODE _CRT_SECURE_NO_WARNINGS
 	LIBS	+= -lAdvapi32

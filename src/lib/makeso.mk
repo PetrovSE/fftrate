@@ -7,7 +7,8 @@ mk_dir:
 
 
 $(MODULE): $(FILES)
-	$(AR) rcus $(BIND)/lib$(MODULE).a $(addprefix $(OBJD)/, $(FILES))
+	$(CC) -s -o $(BIND)/lib$(MODULE).so -shared  $(addprefix $(OBJD)/, $(FILES)) -L $(LIBD) $(LIBS)
+	chmod -x $(BIND)/lib$(MODULE).so
 
 $(FILES):
 	$(CC) $(CFLAGS) -I $(INCD) -c $*.c -o $(OBJD)/$@

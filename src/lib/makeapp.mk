@@ -7,7 +7,7 @@ mk_dir:
 
 
 $(MODULE): $(FILES)
-	$(CMP) $(LDFLAGS) $(OBJD)/* -L $(BIND) $(LIBS) -o $(BIND)/$(MODULE)
+	$(CMP) $(LDFLAGS) $(OBJD)/* -L $(LIBD) $(LIBS) -o $(BIND)/$(MODULE)
 
 $(FILES):
 	$(CMP) $(CFLAGS) -I $(INCD) -c $*.$(EXT) -o $(OBJD)/$(notdir $@)

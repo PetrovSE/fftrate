@@ -6,37 +6,39 @@ SUBDIRS += \
 	common		\
 	convert		\
 	stretch		\
-	fft			\
+	fft		\
 	mathex		\
 	profiler	\
 	riffio		\
-	thr			\
+	thr		\
 	\
 	fft_test	\
 	ini_test	\
+	\
 	arateconf	\
 	\
 	pcm_conv	\
 	pcm_info	\
 	pcm_mse		\
 	pcm_stretch
-	
 
-cmdline.file	= ../lib/cmdline.pro
-common.file		= ../lib/common.pro
-convert.file	= ../lib/convert.pro
-stretch.file	= ../lib/stretch.pro
-fft.file		= ../lib/fft.pro
-mathex.file		= ../lib/mathex.pro
-profiler.file	= ../lib/profiler.pro
-riffio.file		= ../lib/riffio.pro
-thr.file		= ../lib/thr.pro
 
-fft_test.file	= ../tests/fft_test/fft_test.pro
-ini_test.file	= ../tests/ini_test/ini_test.pro
-arateconf.file	= ../packets/src/arateconf.pro
+cmdline.file	= ../src/lib/cmdline.pro
+common.file	= ../src/lib/common.pro
+convert.file	= ../src/lib/convert.pro
+stretch.file	= ../src/lib/stretch.pro
+fft.file	= ../src/lib/fft.pro
+mathex.file	= ../src/lib/mathex.pro
+profiler.file	= ../src/lib/profiler.pro
+riffio.file	= ../src/lib/riffio.pro
+thr.file	= ../src/lib/thr.pro
 
-pcm_conv.file		= ../apps/pcm_conv/pcm_conv.pro
-pcm_info.file		= ../apps/pcm_info/pcm_info.pro
-pcm_mse.file		= ../apps/pcm_mse/pcm_mse.pro
-pcm_stretch.file	= ../apps/pcm_stretch/pcm_stretch.pro
+fft_test.file	= ../src/tests/fft_test/fft_test.pro
+ini_test.file	= ../src/tests/ini_test/ini_test.pro
+
+arateconf.file	= ../src/tools/arateconf/arateconf.pro
+
+pcm_conv.file		= ../src/apps/pcm_conv/pcm_conv.pro
+pcm_info.file		= ../src/apps/pcm_info/pcm_info.pro
+pcm_mse.file		= ../src/apps/pcm_mse/pcm_mse.pro
+pcm_stretch.file	= ../src/apps/pcm_stretch/pcm_stretch.pro
