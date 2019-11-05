@@ -1,6 +1,6 @@
-PROJS = alsa
+PROJS = arateconf plugin
 
-include ../lib/makedef.mk
+include ../../lib/makedef.mk
 
 all:
 	for proj in $(PROJS);					\

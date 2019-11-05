@@ -1,7 +1,7 @@
 MODULE = arateconf
 FILES  = alsa.o conf.o main.o
 LIBS   = -lmathex -lcmdline -lthr -lasound -lm -lpthread
-ROOT   = ../..
+ROOT   = ../../..
 
 CMP    = $(CC)
 EXT    = c

@@ -1,18 +1,17 @@
 
 include src/lib/makedef.mk
 
+all: libs apps tools
+	( cd src/tests; $(MAKE) -f $(MAKEF) )
+
 libs:
 	( cd src/lib; $(MAKE) -f $(MAKEF) )
 
 apps:
 	( cd src/apps; $(MAKE) -f $(MAKEF) )
 
-alsa:
+tools:
 	( cd src/tools; $(MAKE) -f $(MAKEF) )
-
-
-all: libs apps alsa
-	( cd src/tests; $(MAKE) -f $(MAKEF) )
 
 clean:
 	( cd src/lib; $(MAKE) -f $(MAKEF) clean )
@@ -21,7 +20,6 @@ clean:
 	( cd src/tools; $(MAKE) -f $(MAKEF) clean )
 
 	rm -rf build-*-*-*
-
 
 purge: clean
 	rm -rf bin

@@ -2,4 +2,4 @@
 
 PREF=/opt/digi-toolchain/usr/bin/arm-linux-
 
-make PREF=$PREF
+make PREF=$PREF libs tools
