@@ -1,3 +1,9 @@
+libasound2-plugin-fftrate (1.6.3) UNRELEASED; urgency=low
+
+  * Add PCM utils, codebase update
+
+ -- PetrovSE <petrovse@PetrovSE-PC>  Tue, 05 Nov 2019 14:35:03 +0300
+
 libasound2-plugin-fftrate (1.6.2) precise; urgency=low
 
   * Add zummer for selfcontrol

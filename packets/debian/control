@@ -27,4 +27,15 @@ Description: ALSA configurator
  .
  The following utilities are included:
    - arateconf: ALSA configurator
-   - amixrestore: reset all ALSA mixer device
+
+Package: pcm-utils
+Section: miscellaneous
+Architecture: i386 amd64
+Depends: ${shlibs:Depends}
+Description: Wave PCM utils
+ This package contains simple utilities for the wave PCM processing.
+ .
+ The following utilities are included:
+   - pcm_info: information of the data format in 'wav' file
+   - pcm_conv: standalone PCM converter
+   - pcm_mse:  computing of the Mean Squared Error (MSE) between two 'wav' files in PCM format
