@@ -17,6 +17,7 @@ SUBDIRS += \
 	\
 	arateconf	\
 	\
+	pcm_common	\
 	pcm_conv	\
 	pcm_info	\
 	pcm_mse		\
@@ -36,8 +37,9 @@ thr.file	= ../src/lib/thr.pro
 fft_test.file	= ../src/tests/fft_test/fft_test.pro
 ini_test.file	= ../src/tests/ini_test/ini_test.pro
 
-arateconf.file	= ../src/tools/arateconf/arateconf.pro
+arateconf.file	= ../src/tools/alsa/arateconf/arateconf.pro
 
+pcm_common.file		= ../src/apps/pcm_common/pcm_common.pro
 pcm_conv.file		= ../src/apps/pcm_conv/pcm_conv.pro
 pcm_info.file		= ../src/apps/pcm_info/pcm_info.pro
 pcm_mse.file		= ../src/apps/pcm_mse/pcm_mse.pro

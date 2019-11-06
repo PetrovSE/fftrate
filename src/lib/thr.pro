@@ -8,7 +8,6 @@ CONFIG -= app_bundle
 CONFIG -= qt gui
 
 SOURCES += \
-	thr/thr.c		\
 	thr/thr_posix.c	\
 	thr/thr_win.c
 

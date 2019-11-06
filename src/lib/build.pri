@@ -8,6 +8,7 @@ else {
 
 OBJECTS_DIR = $${DESTDIR}
 
+INCLUDEPATH  += ../../lib
 QMAKE_LIBDIR += ../../lib/$${DESTDIR}
 
 LIBS +=	\

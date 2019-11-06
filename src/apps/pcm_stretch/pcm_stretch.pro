@@ -7,9 +7,7 @@ CONFIG += console c++11
 CONFIG -= app_bundle
 CONFIG -= qt gui
 
-SOURCES +=		\
-	Main.cpp	\
-	../pcm_common/Common.cpp
+QMAKE_LIBDIR += ../pcm_common/$${DESTDIR}
+LIBS += -lpcm_common
 
-HEADERS += \
-	../pcm_common/Common.h
+SOURCES += Main.cpp
