@@ -1,4 +1,4 @@
-PROJS = pcm_conv pcm_info pcm_mse
+PROJS = pcm_common pcm_conv pcm_info pcm_mse
 
 include ../lib/makedef.mk
 

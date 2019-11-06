@@ -10,7 +10,7 @@ $(MODULE): $(FILES)
 	$(AR) rcus $(LIBD)/lib$(MODULE).a $(addprefix $(OBJD)/, $(FILES))
 
 $(FILES):
-	$(CC) $(CFLAGS) -I $(INCD) -c $*.c -o $(OBJD)/$@
+	$(CMP) $(CFLAGS) -I $(INCD) -c $*.$(EXT) -o $(OBJD)/$@
 
 
 clean:

@@ -11,7 +11,7 @@ $(MODULE): $(FILES)
 	chmod -x $(BIND)/lib$(MODULE).so
 
 $(FILES):
-	$(CC) $(CFLAGS) -I $(INCD) -c $*.c -o $(OBJD)/$@
+	$(CMP) $(CFLAGS) -I $(INCD) -c $*.$(EXT) -o $(OBJD)/$@
 
 
 clean:

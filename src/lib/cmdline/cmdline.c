@@ -110,13 +110,6 @@ VOID number_to_str( LONGLONG val, CHAR *str, INT len )
 //================================================================
 //  Print help
 //----------------------------------------------------------------
-STATIC VOID cmdline_local_print_info( CONST CHAR *title, CONST CHAR *info )
-{
-	if( !invalid_ptr( info ) )
-		fprintf( stderr, "%s: %s\n", title, info );
-}
-
-
 VOID cmdline_print_help( CONST HELPTXT *p_help, CONST CHAR *self, INT n_layer )
 {
 	INT n_count;

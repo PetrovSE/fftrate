@@ -11,3 +11,12 @@ BIND    = ../$(ROOT)/bin
 LIBD    = ../$(ROOT)/lib
 
 MAKEF   = makefile.st
+
+
+ifeq ($(CMP),)
+CMP = $(CC)
+endif
+
+ifeq ($(EXT),)
+EXT = c
+endif

@@ -67,21 +67,6 @@ typedef struct
 
 //--------------------------------------------------------------------------------------------
 
-static const char g_suffix[] =
-{
-	""
-
-#ifdef DUMP
-	" dump"
-#endif
-
-#ifdef DEBUG
-	" debug"
-#endif
-};
-
-//--------------------------------------------------------------------------------------------
-
 #define channel_processing( _name, _arg )	\
 static void channel_##_name					\
 (											\
@@ -342,7 +327,6 @@ static int pcm_rate_init( void *obj, snd_pcm_rate_info_t *info )
 	//--------------------------------------------------------------------------------------------
 
 	dbg_printf( "[pcm_rate_init]\n" );
-	fprintf( OUTF, "\n" TITLE " (build: " LIBINFO_BUILD_STR "%s)\n", g_suffix );
 	pcm_rate_free( obj );
 
 	//--------------------------------------------------------------------------------------------

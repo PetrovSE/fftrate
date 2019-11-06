@@ -1,5 +1,5 @@
 MODULE = thr
-FILES  = thr.o thr_posix.o
+FILES  = thr_posix.o
 ROOT   = ../..
 
 include ../makedef.mk

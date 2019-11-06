@@ -1,8 +1,7 @@
 MODULE = pcm_info
-DIRC   = ../pcm_common
 
-FILES  = Main.o $(DIRC)/Common.o
-LIBS   = -lriffio -lmathex -lcmdline
+FILES  = Main.o
+LIBS   = -lpcm_common -lriffio -lmathex -lcmdline
 
 ROOT   = ../..
 

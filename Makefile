@@ -1,7 +1,7 @@
 
 include src/lib/makedef.mk
 
-all: libs apps tools
+all: libs apps tools apps
 	( cd src/tests; $(MAKE) -f $(MAKEF) )
 
 libs:
