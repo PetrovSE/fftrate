@@ -69,40 +69,16 @@
 // ROM
 //-----------------------------------------------------------------------------
 STATIC HELPTXT_BEGIN( g_szHelp )
-	HELPTXT_ITEM( 1, "Usage: arateconf [--info] [-h|--help]"			),
+	HELPTXT_ITEM( 1, "Usage: arateconf [-h|--help]"			),
 	HELPTXT_ITEM( 2, ""													),
 	HELPTXT_ITEM( 2, "Options:"											),
-	HELPTXT_ITEM( 2, " --info        Show wide modules information"		),
 	HELPTXT_ITEM( 2, " -h, --help    Show this message"					),
 HELPTXT_END
 
 
 STATIC GETOPT_BEGIN( g_LongOpt )
-	GETOPT_ITEM_SIMPLE(	"info"			),
 	GETOPT_ITEM_SYM(	"help",		'h' ),
 GETOPT_END
-
-
-//=============================================================================
-// Get module information
-//-----------------------------------------------------------------------------
-LIBINFO_FUNCTION
-(
-	arateconf,
-	"ALSA config maker",
-	"Generate config file for ALSA",
-	"Copyright (c) 2010-16, PetrovSE",
-	"1.0.4.6"
-)
-
-
-STATIC LIBINFO_POINTER pFnInfos[] =
-{
-	arateconf_get_info,
-	cmdline_get_info,
-	mathex_get_info,
-};
-
 
 
 //=============================================================================
@@ -1236,7 +1212,6 @@ MENU_END
 //-----------------------------------------------------------------------------
 INT main( INT nargs, CHAR *argv[] )
 {
-	INT n_of_infos		= 1;
 	INT n_help_layer	= 0;
 	INT long_idx;
 	INT cnt;
@@ -1262,12 +1237,7 @@ INT main( INT nargs, CHAR *argv[] )
 		case 0:
 			switch( long_idx )
 			{
-			case 0: // info
-				n_of_infos		= sizeof( pFnInfos ) / sizeof( *pFnInfos );
-				n_help_layer	= max( n_help_layer, 1 );
-				break;
-
-			case 1: // help
+			case 0: // help
 				n_help_layer	= max( n_help_layer, 2 );
 				break;
 			}
@@ -1277,7 +1247,6 @@ INT main( INT nargs, CHAR *argv[] )
 	
 	//-------------------------------------------------------------------------
 	
-	cmdline_print_infos( pFnInfos, n_of_infos );
 	cmdline_print_help( g_szHelp, argv[0], n_help_layer );
 	
 	if( n_help_layer )

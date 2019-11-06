@@ -13,7 +13,7 @@
 #include "str.h"
 #include "getoptw.h"
 #include "convert.h"
-#include "riffio.h"
+#include "waveio.h"
 #include "fft.h"
 #include "cmdline.h"
 #include "mathex.h"
@@ -41,8 +41,8 @@ STATIC BYTE		g_BufferResid[BUFFER_INP];
 // ROM
 //-----------------------------------------------------------------------------
 STATIC HELPTXT_BEGIN( g_szHelp )
-	HELPTXT_ITEM( 1, "Usage: " SLFNAME " <file #1> <file #2> [<resid>] [-b count] [-e count]"			),
-	HELPTXT_ITEM( 1, "               [--info] [-h|--help]"											),
+	HELPTXT_ITEM( 1, "Usage: " SLFNAME " <file #1> <file #2> [<resid>] [-b count] [-e count]"		),
+	HELPTXT_ITEM( 1, "               [-h|--help]"													),
 	HELPTXT_ITEM( 2, ""																				),
 	HELPTXT_ITEM( 2, "Options:"																		),
 	HELPTXT_ITEM( 2, " file #1       First WAVE file"												),
@@ -52,38 +52,15 @@ STATIC HELPTXT_BEGIN( g_szHelp )
 	HELPTXT_ITEM( 2, " -b            Fragment begining (in samples)"								),
 	HELPTXT_ITEM( 2, " -e            Fragment end (in samples)"										),
 	HELPTXT_ITEM( 2, ""																				),
-	HELPTXT_ITEM( 2, " --info        Show wide modules information"									),
 	HELPTXT_ITEM( 2, " -h, --help    Show this message"												),
+	HELPTXT_ITEM( 2, " --help-all    Show all help info"											),
 HELPTXT_END
 
 
 STATIC GETOPT_BEGIN( g_LongOpt )
-	GETOPT_ITEM_SIMPLE(	"info"			),
 	GETOPT_ITEM_SYM(	"help",		'h' ),
+	GETOPT_ITEM_SIMPLE(	"help-all"		),
 GETOPT_END
-
-
-//=============================================================================
-// Get module information
-//-----------------------------------------------------------------------------
-LIBINFO_FUNCTION
-(
-	pcm_mse,
-	"MSE calculation",
-	"Mean Square Error calculation for WAVE file",
-	"Copyright (c) 2009-12 PetrovSE",
-	"1.0.4.0"
-)
-
-
-STATIC LIBINFO_POINTER pFnInfos[] =
-{
-	pcm_mse_get_info,
-	convert_get_info,
-	mathex_get_info,
-	riffio_get_info,
-	cmdline_get_info,
-};
 
 
 //=============================================================================
@@ -379,7 +356,6 @@ INT main( INT nArg, CHAR *pszArgs[] )
 	DWORD	dwStart	= 0;
 	DWORD	dwStop	= 0;
 
-	INT	nOfInfos	= 0;
 	INT	nHelpLayer	= 1;
 
 	INT nLongIdx;
@@ -415,12 +391,12 @@ INT main( INT nArg, CHAR *pszArgs[] )
 		case 0:
 			switch( nLongIdx )
 			{
-			case 0: // info
-				nOfInfos	= sizeof( pFnInfos ) / sizeof( *pFnInfos );
+			case 0: // help
+				nHelpLayer = max( nHelpLayer, 2 );
 				break;
 
-			case 1: // help
-				nHelpLayer = max( nHelpLayer, 2 );
+			case 1: // help-all
+				nHelpLayer = max( nHelpLayer, 3 );
 				break;
 			}
 			break;
@@ -443,12 +419,8 @@ INT main( INT nArg, CHAR *pszArgs[] )
 	//-------------------------------------------------------------------------
 
 	if( InputFiles[0].szNames && InputFiles[1].szNames )
-	{
-		nOfInfos	= max( nOfInfos, 1 );
-		nHelpLayer	= 0;
-	}
+		nHelpLayer = 0;
 
-	cmdline_print_infos( pFnInfos, nOfInfos );
 	cmdline_print_help( g_szHelp, pszArgs[0], nHelpLayer );
 
 	if( nHelpLayer )

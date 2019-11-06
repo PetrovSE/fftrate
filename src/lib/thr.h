@@ -13,8 +13,6 @@
 //----------------------------------------------------------------
 CDECL_BEGIN
 
-LIBINFO_PROTOTYPE( thr );
-
 VOID thr_sleep( DWORD timeout_ms );
 LONGLONG thr_time( VOID );
 

@@ -11,7 +11,7 @@
 #include "types.h"
 #include "array.h"
 #include "getoptw.h"
-#include "riffio.h"
+#include "waveio.h"
 #include "cmdline.h"
 #include "str.h"
 
@@ -22,34 +22,18 @@
 // ROM
 //-----------------------------------------------------------------------------
 STATIC HELPTXT_BEGIN( g_szHelp )
-	HELPTXT_ITEM( 1, "Usage: " SLFNAME " <file> [--info]" ),
+	HELPTXT_ITEM( 1, "Usage: " SLFNAME " <file>" ),
+	HELPTXT_ITEM( 2, ""													),
+	HELPTXT_ITEM( 2, "Options:"											),
+	HELPTXT_ITEM( 2, " -h, --help    Show this message"					),
+	HELPTXT_ITEM( 2, " --help-all    Show all help info"				),
 HELPTXT_END
 
 
 STATIC GETOPT_BEGIN( g_LongOpt )
-	GETOPT_ITEM_SIMPLE( "info" ),
+	GETOPT_ITEM_SYM(	"help",		'h' ),
+	GETOPT_ITEM_SIMPLE(	"help-all"		),
 GETOPT_END
-
-
-//=============================================================================
-// Get module information
-//-----------------------------------------------------------------------------
-LIBINFO_FUNCTION
-(
-	pcm_info,
-	"WAVE Info",
-	"Get information abount WAVE PCM file",
-	"Copyright (c) 2011 PetrovSE",
-	"1.0.0.4"
-)
-
-
-STATIC LIBINFO_POINTER pFnInfos[] =
-{
-	pcm_info_get_info,
-	riffio_get_info,
-	cmdline_get_info,
-};
 
 
 //=============================================================================
@@ -61,7 +45,6 @@ INT main( INT nArg, CHAR *pszArgs[] )
 	PWAVEFORMATEX	pFormat	= NULL;
 	HWAVEIO			hFile	= NULL;
 
-	INT	nOfInfos	= 0;
 	INT	nHelpLayer	= 1;
 
 	INT nLongIdx;
@@ -71,15 +54,23 @@ INT main( INT nArg, CHAR *pszArgs[] )
 
 	//-----------------------------------------------------------------------------
 
-	while( ( nCnt = getopt_long( nArg, pszArgs, "", g_LongOpt, &nLongIdx ) ) != -1 )
+	while( ( nCnt = getopt_long( nArg, pszArgs, "h", g_LongOpt, &nLongIdx ) ) != -1 )
 	{
 		switch( nCnt )
 		{
+		case 'h':
+			nHelpLayer = max( nHelpLayer, 2 );
+			break;
+
 		case 0:
 			switch( nLongIdx )
 			{
-			case 0: // info
-				nOfInfos = sizeof( pFnInfos ) / sizeof( *pFnInfos );
+			case 0: // help
+				nHelpLayer = max( nHelpLayer, 2 );
+				break;
+
+			case 1: // help-all
+				nHelpLayer = max( nHelpLayer, 3 );
 				break;
 			}
 			break;
@@ -89,19 +80,13 @@ INT main( INT nArg, CHAR *pszArgs[] )
 	//-----------------------------------------------------------------------------
 
 	if( optind < nArg )
-	{
 		szFileName = pszArgs[optind];
-	}
 
 	//-------------------------------------------------------------------------
 
 	if( szFileName )
-	{
-		nOfInfos	= max( nOfInfos, 1 );
-		nHelpLayer	= 0;
-	}
+		nHelpLayer = 0;
 
-	cmdline_print_infos( pFnInfos, nOfInfos );
 	cmdline_print_help( g_szHelp, pszArgs[0], nHelpLayer );
 
 	if( nHelpLayer )

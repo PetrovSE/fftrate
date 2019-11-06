@@ -38,8 +38,6 @@ typedef struct
 //----------------------------------------------------------------
 CDECL_BEGIN
 
-LIBINFO_PROTOTYPE( cmdline );
-
 VOID printf_null( CONST CHAR *fmt, ... );
 
 #ifdef DEBUGGING
@@ -53,7 +51,6 @@ VOID clrscr( VOID );
 
 VOID number_to_str( LONGLONG val, CHAR *str, INT len );
 
-VOID cmdline_print_infos( CONST LIBINFO_POINTER *p_fn_infos, INT number );
 VOID cmdline_print_help( CONST HELPTXT *p_help, CONST CHAR *self, INT n_layer );
 
 VOID cmdline_progress_init( CONST CHAR *fills );

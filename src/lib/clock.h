@@ -72,8 +72,6 @@ typedef struct
 //----------------------------------------------------------------
 CDECL_BEGIN
 
-LIBINFO_PROTOTYPE( profiler );
-
 LONGLONG clock_get_cpu_counter( VOID );
 LONGLONG clock_get_cpu_freq( VOID );
 

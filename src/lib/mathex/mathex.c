@@ -47,19 +47,6 @@ STATIC INT g_nOfFirstPrimes = numelems( g_pFirstPrimes );
 
 
 //================================================================
-//  Get module information
-//----------------------------------------------------------------
-LIBINFO_FUNCTION
-(
-	mathex,
-	"MathEx library",
-	"Some mathematical functions",
-	"Copyright (c) 2007-16 PetrovSE",
-	"1.0.5.2"
-);
-
-
-//================================================================
 //  Euclid algorithms
 //----------------------------------------------------------------
 INT euclid( INT a, INT b )

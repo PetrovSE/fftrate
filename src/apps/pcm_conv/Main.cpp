@@ -12,7 +12,7 @@
 #include "types.h"
 #include "getoptw.h"
 #include "convert.h"
-#include "riffio.h"
+#include "waveio.h"
 #include "fft.h"
 #include "str.h"
 #include "array.h"
@@ -50,13 +50,13 @@ STATIC BYTE pOutBuffer[BUFFER_SIZE];
 // ROM
 //-----------------------------------------------------------------------------
 STATIC HELPTXT_BEGIN( g_szHelp )
-	HELPTXT_ITEM( 1, "Usage: " SLFNAME " <input file> [output file]"								),
+	HELPTXT_ITEM( 1, "Usage: " SLFNAME " <input file> [output file]"							),
 	HELPTXT_ITEM( 1, "               [-c number of channels]"									),
 	HELPTXT_ITEM( 3, "               [-m mask] [-n on|off]"										),
 	HELPTXT_ITEM( 3, "               [-I input order] [-O output order]"						),
 	HELPTXT_ITEM( 1, "               [-b number of bits] [-f frequency] "						),
 	HELPTXT_ITEM( 3, "               [-T trans] [-W win]"										),
-	HELPTXT_ITEM( 1, "               [-v] [--info] [-h|--help|--help-all]"						),
+	HELPTXT_ITEM( 1, "               [-v] [-h|--help|--help-all]"								),
 	HELPTXT_ITEM( 2, ""																			),
 	HELPTXT_ITEM( 2, "Options:"																	),
 	HELPTXT_ITEM( 2, " input file    Input WAVE file"											),
@@ -87,41 +87,15 @@ STATIC HELPTXT_BEGIN( g_szHelp )
 	HELPTXT_ITEM( 3, " -W            Window type: " SZ_VORBIS ", " SZ_HANNING ", " SZ_RECT " (default: " SZ_VORBIS ")"	),
 	HELPTXT_ITEM( 2, ""																			),
 	HELPTXT_ITEM( 2, " -v            Show verbose information"									),
-	HELPTXT_ITEM( 2, " --info        Show wide modules information"								),
 	HELPTXT_ITEM( 2, " -h, --help    Show this message"											),
 	HELPTXT_ITEM( 2, " --help-all    Show all help info"										),
 HELPTXT_END
 
 
 STATIC GETOPT_BEGIN( g_LongOpt )
-	GETOPT_ITEM_SIMPLE(	"info"			),
 	GETOPT_ITEM_SYM(	"help",		'h' ),
 	GETOPT_ITEM_SIMPLE(	"help-all"		),
 GETOPT_END
-
-
-//=============================================================================
-// Get module information
-//-----------------------------------------------------------------------------
-LIBINFO_FUNCTION
-(
-	pcm_conv,
-	"WAVE PCM Converter",
-	"Convert PCM format for WAVE files",
-	"Copyright (c) 2009-11 PetrovSE",
-	"1.0.4.0"
-)
-
-
-STATIC LIBINFO_POINTER pFnInfos[] =
-{
-	pcm_conv_get_info,
-	convert_get_info,
-	riffio_get_info,
-	fft_get_info,
-	profiler_get_info,
-	cmdline_get_info,
-};
 
 
 //=============================================================================
@@ -138,7 +112,6 @@ INT main( INT nArg, CHAR *pszArgs[] )
 	HWAVEIO	hFileIn		= NULL;
 	HWAVEIO	hFileOut	= NULL;
 
-	INT  nOfInfos	= 0;
 	INT  nHelpLayer	= 1;
 
 	DWORD dwTransform	= CONV_TRANSFORM_DCT;
@@ -227,15 +200,11 @@ INT main( INT nArg, CHAR *pszArgs[] )
 		case 0:
 			switch( nLongIdx )
 			{
-			case 0: // info
-				nOfInfos = sizeof( pFnInfos ) / sizeof( *pFnInfos );
-				break;
-
-			case 1: // help
+			case 0: // help
 				nHelpLayer = max( nHelpLayer, 2 );
 				break;
 
-			case 2: // help-all
+			case 1: // help-all
 				nHelpLayer = max( nHelpLayer, 3 );
 				break;
 			}
@@ -268,12 +237,8 @@ INT main( INT nArg, CHAR *pszArgs[] )
 	//-------------------------------------------------------------------------
 
 	if( szInName )
-	{
-		nOfInfos	= max( nOfInfos, 1 );
-		nHelpLayer	= 0;
-	}
+		nHelpLayer = 0;
 
-	cmdline_print_infos( pFnInfos, nOfInfos );
 	cmdline_print_help( g_szHelp, pszArgs[0], nHelpLayer );
 
 	if( nHelpLayer )

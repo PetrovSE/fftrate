@@ -70,19 +70,6 @@ STATIC INT g_nOfElementaryFFT = numelems( g_pElementaryFFT );
 
 
 //================================================================
-//  Get module information
-//----------------------------------------------------------------
-LIBINFO_FUNCTION
-(
-	fft,
-	"FFT-DCT4-MDCT",
-	"FFT, DCT4 and MDCT by Cooley-Tukey, Good-Thomas and Winograd algorithms",
-	"Copyright (c) 2007-10 PetrovSE",
-	"2.0.0.2"
-);
-
-
-//================================================================
 //  FFT 2
 //----------------------------------------------------------------
 VOID fft_2( HFFT p_inst, PCOMPLEX p_x, INT step )

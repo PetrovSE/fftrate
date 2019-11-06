@@ -63,9 +63,6 @@ DECL_HANDLE( HMSE );
 //----------------------------------------------------------------
 CDECL_BEGIN
 
-LIBINFO_PROTOTYPE( mathex );
-
-
 INT euclid( INT a, INT b );
 INT euclid_ext( INT a, INT b, INT *x, INT *y );
 

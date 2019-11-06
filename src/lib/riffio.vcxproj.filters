@@ -14,18 +14,12 @@
     <ClCompile Include="riffio\mmsys.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="riffio\riffio.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="riffio\waveio.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="mmsys.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="riffio.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="waveio.h">

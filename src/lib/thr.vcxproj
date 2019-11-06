@@ -70,7 +70,6 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="thr\thr.c" />
     <ClCompile Include="thr\thr_posix.c" />
     <ClCompile Include="thr\thr_win.c" />
   </ItemGroup>

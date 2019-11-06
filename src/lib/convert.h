@@ -114,8 +114,6 @@ typedef struct
 //----------------------------------------------------------------
 CDECL_BEGIN
 
-LIBINFO_PROTOTYPE( convert );
-
 HCONVERT convert_open
 (
 	CONST WAVEFORMATEX	*p_src_format,

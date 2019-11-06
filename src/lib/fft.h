@@ -20,8 +20,6 @@ DECL_HANDLE( HFFT );
 //----------------------------------------------------------------
 CDECL_BEGIN
 
-LIBINFO_PROTOTYPE( fft );
-
 VOID fft_2( HFFT p_inst, PCOMPLEX p_x, INT step );
 VOID fft_3( HFFT p_inst, PCOMPLEX p_x, INT step );
 VOID fft_4( HFFT p_inst, PCOMPLEX p_x, INT step );

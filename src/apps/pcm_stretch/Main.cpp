@@ -12,7 +12,7 @@
 #include "types.h"
 #include "getoptw.h"
 #include "stretch.h"
-#include "riffio.h"
+#include "waveio.h"
 #include "fft.h"
 #include "str.h"
 #include "array.h"
@@ -54,40 +54,15 @@ STATIC HELPTXT_BEGIN( g_szHelp )
 	HELPTXT_ITEM( 3, " -s            Stretch coef"												),
 	HELPTXT_ITEM( 3, ""																			),
 	HELPTXT_ITEM( 2, " -v            Show verbose information"									),
-	HELPTXT_ITEM( 2, " --info        Show wide modules information"								),
 	HELPTXT_ITEM( 2, " -h, --help    Show this message"											),
 	HELPTXT_ITEM( 2, " --help-all    Show all help info"										),
 HELPTXT_END
 
 
 STATIC GETOPT_BEGIN( g_LongOpt )
-	GETOPT_ITEM_SIMPLE(	"info"			),
 	GETOPT_ITEM_SYM(	"help",		'h' ),
 	GETOPT_ITEM_SIMPLE(	"help-all"		),
 GETOPT_END
-
-
-//=============================================================================
-// Get module information
-//-----------------------------------------------------------------------------
-LIBINFO_FUNCTION
-(
-	pcm_stretch,
-	"WAVE PCM Stretcher",
-	"Stretching PCM data for WAVE files",
-	"Copyright (c) 2009-17 PetrovSE",
-	"1.0.1.0"
-)
-
-
-STATIC LIBINFO_POINTER pFnInfos[] =
-{
-	pcm_stretch_get_info,
-	stretch_get_info,
-	riffio_get_info,
-	fft_get_info,
-	cmdline_get_info,
-};
 
 
 //=============================================================================
@@ -104,7 +79,6 @@ INT main( INT nArg, CHAR *pszArgs[] )
 	HWAVEIO	hFileOut	= NULL;
 
 	DATA fStretchCoef = 1.0;
-	INT  nOfInfos	= 0;
 	INT  nHelpLayer	= 1;
 
 	BOOL bInfo		= FALSE;
@@ -135,15 +109,11 @@ INT main( INT nArg, CHAR *pszArgs[] )
 		case 0:
 			switch( nLongIdx )
 			{
-			case 0: // info
-				nOfInfos = sizeof( pFnInfos ) / sizeof( *pFnInfos );
-				break;
-
-			case 1: // help
+			case 0: // help
 				nHelpLayer = max( nHelpLayer, 2 );
 				break;
 
-			case 2: // help-all
+			case 1: // help-all
 				nHelpLayer = max( nHelpLayer, 3 );
 				break;
 			}
@@ -176,12 +146,8 @@ INT main( INT nArg, CHAR *pszArgs[] )
 	//-------------------------------------------------------------------------
 
 	if( szInName )
-	{
-		nOfInfos	= max( nOfInfos, 1 );
-		nHelpLayer	= 0;
-	}
+		nHelpLayer = 0;
 
-	cmdline_print_infos( pFnInfos, nOfInfos );
 	cmdline_print_help( g_szHelp, pszArgs[0], nHelpLayer );
 
 	if( nHelpLayer )

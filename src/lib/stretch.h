@@ -20,8 +20,6 @@ DECL_HANDLE( HSTRETCH );
 //----------------------------------------------------------------
 CDECL_BEGIN
 
-LIBINFO_PROTOTYPE( stretch );
-
 HSTRETCH stretch_open
 (
 	CONST WAVEFORMATEX	*p_format,

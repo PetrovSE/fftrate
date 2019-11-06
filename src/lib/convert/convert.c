@@ -18,19 +18,6 @@
 
 
 //================================================================
-//  Get module information
-//----------------------------------------------------------------
-LIBINFO_FUNCTION
-(
-	convert,
-	"PCM Converter",
-	"Sampling converter & channels mixer for Wave PCM data",
-	"Copyright (c) 2007-16 PetrovSE",
-	"2.0.9.10"
-);
-
-
-//================================================================
 //  Open module
 //----------------------------------------------------------------
 HCONVERT convert_open

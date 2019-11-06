@@ -12,19 +12,6 @@
 
 
 //================================================================
-//  Get module information
-//----------------------------------------------------------------
-LIBINFO_FUNCTION
-(
-	cmdline,
-	"CmdLine",
-	"Command line support functions",
-	"Copyright (c) 2007-16 PetrovSE",
-	"1.0.4.8"
-);
-
-
-//================================================================
 //  Definitions
 //----------------------------------------------------------------
 #define ADD_SYMB( _p, _c )			( * --(_p) ) = (_c);
@@ -127,35 +114,6 @@ STATIC VOID cmdline_local_print_info( CONST CHAR *title, CONST CHAR *info )
 {
 	if( !invalid_ptr( info ) )
 		fprintf( stderr, "%s: %s\n", title, info );
-}
-
-
-VOID cmdline_print_infos( CONST LIBINFO_POINTER *p_fn_infos, INT number )
-{
-	if( is_zero( number ) )
-		return;
-
-	fprintf( stderr, "=================================================================\n" );
-	fprintf( stderr, "Module Info:\n\n" );
-
-	if( !invalid_ptr( p_fn_infos ) )
-	{
-		INT cnt;
-
-		for( cnt = 0 ; cnt < number ; cnt ++ )
-		{
-			if( cnt )
-				fprintf( stderr, "\n" );
-
-			cmdline_local_print_info( "Short name", p_fn_infos[cnt]( LIBINFO_SHORTNAME ) );
-			cmdline_local_print_info( "Long name ", p_fn_infos[cnt]( LIBINFO_LONGNAME ) );
-			cmdline_local_print_info( "Copyright ", p_fn_infos[cnt]( LIBINFO_COPYRIGHT ) );
-			cmdline_local_print_info( "Version   ", p_fn_infos[cnt]( LIBINFO_VERSION ) );
-			cmdline_local_print_info( "Build     ", p_fn_infos[cnt]( LIBINFO_BUILD ) );
-		}
-	}
-
-	fprintf( stderr, "=================================================================\n\n" );
 }
 
 

@@ -71,12 +71,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="riffio\mmsys.c" />
-    <ClCompile Include="riffio\riffio.c" />
     <ClCompile Include="riffio\waveio.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="mmsys.h" />
-    <ClInclude Include="riffio.h" />
     <ClInclude Include="waveio.h" />
     <ClInclude Include="riffio\waveiolib.h" />
   </ItemGroup>
