@@ -2,14 +2,14 @@
 // Includes
 //-----------------------------------------------------------------------------
 #include <stdio.h>
-#include "../../lib/swin.h"
+#include "swin.h"
 
 #if defined(IS_WIN32)
 #include <Windows.h>
 #endif
 
-#include "../../lib/types.h"
-#include "../../lib/mmsys.h"
+#include "types.h"
+#include "mmsys.h"
 
 #include "Common.h"
 

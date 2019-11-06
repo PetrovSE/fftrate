@@ -4,20 +4,20 @@
 #include <stdio.h>
 #include <math.h>
 
-#include "../../lib/swin.h"
-#include "../../lib/types.h"
-#include "../../lib/array.h"
-#include "../../lib/fft.h"
-#include "../../lib/dct4.h"
-#include "../../lib/mdct.h"
-#include "../../lib/mathex.h"
-#include "../../lib/clock.h"
-#include "../../lib/cmdline.h"
-#include "../../lib/profile.h"
+#include "swin.h"
+#include "types.h"
+#include "array.h"
+#include "fft.h"
+#include "dct4.h"
+#include "mdct.h"
+#include "mathex.h"
+#include "clock.h"
+#include "cmdline.h"
+#include "profile.h"
 
 
 #define PROF_EXTERN		"fft/proftodo.inc"
-#include "../../lib/profdata.h"
+#include "profdata.h"
 
 
 

@@ -2,21 +2,21 @@
 // Includes
 //-----------------------------------------------------------------------------
 #include <stdio.h>
-#include "../../lib/swin.h"
+#include "swin.h"
 
 #if defined(IS_WIN32)
 #include <Windows.h>
 #endif
 
-#include "../../lib/types.h"
-#include "../../lib/array.h"
-#include "../../lib/str.h"
-#include "../../lib/getoptw.h"
-#include "../../lib/convert.h"
-#include "../../lib/riffio.h"
-#include "../../lib/fft.h"
-#include "../../lib/cmdline.h"
-#include "../../lib/mathex.h"
+#include "types.h"
+#include "array.h"
+#include "str.h"
+#include "getoptw.h"
+#include "convert.h"
+#include "riffio.h"
+#include "fft.h"
+#include "cmdline.h"
+#include "mathex.h"
 
 #include "../pcm_common/Common.h"
 

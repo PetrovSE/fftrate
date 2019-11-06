@@ -3,33 +3,33 @@
 //-----------------------------------------------------------------------------
 #include <stdio.h>
 #include <string.h>
-#include "../../lib/swin.h"
+#include "swin.h"
 
 #if defined(IS_WIN32)
 #include <Windows.h>
 #endif
 
-#include "../../lib/types.h"
-#include "../../lib/getoptw.h"
-#include "../../lib/convert.h"
-#include "../../lib/riffio.h"
-#include "../../lib/fft.h"
-#include "../../lib/str.h"
-#include "../../lib/array.h"
-#include "../../lib/cmdline.h"
-#include "../../lib/thr.h"
-#include "../../lib/clock.h"
-#include "../../lib/profile.h"
+#include "types.h"
+#include "getoptw.h"
+#include "convert.h"
+#include "riffio.h"
+#include "fft.h"
+#include "str.h"
+#include "array.h"
+#include "cmdline.h"
+#include "thr.h"
+#include "clock.h"
+#include "profile.h"
 
 #include "../pcm_common/Common.h"
 #include "../pcm_common/InfoConv.h"
 
 
 #define PROF_EXTERN	"fft/proftodo.inc"
-#include "../../lib/profdata.h"
+#include "profdata.h"
 
 #define PROF_EXTERN	"convert/proftodo.inc"
-#include "../../lib/profdata.h"
+#include "profdata.h"
 
 
 //=============================================================================

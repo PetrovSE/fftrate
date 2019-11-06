@@ -4,10 +4,10 @@
 #include <stdio.h>
 #include <math.h>
 
-#include "../../lib/swin.h"
-#include "../../lib/types.h"
-#include "../../lib/array.h"
-#include "../../lib/inifile.h"
+#include "swin.h"
+#include "types.h"
+#include "array.h"
+#include "inifile.h"
 
 
 //================================================================
