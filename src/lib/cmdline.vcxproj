@@ -75,7 +75,6 @@
     <ClCompile Include="cmdline\inifile.c" />
     <ClCompile Include="cmdline\kbhit.c" />
     <ClCompile Include="cmdline\menu.c" />
-    <ClCompile Include="cmdline\plug.c" />
     <ClCompile Include="cmdline\str.c" />
   </ItemGroup>
   <ItemGroup>
@@ -87,8 +86,6 @@
     <ClInclude Include="kbhit.h" />
     <ClInclude Include="cmdline\kbhitlib.h" />
     <ClInclude Include="menu.h" />
-    <ClInclude Include="plug.h" />
-    <ClInclude Include="cmdline\pluglib.h" />
     <ClInclude Include="str.h" />
     <ClInclude Include="cmdline\strlib.h" />
   </ItemGroup>

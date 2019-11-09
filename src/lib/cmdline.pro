@@ -13,7 +13,6 @@ SOURCES += \
 	cmdline/inifile.c	\
 	cmdline/kbhit.c		\
 	cmdline/menu.c		\
-	cmdline/plug.c		\
 	cmdline/str.c
 
 HEADERS += \
@@ -22,10 +21,8 @@ HEADERS += \
 	inifile.h	\
 	kbhit.h		\
 	menu.h		\
-	plug.h		\
 	str.h		\
 	cmdline/getoptlib.h		\
 	cmdline/inifilelib.h	\
 	cmdline/kbhitlib.h		\
-	cmdline/pluglib.h		\
 	cmdline/strlib.h

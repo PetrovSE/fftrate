@@ -26,9 +26,6 @@
     <ClCompile Include="cmdline\menu.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="cmdline\plug.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="cmdline\str.c">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -56,12 +53,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="menu.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="plug.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="cmdline\pluglib.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="str.h">
