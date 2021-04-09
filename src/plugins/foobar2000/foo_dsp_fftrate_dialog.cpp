@@ -17,17 +17,6 @@ static const t_foo_dsp_fftrate_desc g_hRates[] =
 	{ NULL,				0		}
 };
 
-static const t_foo_dsp_fftrate_desc g_hBits[] =
-{
-	{ _T( "By pass" ),	make_dword( foo_dsp_fftrate_params::BITS_FLAG_INT,		 0 )	},
-	{ _T( "8" ),		make_dword( foo_dsp_fftrate_params::BITS_FLAG_INT,		 8 )	},
-	{ _T( "16" ),		make_dword( foo_dsp_fftrate_params::BITS_FLAG_INT,		16 )	},
-	{ _T( "24" ),		make_dword( foo_dsp_fftrate_params::BITS_FLAG_INT,		24 )	},
-	{ _T( "32" ),		make_dword( foo_dsp_fftrate_params::BITS_FLAG_INT,		32 )	},
-	{ _T( "32 float" ),	make_dword( foo_dsp_fftrate_params::BITS_FLAG_FLOAT,	32 )	},
-	{ NULL,				0	}
-};
-
 static const t_foo_dsp_fftrate_desc g_hChann[] =
 {
 	{ _T( "By pass" ),		0	},
@@ -64,7 +53,6 @@ foo_dsp_fftrate_dialog::foo_dsp_fftrate_dialog( foo_dsp_fftrate_params &p_params
 BOOL foo_dsp_fftrate_dialog::OnInitDialog( CWindow wndFocus, LPARAM lInitParam )
 {
 	combo_upload( IDC_COMBO_RATE,	g_hRates,	m_params.rate()  );
-	combo_upload( IDC_COMBO_BITS,	g_hBits,	m_params.bits()  );
 	combo_upload( IDC_COMBO_CHANN,	g_hChann,	m_params.chann() );
 	combo_upload( IDC_COMBO_TRANS,	g_hTrans,	m_params.trans() );
 	combo_upload( IDC_COMBO_WIND,	g_hWind,	m_params.wind()  );
@@ -79,7 +67,6 @@ void foo_dsp_fftrate_dialog::OnCommand( UINT uNotifyCode, int nID, CWindow wndCt
 	{
 	case IDOK:
 		m_params.set_rate(	combo_download(	IDC_COMBO_RATE,  g_hRates ) );
-		m_params.set_bits(	combo_download(	IDC_COMBO_BITS,  g_hBits  ) );
 		m_params.set_chann(	combo_download(	IDC_COMBO_CHANN, g_hChann ) );
 		m_params.set_trans(	combo_download(	IDC_COMBO_TRANS, g_hTrans ) );
 		m_params.set_wind(	combo_download(	IDC_COMBO_WIND,  g_hWind  ) );

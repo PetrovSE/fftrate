@@ -19,18 +19,11 @@ class foo_dsp_fftrate_params
 public:
 	foo_dsp_fftrate_params( void ):
 		m_rate( 0 ),
-		m_bits( 0 ),
 		m_chann( 0 ),
 		m_trans( 1 ),
 		m_wind( 2 )
 	{
 	}
-
-	enum
-	{
-		BITS_FLAG_INT		= 0,
-		BITS_FLAG_FLOAT
-	};
 
 	// The GUID that identifies this DSP and its configuration.
 	static const GUID &g_get_guid( void );
@@ -42,11 +35,6 @@ public:
 	void set_rate( t_int32 p_rate )
 	{
 		m_rate = p_rate;
-	}
-
-	void set_bits( t_int32 p_bits )
-	{
-		m_bits = p_bits;
 	}
 
 	void set_chann( t_int32 p_chann )
@@ -69,11 +57,6 @@ public:
 		return m_rate;
 	}
 
-	t_int32 bits( void ) const
-	{
-		return m_bits;
-	}
-
 	t_int32 chann( void ) const
 	{
 		return m_chann;
@@ -90,7 +73,7 @@ public:
 	}
 
 private:
-	static const t_size	m_paramCount = 5;
+	static const t_size	m_paramCount = 4;
 
 	union
 	{
@@ -99,7 +82,6 @@ private:
 		struct 
 		{
 			t_int32	m_rate;
-			t_int32	m_bits;
 			t_int32	m_chann;
 			t_int32	m_trans;
 			t_int32	m_wind;
