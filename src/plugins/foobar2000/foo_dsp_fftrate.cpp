@@ -32,7 +32,13 @@ void foo_dsp_fftrate::on_endofplayback( abort_callback &p_abort )
 
 bool foo_dsp_fftrate::on_chunk( audio_chunk *chunk, abort_callback &p_abort )
 {
-	return false;
+	unsigned chann		= chunk->get_channels();
+	unsigned map		= chunk->get_channel_config();
+	unsigned rate		= chunk->get_sample_rate();
+	t_size count		= chunk->get_sample_count();
+	audio_sample *data	= chunk->get_data();
+
+	return true;
 }
 
 
