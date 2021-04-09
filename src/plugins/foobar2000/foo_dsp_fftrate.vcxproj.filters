@@ -18,9 +18,18 @@
     <ClCompile Include="foo_dsp_fftrate.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="foo_dsp_fftrate_params.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="foo_dsp_fftrate_dialog.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="foo_dsp_fftrate.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

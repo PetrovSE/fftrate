@@ -9,6 +9,8 @@ call clear.bat src\apps\pcm_stretch
 call clear.bat src\tests\fft_test
 call clear.bat src\tests\ini_test
 
+call clear.bat src\plugins\foobar2000
+
 call clear.bat src\tools\alsa\arateconf
 call clear.bat src\lib
 
