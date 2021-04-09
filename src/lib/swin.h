@@ -48,10 +48,6 @@
 #define IS_VC
 #endif
 
-#if _MSC_VER == 1200
-#define IS_VC6
-#endif
-
 #if defined(__GNUC__)
 #define IS_GCC
 #endif

@@ -5,6 +5,7 @@ rmdir /S /Q %1\debug_win32
 rmdir /S /Q %1\release
 rmdir /S /Q %1\release_win32
 rmdir /S /Q %1\ipch
+rmdir /S /Q %1\.vs
 
 del %1\*.ncb
 del %1\*.plg

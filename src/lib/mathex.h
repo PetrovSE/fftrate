@@ -110,21 +110,6 @@ COMBOTYPE mse_get_val( HMSE p_inst, DWORD flag );
 #define NAN				__builtin_nand( "" )
 #endif
 
-
-#if defined(IS_VC)
-
-DOUBLE __builtin_inf( VOID );
-FLOAT  __builtin_inff( VOID );
-
-DOUBLE __builtin_nan( CONST CHAR *str );
-FLOAT  __builtin_nanf( CONST CHAR *str );
-
-BOOL isnan( DATA x );
-BOOL isinf( DATA x );
-BOOL isfinite( DATA x );
-
-#endif // Vidual Studio
-
 CDECL_END
 
 #endif // _MATHEX_H_
