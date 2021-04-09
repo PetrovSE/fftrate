@@ -1,7 +1,7 @@
 #include "foo_dsp_fftrate.h"
 
 
-static const t_foo_dsp_fftrate_value g_hRates[] =
+static const t_foo_dsp_fftrate_desc g_hRates[] =
 {
 	{ _T( "By pass" ),	0		},
 	{ _T( "8000" ),		8000	},
@@ -17,7 +17,7 @@ static const t_foo_dsp_fftrate_value g_hRates[] =
 	{ NULL,				0		}
 };
 
-static const t_foo_dsp_fftrate_value g_hBits[] =
+static const t_foo_dsp_fftrate_desc g_hBits[] =
 {
 	{ _T( "By pass" ),	make_dword( foo_dsp_fftrate_params::BITS_FLAG_INT,		 0 )	},
 	{ _T( "8" ),		make_dword( foo_dsp_fftrate_params::BITS_FLAG_INT,		 8 )	},
@@ -28,7 +28,7 @@ static const t_foo_dsp_fftrate_value g_hBits[] =
 	{ NULL,				0	}
 };
 
-static const t_foo_dsp_fftrate_value g_hChann[] =
+static const t_foo_dsp_fftrate_desc g_hChann[] =
 {
 	{ _T( "By pass" ),		0	},
 	{ _T( "Mono" ),			1	},
@@ -40,14 +40,14 @@ static const t_foo_dsp_fftrate_value g_hChann[] =
 	{ NULL,					0	}
 };
 
-static const t_foo_dsp_fftrate_value g_hTrans[] =
+static const t_foo_dsp_fftrate_desc g_hTrans[] =
 {
 	{ _T( "FFT" ),		CONV_TRANSFORM_FFT	},
 	{ _T( "DCT" ),		CONV_TRANSFORM_DCT	},
 	{ NULL,				0	}
 };
 
-static const t_foo_dsp_fftrate_value g_hWind[] =
+static const t_foo_dsp_fftrate_desc g_hWind[] =
 {
 	{ _T( "Sin" ),		CONV_WINDOW_SIN		},
 	{ _T( "Vorbis" ),	CONV_WINDOW_VORBIS	},
@@ -93,7 +93,7 @@ void foo_dsp_fftrate_dialog::OnCommand( UINT uNotifyCode, int nID, CWindow wndCt
 }
 
 
-void foo_dsp_fftrate_dialog::combo_upload( int id, const t_foo_dsp_fftrate_value *desc, t_int32 curr )
+void foo_dsp_fftrate_dialog::combo_upload( int id, const t_foo_dsp_fftrate_desc *desc, t_int32 curr )
 {
 	CComboBox combo( GetDlgItem( id ) );
 	int select = 0;
@@ -113,7 +113,7 @@ void foo_dsp_fftrate_dialog::combo_upload( int id, const t_foo_dsp_fftrate_value
 }
 
 
-t_int32 foo_dsp_fftrate_dialog::combo_download( int id, const t_foo_dsp_fftrate_value *desc )
+t_int32 foo_dsp_fftrate_dialog::combo_download( int id, const t_foo_dsp_fftrate_desc *desc )
 {
 	CString text;
 	CComboBox combo( GetDlgItem( id ) );

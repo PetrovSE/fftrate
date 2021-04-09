@@ -24,6 +24,9 @@
     <ClCompile Include="foo_dsp_fftrate_dialog.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="foo_dsp_fftrate_entry.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h">

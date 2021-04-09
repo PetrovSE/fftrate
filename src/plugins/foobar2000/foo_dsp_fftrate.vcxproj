@@ -91,6 +91,7 @@
   <ItemGroup>
     <ClCompile Include="foo_dsp_fftrate.cpp" />
     <ClCompile Include="foo_dsp_fftrate_dialog.cpp" />
+    <ClCompile Include="foo_dsp_fftrate_entry.cpp" />
     <ClCompile Include="foo_dsp_fftrate_params.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -99,6 +100,23 @@
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="foo_dsp_fftrate.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\lib\cmdline.vcxproj">
+      <Project>{5127f9f8-36b2-4d44-9e2e-1780f1ed1c05}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\lib\convert.vcxproj">
+      <Project>{c4c0ee34-854c-4d03-88a3-7aef95e85f2d}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\lib\fft.vcxproj">
+      <Project>{2f2a0b0a-57d6-4cfe-af6b-f80ec54ae6e8}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\lib\mathex.vcxproj">
+      <Project>{3c8a94e3-aae0-41cc-a0e9-4b99e7c6769c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\lib\riffio.vcxproj">
+      <Project>{8f30995a-0cbf-4cf1-9010-d866fefc494a}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

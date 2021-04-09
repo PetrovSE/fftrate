@@ -7,7 +7,7 @@
 #include "resource.h"
 
 
-struct t_foo_dsp_fftrate_value
+struct t_foo_dsp_fftrate_desc
 {
 	const TCHAR	*name;
 	t_int32		val;
@@ -131,9 +131,31 @@ protected:
 private:
 	foo_dsp_fftrate_params &m_params;
 
-	void combo_upload( int id, const t_foo_dsp_fftrate_value *desc, t_int32 curr );
-	t_int32 combo_download( int id, const t_foo_dsp_fftrate_value *desc );
+	void combo_upload( int id, const t_foo_dsp_fftrate_desc *desc, t_int32 curr );
+	t_int32 combo_download( int id, const t_foo_dsp_fftrate_desc *desc );
 };
 
+
+class foo_dsp_fftrate: public dsp_impl_base_t<dsp_v2>
+{
+public:
+	foo_dsp_fftrate( void );
+	foo_dsp_fftrate( const foo_dsp_fftrate_params &params );
+	~foo_dsp_fftrate( void );
+
+	void flush( void );
+	double get_latency( void );
+	bool need_track_change_mark( void );
+
+protected:
+	void on_endoftrack( abort_callback &p_abort );
+	void on_endofplayback( abort_callback &p_abort );
+	bool on_chunk( audio_chunk *chunk, abort_callback &p_abort );
+
+private:
+	HCONVERT	m_convert;
+
+	void close( void );
+};
 
 #endif //_FOO_DSP_FFT_RATE_H_
