@@ -42,24 +42,7 @@ typedef struct stat			STATD;
 
 // MS Visual Studio compiler
 #elif defined(IS_VC)
-
-typedef char				int8_t;
-typedef unsigned __int8		uint8_t;
-
-typedef __int16				int16_t;
-typedef unsigned __int16	uint16_t;
-
-typedef __int32				int32_t;
-typedef unsigned __int32	uint32_t;
-
-typedef __int64				int64_t;
-typedef unsigned __int64	uint64_t;
-
-#define INT16_MAX			( (__int32)_I16_MAX )
-#define INT16_MIN			( (__int32)_I16_MIN )
-
-#define INT32_MAX			( (__int32)_I32_MAX )
-#define INT32_MIN			( (__int32)_I32_MIN )
+#include <stdint.h>
 
 #define INLINE				__forceinline
 

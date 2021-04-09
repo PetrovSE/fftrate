@@ -240,8 +240,11 @@ typedef struct
 //================================================================
 //  Extented wave format definitions
 //----------------------------------------------------------------
+#if !defined(EXTRACT_WAVEFORMATEX_ID)
 #define EXTRACT_WAVEFORMATEX_ID( _Guid )				(WORD)( (_Guid).Data1 )
+#endif
 
+#if !defined(INIT_WAVEFORMATEX_GUID)
 #define INIT_WAVEFORMATEX_GUID( _Guid, _wFormatTag )	\
 {														\
 	(_Guid).Data1		= (WORD)(_wFormatTag);			\
@@ -256,6 +259,7 @@ typedef struct
 	(_Guid).Data4[6]	= 0x9b;							\
 	(_Guid).Data4[7]	= 0x71;							\
 }
+#endif
 
 
 //================================================================
