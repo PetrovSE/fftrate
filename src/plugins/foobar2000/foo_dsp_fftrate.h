@@ -18,10 +18,9 @@ class foo_dsp_fftrate_params
 {
 public:
 	foo_dsp_fftrate_params( void ):
-		m_rate( 0 ),
-		m_chann( 0 ),
-		m_trans( 1 ),
-		m_wind( 2 )
+		m_trans( CONV_TRANSFORM_FFT ),
+		m_wind( CONV_WINDOW_VORBIS ),
+		m_rate( 0 )
 	{
 	}
 
@@ -31,16 +30,6 @@ public:
 	// Read data from a preset.
 	bool set_data( const dsp_preset &p_data );
 	bool get_data( dsp_preset &p_data );
-
-	void set_rate( t_int32 p_rate )
-	{
-		m_rate = p_rate;
-	}
-
-	void set_chann( t_int32 p_chann )
-	{
-		m_chann = p_chann;
-	}
 
 	void set_trans( t_int32 p_trans )
 	{
@@ -52,14 +41,9 @@ public:
 		m_wind = p_wind;
 	}
 
-	t_int32 rate( void ) const
+	void set_rate( t_int32 p_rate )
 	{
-		return m_rate;
-	}
-
-	t_int32 chann( void ) const
-	{
-		return m_chann;
+		m_rate = p_rate;
 	}
 
 	t_int32 trans( void ) const
@@ -72,8 +56,14 @@ public:
 		return m_wind;
 	}
 
+	t_int32 rate( void ) const
+	{
+		return m_rate;
+	}
+
+
 private:
-	static const t_size	m_paramCount = 4;
+	static const t_size	m_paramCount = 3;
 
 	union
 	{
@@ -81,10 +71,9 @@ private:
 
 		struct 
 		{
-			t_int32	m_rate;
-			t_int32	m_chann;
 			t_int32	m_trans;
 			t_int32	m_wind;
+			t_int32	m_rate;
 		};
 	};
 };
