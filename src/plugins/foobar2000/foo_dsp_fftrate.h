@@ -110,7 +110,6 @@ private:
 class foo_dsp_fftrate: public dsp_impl_base_t<dsp_v2>
 {
 public:
-	foo_dsp_fftrate( void );
 	foo_dsp_fftrate( const foo_dsp_fftrate_params &params );
 	~foo_dsp_fftrate( void );
 
@@ -124,9 +123,19 @@ protected:
 	bool on_chunk( audio_chunk *chunk, abort_callback &p_abort );
 
 private:
-	HCONVERT	m_convert;
+	HCONVERT		m_convert;
+	audio_sample	*m_out;
+
+	int			m_rateOut;
+	int			m_trans;
+	int			m_wind;
+
+	int			m_rate;
+	int			m_chann;
+	int			m_map;
 
 	void close( void );
+	void open( int p_rate, int p_chann, int p_map );
 };
 
 #endif //_FOO_DSP_FFT_RATE_H_
