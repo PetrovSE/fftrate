@@ -118,15 +118,22 @@ public:
 	bool need_track_change_mark( void );
 
 protected:
-	void on_endoftrack( abort_callback &p_abort );
-	void on_endofplayback( abort_callback &p_abort );
+	virtual void on_endoftrack( abort_callback &p_abort );
+	virtual void on_endofplayback( abort_callback &p_abort );
 	bool on_chunk( audio_chunk *chunk, abort_callback &p_abort );
 
 private:
-	HCONVERT		m_convert;
-	audio_sample	*m_out;
+	static const t_size m_bufferSize = 32768;
 
-	int			m_rateOut;
+	HCONVERT	m_convert;
+	BYTE		m_buffer[m_bufferSize];
+
+	int			m_transRate;
+	int			m_transChann;
+
+	int			m_outRate;
+	int			m_outChann;
+
 	int			m_trans;
 	int			m_wind;
 
