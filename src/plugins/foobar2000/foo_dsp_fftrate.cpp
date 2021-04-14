@@ -10,7 +10,7 @@ foo_dsp_fftrate::foo_dsp_fftrate( const foo_dsp_fftrate_params &params ):
 	m_map( 0 )
 {
 	m_transRate		= params.rate();
-	m_transChann	= 0;
+	m_transChann	= params.chann();
 
 	m_trans	= params.trans();
 	m_wind	= params.wind();

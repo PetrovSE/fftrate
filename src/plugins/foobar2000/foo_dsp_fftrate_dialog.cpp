@@ -41,6 +41,15 @@ static const t_foo_dsp_fftrate_desc g_hRates[] =
 };
 
 
+static const t_foo_dsp_fftrate_desc g_hChann[] =
+{
+	{ _T( "By pass" ),	0		},
+	{ _T( "mono" ),		1		},
+	{ _T( "stereo" ),	2		},
+	{ NULL,				0		}
+};
+
+
 foo_dsp_fftrate_dialog::foo_dsp_fftrate_dialog( foo_dsp_fftrate_params &p_params ):
 	m_params( p_params )
 {
@@ -52,6 +61,7 @@ BOOL foo_dsp_fftrate_dialog::OnInitDialog( CWindow wndFocus, LPARAM lInitParam )
 	combo_upload( IDC_COMBO_TRANS,	g_hTrans,	m_params.trans() );
 	combo_upload( IDC_COMBO_WIND,	g_hWind,	m_params.wind()  );
 	combo_upload( IDC_COMBO_RATE,	g_hRates,	m_params.rate()  );
+	combo_upload( IDC_COMBO_CHANN,	g_hChann,	m_params.chann()  );
 
 	return FALSE;
 }
@@ -65,6 +75,7 @@ void foo_dsp_fftrate_dialog::OnCommand( UINT uNotifyCode, int nID, CWindow wndCt
 		m_params.set_trans(	combo_download(	IDC_COMBO_TRANS, g_hTrans ) );
 		m_params.set_wind(	combo_download(	IDC_COMBO_WIND,  g_hWind  ) );
 		m_params.set_rate(	combo_download(	IDC_COMBO_RATE,  g_hRates ) );
+		m_params.set_chann(	combo_download(	IDC_COMBO_CHANN, g_hChann ) );
 		EndDialog( IDOK );
 		break;
 			

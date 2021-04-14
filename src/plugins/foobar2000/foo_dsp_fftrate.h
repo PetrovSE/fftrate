@@ -20,7 +20,8 @@ public:
 	foo_dsp_fftrate_params( void ):
 		m_trans( CONV_TRANSFORM_FFT ),
 		m_wind( CONV_WINDOW_VORBIS ),
-		m_rate( 0 )
+		m_rate( 0 ),
+		m_chann( 0 )
 	{
 	}
 
@@ -46,6 +47,11 @@ public:
 		m_rate = p_rate;
 	}
 
+	void set_chann( t_int32 p_chann )
+	{
+		m_chann = p_chann;
+	}
+
 	t_int32 trans( void ) const
 	{
 		return m_trans;
@@ -61,9 +67,14 @@ public:
 		return m_rate;
 	}
 
+	t_int32 chann( void ) const
+	{
+		return m_chann;
+	}
+
 
 private:
-	static const t_size	m_paramCount = 3;
+	static const t_size	m_paramCount = 4;
 
 	union
 	{
@@ -74,6 +85,7 @@ private:
 			t_int32	m_trans;
 			t_int32	m_wind;
 			t_int32	m_rate;
+			t_int32	m_chann;
 		};
 	};
 };
