@@ -114,6 +114,9 @@
     <ProjectReference Include="..\..\lib\mathex.vcxproj">
       <Project>{3c8a94e3-aae0-41cc-a0e9-4b99e7c6769c}</Project>
     </ProjectReference>
+    <ProjectReference Include="..\..\lib\profiler.vcxproj">
+      <Project>{5656431b-f31f-4b1e-ad79-977272cacb1a}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\..\lib\riffio.vcxproj">
       <Project>{8f30995a-0cbf-4cf1-9010-d866fefc494a}</Project>
     </ProjectReference>
